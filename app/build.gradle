@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "example.com.playandroid"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding{
+        enabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //引入支持库大礼包
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:recyclerview-v7:$support_version"
+    implementation "com.android.support:support-vector-drawable:$support_version"
+    implementation "com.android.support:support-v4:$support_version"
+    implementation "com.android.support:support-v13:$support_version"
+    implementation 'com.android.support:design:27.1.1'
+    implementation "com.android.support:cardview-v7:$support_version"
+    //RxJava2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    //retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    //okhttp拦截器配合retrofit使用
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    //日志打印工具
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //ARouter
+    implementation 'com.alibaba:arouter-api:1.3.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
+    implementation 'com.blankj:utilcode:1.20.3'
+
+}
