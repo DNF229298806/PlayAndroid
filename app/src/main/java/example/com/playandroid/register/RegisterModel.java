@@ -1,4 +1,4 @@
-package example.com.playandroid;
+package example.com.playandroid.register;
 
 import android.content.res.Resources;
 import android.util.Log;
@@ -6,6 +6,9 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import example.com.playandroid.network.Api;
+import example.com.playandroid.network.ApiUtils;
+import example.com.playandroid.network.transform.ErrorTransform;
 import timber.log.Timber;
 
 /**
@@ -13,6 +16,7 @@ import timber.log.Timber;
  * @des 2018/9/19
  */
 public class RegisterModel {
+    private Api api;
     private RegisterActivity mActivity;
     private Resources mResources;
     private RegisterEntity mEntity;
@@ -20,6 +24,7 @@ public class RegisterModel {
     public RegisterModel(RegisterActivity activity, Resources resources) {
         mActivity = activity;
         mResources = resources;
+        api = ApiUtils.INSTANCE.getApi(activity);
     }
 
     public RegisterModel(RegisterActivity activity, Resources resources, RegisterEntity entity) {
@@ -29,9 +34,14 @@ public class RegisterModel {
 
     public void onRegisterClick(View view) {
         System.out.println("啊实打实大师大师大神阿萨德阿萨阿萨德");
-        Timber.e("阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德阿萨德阿萨阿萨德");
-        Timber.e("mEntity=%1s"+mEntity.toString());
+        Timber.e("mEntity=%1s",mEntity.toString());
         Log.i("大爷", mEntity.toString());
         ToastUtils.showLong(mEntity.toString());
+        mActivity.addDisposable(api.register(mEntity.getUsername(), mEntity.getPassword(), mEntity.getRepassword())
+                .compose(new ErrorTransform<>())
+                .subscribe(
+                        entity -> ToastUtils.showLong("注册成功"),
+                        a -> ToastUtils.showLong(a.getMessage())
+                ));
     }
 }

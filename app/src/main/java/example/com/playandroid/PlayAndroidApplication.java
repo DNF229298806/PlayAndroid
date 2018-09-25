@@ -1,10 +1,10 @@
 package example.com.playandroid;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import example.com.playandroid.util.TimberUtil;
 import timber.log.Timber;
 
 /**
@@ -41,42 +41,14 @@ public class PlayAndroidApplication extends Application {
         // 尽可能早，推荐在Application中初始化
         ARouter.init(this);
 
-       /* //设置log自动在apk为debug版本时打开，在release版本时关闭
+        //设置log自动在apk为debug版本时打开，在release版本时关闭
         TimberUtil.setLogAuto();
         //也可以设置log一直开
         //TimberUtil.setLogDebug();
 
         //打印tag为类名
-        Timber.v("---onCreate---");*/
-
-        /*if (isDebug) {
-            Timber.plant(new Timber.DebugTree());
-        } else {
-            Timber.plant(new CrashReportingTree());
-            //Timber.plant(new CrashReportingTree());
-        }*/
+        Timber.v("---onCreate---");
 
     }
 
-
-
-
-    private static class CrashReportingTree extends Timber.Tree {
-        @Override
-        protected void log(int priority, String tag, String message, Throwable t) {
-            if (priority == Log.VERBOSE || priority == Log.DEBUG) {
-                return;
-            }
-            //FakeCrashLibrary.log(priority, tag, message);
-            if (t != null) {
-                if (priority == Log.ERROR) {
-                    //FakeCrashLibrary.logError(t);
-                } else if (priority == Log.WARN) {
-                    // FakeCrashLibrary.logWarning(t);
-                } else {
-
-                }
-            }
-        }
-    }
 }

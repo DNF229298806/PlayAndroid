@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="example.com.playandroid.RegisterModel"/>
+            type="example.com.playandroid.register.RegisterModel"/>
 
         <variable
             name="entity"
-            type="example.com.playandroid.RegisterEntity"/>
+            type="example.com.playandroid.register.RegisterEntity"/>
 
     </data>
 

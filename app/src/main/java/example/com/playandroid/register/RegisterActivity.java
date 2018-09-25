@@ -1,17 +1,17 @@
-package example.com.playandroid;
+package example.com.playandroid.register;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
+import example.com.playandroid.R;
+import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.databinding.ActivityRegisterBinding;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/19
  */
-public class RegisterActivity extends AppCompatActivity {
-
+public class RegisterActivity extends BaseActivity {
     private ActivityRegisterBinding mBinding;
     private RegisterModel mModel;
     private RegisterEntity mEntity;
@@ -24,5 +24,10 @@ public class RegisterActivity extends AppCompatActivity {
         mBinding.setEntity(mEntity);
         mModel = new RegisterModel(this, getResources(), mEntity);
         mBinding.setVm(mModel);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
