@@ -11,10 +11,28 @@
 
     </data>
 
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <android.support.v7.widget.Toolbar
+            android:elevation="4dp"
+            app:title="玩安卓"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#0081f9"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
         <TextView
+            android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

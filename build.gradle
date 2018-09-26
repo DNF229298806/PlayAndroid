@@ -29,5 +29,6 @@ task clean(type: Delete) {
 ext{
     support_version ="27.1.1"
     retrofit = "2.4.0"
+    glide_version = "4.7.1"
 }
 
