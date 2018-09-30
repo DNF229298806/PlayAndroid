@@ -1,20 +1,10 @@
-package example.com.playandroid.home;
+package example.com.playandroid.content.home;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-
-import com.blankj.utilcode.util.ToastUtils;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.databinding.ActivityHomeBinding;
-import example.com.playandroid.util.GlideImageLoader;
 
 public class HomeActivity extends BaseActivity {
     private ActivityHomeBinding mBinding;
@@ -23,7 +13,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mModel = new HomeModel(this,getResources());
+        /*mModel = new HomeModel(this,getResources());
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mBinding.setVm(mModel);
         setSupportActionBar(mBinding.toolbar);
@@ -72,6 +62,11 @@ public class HomeActivity extends BaseActivity {
         });
         banner.setImages(list2);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-        banner.start();
+        banner.start();*/
+    }
+
+    @Override
+    public int setLayout() {
+        return R.layout.activity_home;
     }
 }

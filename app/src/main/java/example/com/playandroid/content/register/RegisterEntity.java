@@ -1,4 +1,4 @@
-package example.com.playandroid.register;
+package example.com.playandroid.content.register;
 
 /**
  * @author Richard_Y_Wang

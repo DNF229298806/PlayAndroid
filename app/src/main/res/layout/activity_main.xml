@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="example.com.playandroid.content.home.HomeModel"/>
+            type="example.com.playandroid.content.main.MainModel"/>
 
     </data>
 
@@ -28,7 +28,13 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="玩安卓"/>
 
-        <com.youth.banner.Banner
+        <!-- android:layout_weight="1"-->
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+       <!-- <com.youth.banner.Banner            android:layout_weight="1"
+
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="150dp"/>
@@ -36,11 +42,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>
+            android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>-->
 
         <android.support.design.widget.BottomNavigationView
+            onNavigationItemSelected="@{vm::onNavigationItemSelected}"
             android:id="@+id/bnv"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            app:itemBackground="@null"
+            app:menu="@menu/main_bnv_menu"/>
     </LinearLayout>
 </layout>

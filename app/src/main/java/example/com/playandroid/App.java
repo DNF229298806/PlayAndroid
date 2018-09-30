@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import example.com.playandroid.network.Api;
+import example.com.playandroid.network.ApiUtils;
 import example.com.playandroid.util.TimberUtil;
 import timber.log.Timber;
 
@@ -11,7 +13,8 @@ import timber.log.Timber;
  * @author Richard_Y_Wang
  * @des 2018/9/19
  */
-public class PlayAndroidApplication extends Application {
+public class App extends Application {
+    public static Api api;
     /**
      * 标识是否为调试
      */
@@ -49,6 +52,7 @@ public class PlayAndroidApplication extends Application {
         //打印tag为类名
         Timber.v("---onCreate---");
 
+        api = ApiUtils.INSTANCE.getApi(this);
     }
 
 }

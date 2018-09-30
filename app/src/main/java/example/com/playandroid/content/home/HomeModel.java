@@ -1,4 +1,4 @@
-package example.com.playandroid.home;
+package example.com.playandroid.content.home;
 
 import android.content.res.Resources;
 
@@ -11,13 +11,13 @@ import example.com.playandroid.network.ApiUtils;
  */
 public class HomeModel {
     private Api api;
-    private HomeActivity mActivity;
+    private HomeFragment mFragment;
     private Resources mResources;
 
-    public HomeModel(HomeActivity activity, Resources resources) {
-        mActivity = activity;
+    public HomeModel(HomeFragment fragment, Resources resources) {
+        mFragment = fragment;
         mResources = resources;
-        api = ApiUtils.INSTANCE.getApi(activity);
+        api = ApiUtils.INSTANCE.getApi(fragment.getActivity());
     }
 
 }
