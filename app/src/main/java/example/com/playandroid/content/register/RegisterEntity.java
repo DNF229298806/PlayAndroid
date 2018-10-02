@@ -1,10 +1,12 @@
 package example.com.playandroid.content.register;
 
+import example.com.playandroid.base.BaseEntity;
+
 /**
  * @author Richard_Y_Wang
  * @des 22:04
  */
-public class RegisterEntity {
+public class RegisterEntity extends BaseEntity {
     private String username;
     private String password;
     private String repassword;

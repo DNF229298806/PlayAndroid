@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -62,6 +63,7 @@ public class UserInterceptor implements Interceptor{
                     .build();
         } else {
             //设置缓存
+            ToastUtils.showShort("无网络！请稍后重试");
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build();

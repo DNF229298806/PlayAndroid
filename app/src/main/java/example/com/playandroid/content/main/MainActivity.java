@@ -12,16 +12,16 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.content.home.HomeFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
+import example.com.playandroid.util.BottomNavigationViewHelper;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*extends BaseActivity<MainModel,ActivityMainBinding>*/{
-    /* private ActivityMainBinding mBinding;
-     private MainModel mModel;*/
     private BottomNavigationView bnv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setSme(() ->{getBinding().setVm(new MainModel(this));Timber.i("回调成功" );});
         super.onCreate(savedInstanceState);
+        setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
         /*mModel = new MainModel(this,getResources());
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -33,9 +33,13 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
             fragment = new HomeFragment();
             fm.beginTransaction().add(R.id.frame_layout, fragment).commit();
         }*/
-       //initFragment();
+       initFragment();
     }
 
+    @Override
+    public int setLayout() {
+        return R.layout.activity_main;
+    }
     private void initFragment() {
         Fragment fragment = new HomeFragment();
         Fragment fragment2 = new HomeFragment();
@@ -51,7 +55,7 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_layout,fragment)
                 .show(fragment).commit();
-        //BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
+        BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
         /*mBinding.bnv.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.it_home:
@@ -73,7 +77,6 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         });*/
     }
 
-    public void setModel(MainModel model) {
 
 /*Banner banner = mBinding.banner;
         //设置图片加载器
@@ -121,10 +124,4 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         banner.setImages(list2);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         banner.start();*/
-}
-
-    @Override
-    public int setLayout() {
-        return R.layout.activity_main;
-    }
 }

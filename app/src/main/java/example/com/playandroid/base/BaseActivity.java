@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import example.com.playandroid.BR;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
 
@@ -16,6 +17,7 @@ import io.reactivex.internal.disposables.ListCompositeDisposable;
 public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBinding> extends AppCompatActivity {
     private T mModel;
     private V mBinding;
+    private BaseEntity mEntity;
     private SME sme;
     public ListCompositeDisposable list = new ListCompositeDisposable();
 
@@ -26,10 +28,10 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
         mBinding = DataBindingUtil.setContentView(this, setLayout());
         /*Timber.i("getLayout="+getLayout());
         mResources = getResources();*/
-        sme.setModelEntity();
+        /*sme.setModelEntity();*/
     }
 
-    public interface SME{
+    public interface SME {
         void setModelEntity();
     }
 
@@ -47,12 +49,31 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
         this.sme = sme;
     }
 
-    public T getModel() {
+    //todo 123
+   /* public T getModel() {
         return mModel;
     }
 
     public void setModel(T model) {
         mModel = model;
+    }*/
+
+    public void setModel(T model) {
+        mModel = model;
+        mBinding.setVariable(BR.vm, mModel);
+    }
+
+    public T getModel() {
+        return mModel;
+    }
+
+    public BaseEntity getEntity() {
+        return mEntity;
+    }
+
+    public void setEntity(BaseEntity entity) {
+        mEntity = entity;
+        mBinding.setVariable(BR.entity, mEntity);
     }
 
     public V getBinding() {

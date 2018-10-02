@@ -1,6 +1,5 @@
 package example.com.playandroid.content.register;
 
-import android.content.res.Resources;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -15,31 +14,21 @@ import timber.log.Timber;
  * @des 2018/9/19
  */
 public class RegisterModel extends BaseModel<RegisterActivity> {
-    private RegisterActivity mActivity;
-    private Resources mResources;
-    private RegisterEntity mEntity;
 
     public RegisterModel(RegisterActivity activity) {
         super(activity);
     }
 
     public void onRegisterClick(View view) {
+        RegisterEntity regEntity = getActivity().getBinding().getEntity();
         System.out.println("啊实打实大师大师大神阿萨德阿萨阿萨德");
-        Timber.e("mEntity=%1s",mEntity.toString());
-        ToastUtils.showLong(mEntity.toString());
-        mActivity.addDisposable(App.api.register(mEntity.getUsername(), mEntity.getPassword(), mEntity.getRepassword())
+        Timber.e("mEntity=%1s",regEntity.toString());
+        ToastUtils.showLong(regEntity.toString());
+        getActivity().addDisposable(App.api.register(regEntity.getUsername(), regEntity.getPassword(), regEntity.getRepassword())
                 .compose(new ErrorTransform<>())
                 .subscribe(
                         entity -> ToastUtils.showLong("注册成功"),
                         a -> ToastUtils.showLong(a.getMessage())
                 ));
-    }
-
-    public RegisterEntity getEntity() {
-        return mEntity;
-    }
-
-    public void setEntity(RegisterEntity entity) {
-        mEntity = entity;
     }
 }
