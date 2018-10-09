@@ -1,4 +1,4 @@
-package example.com.playandroid.content.home;
+package example.com.playandroid.content.project;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -11,21 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import example.com.playandroid.R;
-import example.com.playandroid.databinding.FragmentHomeBinding;
+import example.com.playandroid.databinding.FragmentProjectBinding;
 
 /**
  * @author Richard_Y_Wang
- * @des 2018/9/27 22:08
+ * @des 2018/10/9 21:00
  */
-public class HomeFragment extends Fragment{
-    private FragmentHomeBinding mBinding;
-    private HomeModel mModel;
+public class ProjectFragment extends Fragment {
+    private FragmentProjectBinding mBinding;
+    private ProjectModel mModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
-        mModel = new HomeModel(this);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_project, container, false);
+        mModel = new ProjectModel(this);
         mBinding.setVm(mModel);
         return mBinding.getRoot();
     }

@@ -1,28 +1,34 @@
 package example.com.playandroid.content.main;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.support.v4.app.FragmentTransaction;
 
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.content.home.HomeFragment;
+import example.com.playandroid.content.navigation.NavigationFragment;
+import example.com.playandroid.content.project.ProjectFragment;
+import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.util.BottomNavigationViewHelper;
-import timber.log.Timber;
+
+import static example.com.playandroid.util.Constant.FragmentType.HOME;
+import static example.com.playandroid.util.Constant.FragmentType.PROJECT;
+import static example.com.playandroid.util.Constant.FragmentType.SYSTEM;
 
 public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*extends BaseActivity<MainModel,ActivityMainBinding>*/{
-    private BottomNavigationView bnv;
+    private HomeFragment mHomeFragment;
+    private ProjectFragment mProjectFragment;
+    private SystemFragment mSystemFragment;
+    private NavigationFragment mNavigationFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setSme(() ->{getBinding().setVm(new MainModel(this));Timber.i("回调成功" );});
         super.onCreate(savedInstanceState);
+        //设置model 标题栏 还有底部的导航
         setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
+        BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
         /*mModel = new MainModel(this,getResources());
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mBinding.setVm(mModel);
@@ -33,29 +39,51 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
             fragment = new HomeFragment();
             fm.beginTransaction().add(R.id.frame_layout, fragment).commit();
         }*/
-       initFragment();
+       initFragment(mHomeFragment,HOME);
     }
 
     @Override
     public int setLayout() {
         return R.layout.activity_main;
     }
-    private void initFragment() {
-        Fragment fragment = new HomeFragment();
-        Fragment fragment2 = new HomeFragment();
-        Fragment fragment3 = new HomeFragment();
-        Fragment fragment4 = new HomeFragment();
 
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(fragment);
-        fragments.add(fragment2);
-        fragments.add(fragment3);
-        fragments.add(fragment4);
-        FragmentManager fm = getSupportFragmentManager();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout,fragment)
-                .show(fragment).commit();
-        BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
+    protected void initFragment(Fragment fragment,int type) {
+        //记录当前的fragment
+        Fragment checkedFragment;
+
+        //1.开启事务,fragment的控制是由事务来实现的
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        //2.第一种方式(add) 初始化fragment并添加到事务中,如果null就new一个
+        if (fragment == null) {
+            if (type == HOME) {
+                mHomeFragment = new HomeFragment();
+                checkedFragment = mHomeFragment;
+            } else if (type == PROJECT) {
+                mProjectFragment = new ProjectFragment();
+                checkedFragment = mProjectFragment;
+            } else if (type == SYSTEM) {
+                mSystemFragment = new SystemFragment();
+                checkedFragment = mSystemFragment;
+            } else {
+                mNavigationFragment = new NavigationFragment();
+                checkedFragment = mNavigationFragment;
+            }
+            //若当前选中碎片未添加到事务中 则创建碎片对象并添加到事务中
+            transaction.add(R.id.frame_layout, checkedFragment);
+        } else {
+            //若当前选中碎片已经添加到事务中,则将当前碎片赋值给checkedFragment
+            checkedFragment = fragment;
+        }
+
+        //3.隐藏所有fragment
+        hideFragment(transaction);
+
+        //4.显示需要的fragment
+        transaction.show(checkedFragment);
+
+        //5.提交事务
+        transaction.commit();
         /*mBinding.bnv.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.it_home:
@@ -75,6 +103,21 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
             }
             return false;
         });*/
+    }
+
+    private void hideFragment(FragmentTransaction transaction) {
+        if (mHomeFragment != null) {
+            transaction.hide(mHomeFragment);
+        }
+        if (mProjectFragment != null) {
+            transaction.hide(mProjectFragment);
+        }
+        if (mSystemFragment != null) {
+            transaction.hide(mSystemFragment);
+        }
+        if (mNavigationFragment!=null) {
+            transaction.hide(mNavigationFragment);
+        }
     }
 
 
@@ -124,4 +167,20 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         banner.setImages(list2);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         banner.start();*/
+
+    public HomeFragment getHomeFragment() {
+        return mHomeFragment;
+    }
+
+    public ProjectFragment getProjectFragment() {
+        return mProjectFragment;
+    }
+
+    public SystemFragment getSystemFragment() {
+        return mSystemFragment;
+    }
+
+    public NavigationFragment getNavigationFragment() {
+        return mNavigationFragment;
+    }
 }

@@ -13,4 +13,11 @@ public interface Constant {
         int tokenExpire = 51;
         int logout = 50;
     }
+
+    interface FragmentType {
+        int HOME = 0;
+        int PROJECT = 1;
+        int SYSTEM = 2;
+        int NAVIGATION = 3;
+    }
 }
