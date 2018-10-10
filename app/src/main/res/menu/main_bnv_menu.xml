@@ -5,12 +5,15 @@
         android:id="@+id/it_home"
         android:title="@string/home"/>
     <item
+        android:icon="@drawable/selector_project"
         android:id="@+id/it_project"
         android:title="@string/project"/>
     <item
+        android:icon="@drawable/selector_system"
         android:id="@+id/it_system"
         android:title="@string/system"/>
     <item
+        android:icon="@drawable/selector_navigation"
         android:id="@+id/it_nav"
         android:title="@string/navigation"/>
 </menu>
