@@ -56,6 +56,9 @@ public class ErrorTransform<T> implements ObservableTransformer<T,T>{
                     throw new TokenExpireException(entity.getErrorMsg(), entity.getErrorCode());
                 case NetWork.logout: /* 这里进行很多登出之后 很多的置空的行为 比如设置登录状态 修改对应的sp文件 */
                     break;
+                case 0:
+                    emitter.onNext((T) entity);
+                    break;
                 default: throw new ApiException(entity.getErrorMsg(), entity.getErrorCode());
             }
         } catch (Exception e) {

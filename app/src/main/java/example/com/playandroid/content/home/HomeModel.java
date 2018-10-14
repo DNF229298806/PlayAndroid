@@ -1,18 +1,73 @@
 package example.com.playandroid.content.home;
 
-import android.support.v4.app.Fragment;
 
-import example.com.playandroid.base.BaseModel;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import com.blankj.utilcode.util.ToastUtils;
+import com.youth.banner.Banner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import example.com.playandroid.App;
+import example.com.playandroid.base.BaseFragmentModel;
+import example.com.playandroid.base.TestBindingAdapter;
+import example.com.playandroid.base.TestEntity;
+import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.main.MainActivity;
+import example.com.playandroid.network.transform.RestfulTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/25 22:10
  */
-public class HomeModel extends BaseModel<MainActivity> {
-    private HomeFragment mFragment;
+public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
+    private List<BannerEntity> mBannerEntities = new ArrayList<>();
+    private List<TestEntity> names;
+    public HomeModel() {
+    }
 
-    public HomeModel(Fragment fragment) {
-        super(fragment);
+    public HomeModel(MainActivity activity, HomeFragment fragment) {
+        super(activity, fragment);
+        List<String> titleList = new ArrayList<>();
+        List imagesList = new ArrayList<>();
+        getFragment().setConsumer(() -> {
+            activity.addDisposable(App.api.getBannerEntity()
+                    .compose(new RestfulTransformer<>())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::doOnNext, a->{a.printStackTrace();ToastUtils.showLong("获取数据失败");}));
+
+            names = new ArrayList<>();
+            for (int i = 0; i < 20; i++) {
+                TestEntity testEntity = new TestEntity();
+                testEntity.setContent("hahahaha "+i);
+                names.add(testEntity);
+            }
+            RecyclerView recyclerView = getFragment().getBinding().recyclerView;
+            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+            recyclerView.setAdapter(new TestBindingAdapter(names, recyclerView.getContext()));
+                    //.concatMap(Observable::fromIterable)
+                    //.doOnNext((bannerEntity -> {titleList.add(bannerEntity.getTitle());imagesList.add(bannerEntity.getImagePath());}))
+        });
+    }
+
+    private void doOnNext(List<BannerEntity> list) {
+        List<String> titleList = new ArrayList<>();
+        List imagesList = new ArrayList<>();
+        Banner banner = getFragment().getBinding().banner;
+        mBannerEntities = list;
+        for (BannerEntity bannerEntity : list) {
+            titleList.add(bannerEntity.getTitle());
+            imagesList.add(bannerEntity.getImagePath());
+        }
+        banner.setImages(imagesList);
+        banner.setBannerTitles(titleList);
+        banner.start();
+    }
+
+    public void OnBannerClick(int position) {
+        ToastUtils.showLong(mBannerEntities.get(position).getUrl());
     }
 }

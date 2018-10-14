@@ -4,6 +4,9 @@ import android.databinding.BindingAdapter;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
 
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
+
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/27 23:26
@@ -13,6 +16,11 @@ public class DataBindingAdapter {
     @BindingAdapter("onNavigationItemSelected")
     public static void setOnNavigationItemSelected(BottomNavigationView view, OnNavigationItemSelectedListener listener) {
         view.setOnNavigationItemSelectedListener(listener);
+    }
+
+    @BindingAdapter("onBannerClick")
+    public static void setOnBannerClick(Banner view, OnBannerListener listener) {
+        view.setOnBannerListener(listener);
     }
 
 

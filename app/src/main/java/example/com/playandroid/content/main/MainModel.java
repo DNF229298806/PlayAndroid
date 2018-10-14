@@ -1,8 +1,6 @@
 package example.com.playandroid.content.main;
 
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -24,9 +22,6 @@ import static example.com.playandroid.util.Constant.FragmentType.SYSTEM;
  * @des 2018/9/27 21:49
  */
 public class MainModel extends BaseModel<MainActivity> {
-    private MainActivity mActivity;
-    private Resources mResources;
-    private BottomNavigationView bnv;
 
     public MainModel(MainActivity activity) {
         super(activity);

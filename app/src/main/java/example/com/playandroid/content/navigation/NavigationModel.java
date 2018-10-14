@@ -1,21 +1,18 @@
 package example.com.playandroid.content.navigation;
 
-import android.support.v4.app.Fragment;
-
-import example.com.playandroid.base.BaseModel;
+import example.com.playandroid.base.BaseFragmentModel;
 import example.com.playandroid.content.main.MainActivity;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/10/9 21:08
  */
-public class NavigationModel extends BaseModel<MainActivity> {
+public class NavigationModel extends BaseFragmentModel<MainActivity,NavigationFragment> {
 
-    public NavigationModel(MainActivity activity) {
-        super(activity);
+    public NavigationModel() {
     }
 
-    public NavigationModel(Fragment fragment) {
-        super(fragment);
+    public NavigationModel(MainActivity activity, NavigationFragment fragment) {
+        super(activity, fragment);
     }
 }

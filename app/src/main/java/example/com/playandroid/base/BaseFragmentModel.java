@@ -1,20 +1,23 @@
 package example.com.playandroid.base;
 
-import android.support.v4.app.Fragment;
-
 /**
  * @author Richard_Y_Wang
- * @des 2018/9/30 17:12
+ * @des 2018/10/14 14:42
  */
-public class BaseModel<T extends BaseActivity> {
+public class BaseFragmentModel<T extends BaseActivity,V extends BaseFragment> {
     private T mActivity;
-    private Fragment mFragment;
+    private V mFragment;
 
-    public BaseModel(T activity) {
+    public BaseFragmentModel() {
+
+    }
+
+    public BaseFragmentModel(T activity) {
         mActivity = activity;
     }
 
-    public BaseModel(Fragment fragment) {
+    public BaseFragmentModel(T activity, V fragment) {
+        mActivity = activity;
         mFragment = fragment;
     }
 
@@ -26,11 +29,11 @@ public class BaseModel<T extends BaseActivity> {
         mActivity = activity;
     }
 
-    public Fragment getFragment() {
+    public V getFragment() {
         return mFragment;
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(V fragment) {
         mFragment = fragment;
     }
 }

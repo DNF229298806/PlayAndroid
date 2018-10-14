@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -15,13 +16,21 @@
         android:layout_height="match_parent">
 
         <com.youth.banner.Banner
+            app:indicator_width="10dp"
+            app:indicator_height="10dp"
+            app:indicator_margin="5dp"
+            app:onBannerClick = "@{vm::OnBannerClick}"
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="150dp"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 </layout>

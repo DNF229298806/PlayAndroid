@@ -3,6 +3,7 @@ package example.com.playandroid.base;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -18,7 +19,7 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
     private T mModel;
     private V mBinding;
     private BaseEntity mEntity;
-    private SME sme;
+    /*private SME sme;*/
     public ListCompositeDisposable list = new ListCompositeDisposable();
 
 
@@ -31,9 +32,6 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
         /*sme.setModelEntity();*/
     }
 
-    public interface SME {
-        void setModelEntity();
-    }
 
     @Override
     protected void onDestroy() {
@@ -45,18 +43,6 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
         list.add(disposable);
     }
 
-    public void setSme(SME sme) {
-        this.sme = sme;
-    }
-
-    //todo 123
-   /* public T getModel() {
-        return mModel;
-    }
-
-    public void setModel(T model) {
-        mModel = model;
-    }*/
 
     public void setModel(T model) {
         mModel = model;
@@ -85,9 +71,24 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
     }
 
 
-    public abstract int setLayout();
+    public abstract @LayoutRes
+    int setLayout();
 
-    public SME getSme() {
-        return sme;
+     /* public T getModel() {
+        return mModel;
     }
+
+    public void setModel(T model) {
+        mModel = model;
+    }*/
+
+ /*public interface SME {
+        void setModelEntity();
+    }*/
+    /*public void setSme(SME sme) {
+        this.sme = sme;
+    }*/
+    /*public SME getSme() {
+        return sme;
+    }*/
 }
