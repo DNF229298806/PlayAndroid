@@ -40,7 +40,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
                     .subscribe(this::doOnNext, a->{a.printStackTrace();ToastUtils.showLong("获取数据失败");}));
 
             names = new ArrayList<>();
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 200; i++) {
                 TestEntity testEntity = new TestEntity();
                 testEntity.setContent("hahahaha "+i);
                 names.add(testEntity);

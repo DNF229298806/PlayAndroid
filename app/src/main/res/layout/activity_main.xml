@@ -12,45 +12,52 @@
     </data>
 
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <!--android:layout_height="?attr/actionBarSize"-->
         <!--android:background="?attr/colorPrimary"-->
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#0081f9"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="玩安卓"/>
+            android:layout_height="wrap_content">
 
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#0081f9"
+                android:elevation="4dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="玩安卓"/>
+        </android.support.design.widget.AppBarLayout>
         <!-- android:layout_weight="1"-->
         <FrameLayout
-            android:layout_weight="1"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-       <!-- <com.youth.banner.Banner            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <!-- <com.youth.banner.Banner            android:layout_weight="1"
 
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+             android:id="@+id/banner"
+             android:layout_width="match_parent"
+             android:layout_height="150dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>-->
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>-->
 
         <android.support.design.widget.BottomNavigationView
-            onNavigationItemSelected="@{vm::onNavigationItemSelected}"
             android:id="@+id/bnv"
+            onNavigationItemSelected="@{vm::onNavigationItemSelected}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
+            app:layout_behavior="example.com.playandroid.ui.BottomNavigationViewBehavior"
             app:menu="@menu/main_bnv_menu"/>
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -44,7 +44,7 @@ public class TestBindingAdapter extends RecyclerView.Adapter<BindingViewHolder<T
 
     @Override
     public int getItemCount() {
-        return 0;
+        return data == null ? 0 : data.size();
     }
 
 }
