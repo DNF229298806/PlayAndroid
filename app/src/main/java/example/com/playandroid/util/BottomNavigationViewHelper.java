@@ -1,19 +1,12 @@
 package example.com.playandroid.util;
 
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
-import android.util.Log;
-
-import java.lang.reflect.Field;
-
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/28 21:56
  */
 public class BottomNavigationViewHelper {
 
-    public static void disableShiftMode(BottomNavigationView view) {
+    /*public static void disableShiftMode(BottomNavigationView view) {
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
 
@@ -35,5 +28,5 @@ public class BottomNavigationViewHelper {
         } catch (IllegalAccessException e) {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
-    }
+    }*/
 }

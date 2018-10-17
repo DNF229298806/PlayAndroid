@@ -10,24 +10,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import example.com.playandroid.BR;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.disposables.ListCompositeDisposable;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/10/14 13:01
  */
-public abstract class BaseFragment<K extends BaseActivity,T extends BaseFragmentModel, V extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmentModel, V extends ViewDataBinding> extends Fragment implements Inflate{
     private K mActivity;
     private T mModel;
     private V mBinding;
     private BaseEntity mEntity;
+    public ListCompositeDisposable list = new ListCompositeDisposable();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, setLayout(), container, false);
+        //doOnCreateView();
         return mBinding.getRoot();
     }
+
+    @Override
+    public void doOnCreateViewAfter() {
+
+    }
+
+    //protected abstract void doOnCreateView();
 
     public void setModel(T model) {
         mModel = model;
@@ -63,6 +75,17 @@ public abstract class BaseFragment<K extends BaseActivity,T extends BaseFragment
         mActivity = activity;
     }
 
-    public abstract @LayoutRes int setLayout();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        list.dispose();
+    }
+
+    public void addDisposable(Disposable disposable) {
+        list.add(disposable);
+    }
+
+    public abstract @LayoutRes
+    int setLayout();
 
 }

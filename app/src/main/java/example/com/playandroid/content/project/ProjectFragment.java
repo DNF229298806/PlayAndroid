@@ -40,17 +40,5 @@ public class ProjectFragment extends BaseFragment<MainActivity,ProjectModel,Frag
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-
-    /* private FragmentProjectBinding mBinding;
-    private ProjectModel mModel;*/
-
-   /* @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_project, container, false);
-        mModel = new ProjectModel(this);
-        mBinding.setVm(mModel);
-        return mBinding.getRoot();
-    }*/
 }
 

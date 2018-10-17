@@ -51,6 +51,7 @@
              android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>-->
 
         <android.support.design.widget.BottomNavigationView
+            app:labelVisibilityMode="labeled"
             android:id="@+id/bnv"
             onNavigationItemSelected="@{vm::onNavigationItemSelected}"
             android:layout_width="match_parent"

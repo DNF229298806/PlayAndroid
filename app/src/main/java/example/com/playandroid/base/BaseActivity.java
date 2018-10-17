@@ -15,11 +15,10 @@ import io.reactivex.internal.disposables.ListCompositeDisposable;
  * @author Richard_Y_Wang
  * @des 2018/9/25 21:40
  */
-public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBinding> extends AppCompatActivity implements Inflate{
     private T mModel;
     private V mBinding;
     private BaseEntity mEntity;
-    /*private SME sme;*/
     public ListCompositeDisposable list = new ListCompositeDisposable();
 
 
@@ -27,11 +26,16 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, setLayout());
-        /*Timber.i("getLayout="+getLayout());
-        mResources = getResources();*/
-        /*sme.setModelEntity();*/
+        //doOnCreate();
     }
 
+    //protected abstract void doOnCreate();
+
+
+    @Override
+    public void doOnCreateViewAfter() {
+
+    }
 
     @Override
     protected void onDestroy() {
@@ -73,22 +77,4 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
 
     public abstract @LayoutRes
     int setLayout();
-
-     /* public T getModel() {
-        return mModel;
-    }
-
-    public void setModel(T model) {
-        mModel = model;
-    }*/
-
- /*public interface SME {
-        void setModelEntity();
-    }*/
-    /*public void setSme(SME sme) {
-        this.sme = sme;
-    }*/
-    /*public SME getSme() {
-        return sme;
-    }*/
 }

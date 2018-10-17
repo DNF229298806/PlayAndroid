@@ -64,9 +64,6 @@ public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHo
         void setBannerContent();
     }
 
-    public Consumer getConsumer() {
-        return mConsumer;
-    }
 
     public void setConsumer(Consumer consumer) {
         mConsumer = consumer;

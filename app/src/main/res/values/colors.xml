@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3F51B5</color><!--#3F51B5-->
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="little_black">#404040</color>
     <color name="red">#b45250</color>
     <color name="black">#010101</color>
+    <color name="gray_author">#9e9e9e</color>
+    <color name="light_gray">#a7a7a7</color>
+    <color name="tool_bar_blue">#0081f9</color>
+    <color name="greeen">#38b059</color>
 </resources>

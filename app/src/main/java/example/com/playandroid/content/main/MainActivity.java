@@ -11,7 +11,7 @@ import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
-import example.com.playandroid.util.BottomNavigationViewHelper;
+import example.com.playandroid.util.StatusBarUtil;
 
 import static example.com.playandroid.util.Constant.FragmentType.HOME;
 import static example.com.playandroid.util.Constant.FragmentType.PROJECT;
@@ -28,18 +28,9 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         //设置model 标题栏 还有底部的导航
         setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
-        BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
-        /*mModel = new MainModel(this,getResources());
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mBinding.setVm(mModel);
-        setSupportActionBar(mBinding.toolbar);*/
-        //FragmentManager fm = getSupportFragmentManager();
-       /* Fragment fragment = fm.findFragmentById(R.id.frame_layout);
-        if (fragment == null) {
-            fragment = new HomeFragment();
-            fm.beginTransaction().add(R.id.frame_layout, fragment).commit();
-        }*/
-       initFragment(mHomeFragment,HOME);
+        StatusBarUtil.setStatusBarColor(this,R.color.tool_bar_blue);
+        //BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
+        initFragment(mHomeFragment,HOME);
     }
 
     @Override
@@ -84,25 +75,6 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
 
         //5.提交事务
         transaction.commit();
-        /*mBinding.bnv.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.it_home:
-                    ToastUtils.showLong("home");
-                    return true;
-                case R.id.it_project:
-                    ToastUtils.showLong("it_project");
-                    return true;
-                case R.id.it_system:
-                    ToastUtils.showLong("it_system");
-                    return true;
-                case R.id.it_nav:
-                    ToastUtils.showLong("it_nav");
-                    return true;
-                default:
-                    break;
-            }
-            return false;
-        });*/
     }
 
     private void hideFragment(FragmentTransaction transaction) {
