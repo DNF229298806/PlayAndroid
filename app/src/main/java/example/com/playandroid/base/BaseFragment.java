@@ -19,7 +19,7 @@ import io.reactivex.internal.disposables.ListCompositeDisposable;
  * @author Richard_Y_Wang
  * @des 2018/10/14 13:01
  */
-public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmentModel, V extends ViewDataBinding> extends Fragment implements Inflate{
+public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmentModel, V extends ViewDataBinding> extends Fragment{
     private K mActivity;
     private T mModel;
     private V mBinding;
@@ -32,11 +32,6 @@ public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmen
         mBinding = DataBindingUtil.inflate(inflater, setLayout(), container, false);
         //doOnCreateView();
         return mBinding.getRoot();
-    }
-
-    @Override
-    public void doOnCreateViewAfter() {
-
     }
 
     //protected abstract void doOnCreateView();

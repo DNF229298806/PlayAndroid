@@ -12,6 +12,7 @@ import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.util.StatusBarUtil;
+import timber.log.Timber;
 
 import static example.com.playandroid.util.Constant.FragmentType.HOME;
 import static example.com.playandroid.util.Constant.FragmentType.PROJECT;
@@ -22,15 +23,21 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
     private ProjectFragment mProjectFragment;
     private SystemFragment mSystemFragment;
     private NavigationFragment mNavigationFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        long l = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
+        long l1 = System.currentTimeMillis();
+        Timber.i("super="+(l1-l));
         //设置model 标题栏 还有底部的导航
         setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
-        StatusBarUtil.setStatusBarColor(this,R.color.tool_bar_blue);
+        StatusBarUtil.setStatusBarColor(this, R.color.tool_bar_blue);
         //BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
-        initFragment(mHomeFragment,HOME);
+        initFragment(mHomeFragment, HOME);
+        long l2 = System.currentTimeMillis();
+        Timber.i("Main="+(l2-l1));
     }
 
     @Override

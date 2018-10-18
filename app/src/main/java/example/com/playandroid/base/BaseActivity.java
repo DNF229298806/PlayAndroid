@@ -15,7 +15,7 @@ import io.reactivex.internal.disposables.ListCompositeDisposable;
  * @author Richard_Y_Wang
  * @des 2018/9/25 21:40
  */
-public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBinding> extends AppCompatActivity implements Inflate{
+public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBinding> extends AppCompatActivity{
     private T mModel;
     private V mBinding;
     private BaseEntity mEntity;
@@ -31,11 +31,6 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
 
     //protected abstract void doOnCreate();
 
-
-    @Override
-    public void doOnCreateViewAfter() {
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -77,4 +72,6 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
 
     public abstract @LayoutRes
     int setLayout();
+
+
 }

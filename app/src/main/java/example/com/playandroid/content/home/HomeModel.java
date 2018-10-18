@@ -25,8 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
     private List<BannerEntity> mBannerEntities = new ArrayList<>();
     private List<TestEntity> names;
-    public HomeModel() {
-    }
+
 
 
     public HomeModel(MainActivity activity, HomeFragment fragment) {
