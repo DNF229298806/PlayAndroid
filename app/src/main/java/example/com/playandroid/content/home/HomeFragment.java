@@ -48,7 +48,6 @@ public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHo
         banner.isAutoPlay(true);
         banner.setDelayTime(3000);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-        mConsumer.setBannerContent();
     }
 
     @Override

@@ -30,22 +30,25 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
 
     public HomeModel(MainActivity activity, HomeFragment fragment) {
         super(activity, fragment);
-        getFragment().setConsumer(() -> {
-            getFragment().addDisposable(App.api.getBannerEntity()
-                    .compose(new RestfulTransformer<>())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::doOnNext, a->{a.printStackTrace();ToastUtils.showLong("获取数据失败");}));
+    }
 
-            names = new ArrayList<>();
-            for (int i = 0; i < 200; i++) {
-                TestEntity testEntity = new TestEntity();
-                testEntity.setContent("hahahaha "+i);
-                names.add(testEntity);
-            }
-            RecyclerView recyclerView = getFragment().getBinding().recyclerView;
-            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-            recyclerView.setAdapter(new TestBindingAdapter(names, recyclerView.getContext()));
-        });
+    @Override
+    public void onFragmentCreate() {
+        super.onFragmentCreate();
+        addDisposable(App.api.getBannerEntity()
+                .compose(new RestfulTransformer<>())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::doOnNext, a->{a.printStackTrace();ToastUtils.showLong("获取数据失败");}));
+
+        names = new ArrayList<>();
+        for (int i = 0; i < 200; i++) {
+            TestEntity testEntity = new TestEntity();
+            testEntity.setContent("hahahaha "+i);
+            names.add(testEntity);
+        }
+        RecyclerView recyclerView = getFragment().getBinding().recyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(new TestBindingAdapter(names, recyclerView.getContext()));
     }
 
     private void doOnNext(List<BannerEntity> list) {

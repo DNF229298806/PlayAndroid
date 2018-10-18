@@ -24,7 +24,6 @@ public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmen
     private T mModel;
     private V mBinding;
     private BaseEntity mEntity;
-    public ListCompositeDisposable list = new ListCompositeDisposable();
 
     @Nullable
     @Override
@@ -73,11 +72,6 @@ public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        list.dispose();
-    }
-
-    public void addDisposable(Disposable disposable) {
-        list.add(disposable);
     }
 
     public abstract @LayoutRes

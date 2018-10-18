@@ -24,7 +24,7 @@ public class RegisterModel extends BaseModel<RegisterActivity> {
         System.out.println("啊实打实大师大师大神阿萨德阿萨阿萨德");
         Timber.e("mEntity=%1s",regEntity.toString());
         ToastUtils.showLong(regEntity.toString());
-        getActivity().addDisposable(App.api.register(regEntity.getUsername(), regEntity.getPassword(), regEntity.getRepassword())
+        addDisposable(App.api.register(regEntity.getUsername(), regEntity.getPassword(), regEntity.getRepassword())
                 .compose(new ErrorTransform<>())
                 .subscribe(
                         entity -> ToastUtils.showLong("注册成功"),

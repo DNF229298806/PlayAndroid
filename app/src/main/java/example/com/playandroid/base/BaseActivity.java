@@ -8,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import example.com.playandroid.BR;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.disposables.ListCompositeDisposable;
 
 /**
  * @author Richard_Y_Wang
@@ -19,7 +17,6 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
     private T mModel;
     private V mBinding;
     private BaseEntity mEntity;
-    public ListCompositeDisposable list = new ListCompositeDisposable();
 
 
     @Override
@@ -35,12 +32,8 @@ public abstract class BaseActivity<T extends BaseModel, V extends ViewDataBindin
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        list.dispose();
     }
 
-    public void addDisposable(Disposable disposable) {
-        list.add(disposable);
-    }
 
 
     public void setModel(T model) {
