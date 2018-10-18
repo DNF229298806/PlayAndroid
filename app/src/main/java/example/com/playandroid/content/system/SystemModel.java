@@ -9,8 +9,7 @@ import example.com.playandroid.content.main.MainActivity;
  */
 public class SystemModel extends BaseFragmentModel<MainActivity,SystemFragment> {
 
-    public SystemModel() {
-    }
+
 
     public SystemModel(MainActivity activity, SystemFragment fragment) {
         super(activity, fragment);

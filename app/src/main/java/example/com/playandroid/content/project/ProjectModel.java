@@ -8,8 +8,7 @@ import example.com.playandroid.content.main.MainActivity;
  * @des 2018/10/9 21:08
  */
 public class ProjectModel extends BaseFragmentModel<MainActivity,ProjectFragment> {
-    public ProjectModel() {
-    }
+
 
     public ProjectModel(MainActivity activity, ProjectFragment fragment) {
         super(activity, fragment);

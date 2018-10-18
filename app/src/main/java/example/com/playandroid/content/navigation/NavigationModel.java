@@ -9,8 +9,7 @@ import example.com.playandroid.content.main.MainActivity;
  */
 public class NavigationModel extends BaseFragmentModel<MainActivity,NavigationFragment> {
 
-    public NavigationModel() {
-    }
+
 
     public NavigationModel(MainActivity activity, NavigationFragment fragment) {
         super(activity, fragment);
