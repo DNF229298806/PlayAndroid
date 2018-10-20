@@ -1,4 +1,4 @@
-package example.com.playandroid.content.home;
+package example.com.playandroid.adapter;
 
 import android.content.Context;
 

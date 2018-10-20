@@ -12,7 +12,7 @@ import java.util.List;
 
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseFragmentModel;
-import example.com.playandroid.base.TestEntity;
+import example.com.playandroid.content.home.net.ArticleEntity;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.main.MainActivity;
 import example.com.playandroid.network.transform.RestfulTransformer;
@@ -24,7 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  */
 public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
     private List<BannerEntity> mBannerEntities = new ArrayList<>();
-    private List<TestEntity> names;
+    private List<ArticleEntity> names;
 
 
 
@@ -42,13 +42,13 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
 
         names = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
-            TestEntity testEntity = new TestEntity();
-            testEntity.setContent("hahahaha "+i);
+            ArticleEntity testEntity = new ArticleEntity();
+            //testEntity.setContent("hahahaha "+i);
             names.add(testEntity);
         }
         RecyclerView recyclerView = getFragment().getBinding().recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new TestBindingAdapter(names, recyclerView.getContext()));
+        recyclerView.setAdapter(new ArticleBindingAdapter(names, recyclerView.getContext()));
     }
 
     private void doOnNext(List<BannerEntity> list) {

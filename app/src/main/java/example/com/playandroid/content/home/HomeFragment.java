@@ -24,7 +24,6 @@ import example.com.playandroid.util.GlideImageLoader;
  */
 public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHomeBinding> {
 
-    private Consumer mConsumer;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,13 +57,5 @@ public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-    public interface Consumer {
-        void setBannerContent();
-    }
-
-
-    public void setConsumer(Consumer consumer) {
-        mConsumer = consumer;
     }
 }

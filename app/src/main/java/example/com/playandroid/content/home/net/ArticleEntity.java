@@ -1,10 +1,12 @@
 package example.com.playandroid.content.home.net;
 
+import example.com.playandroid.base.BaseEntity;
+
 /**
  * @author Richard_Y_Wang
  * @des 2018/10/16 22:30
  */
-public class ArticleEntity {
+public class ArticleEntity extends BaseEntity {
 
     /**
      * apkLink :  APK地址

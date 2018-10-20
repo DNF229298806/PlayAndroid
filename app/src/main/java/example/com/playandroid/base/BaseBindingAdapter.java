@@ -36,7 +36,7 @@ public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewData
 
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder<T> holder, int position) {
-        holder.getBinding().setVariable(BR.vm,data.get(position));
+        holder.getBinding().setVariable(BR.entity,data.get(position));
         // 立刻刷新界面
         holder.getBinding().executePendingBindings();
     }

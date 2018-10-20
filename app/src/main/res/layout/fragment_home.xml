@@ -23,11 +23,6 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="180dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"

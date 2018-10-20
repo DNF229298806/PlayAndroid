@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="vm"
+            name="entity"
             type="example.com.playandroid.base.TestEntity"/>
 
     </data>
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="@{vm.content,default=12312321}"
+            android:text="@{entity.content,default=12312321}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </FrameLayout>
