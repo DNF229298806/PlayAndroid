@@ -24,4 +24,6 @@ public class ArticleBindingAdapter extends BaseBindingAdapter<ArticleEntity,Hold
     public int setLayout() {
         return R.layout.holder_article_item;
     }
+
+
 }

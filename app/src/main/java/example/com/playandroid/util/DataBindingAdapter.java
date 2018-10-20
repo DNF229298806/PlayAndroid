@@ -3,9 +3,14 @@ package example.com.playandroid.util;
 import android.databinding.BindingAdapter;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
+import android.util.Patterns;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
+
+import java.io.File;
 
 /**
  * @author Richard_Y_Wang
@@ -23,27 +28,13 @@ public class DataBindingAdapter {
         view.setOnBannerListener(listener);
     }
 
+    @BindingAdapter("generalSrc")
+    public static void setFilePath(ImageView view, String path) {
+        if (Patterns.WEB_URL.matcher(path).matches()) {
+            Glide.with(view.getContext()).load(path).into(view);
+        } else {
+            Glide.with(view.getContext()).load(new File(path)).into(view);
+        }
+    }
 
-    /*@BindingAdapter({"OnNavigationItemSelectedListener"})
-    public static void setOnNavigationItemSelectedListener(BottomNavigationView view) {
-        view.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.it_home:
-                    ToastUtils.showLong("home");
-                    break;
-                case R.id.it_project:
-                    ToastUtils.showLong("it_project");
-                    break;
-                case R.id.it_system:
-                    ToastUtils.showLong("it_system");
-                    break;
-                case R.id.it_nav:
-                    ToastUtils.showLong("it_nav");
-                    break;
-                default:
-                    break;
-            }
-            return false;
-        });
-    }*/
 }

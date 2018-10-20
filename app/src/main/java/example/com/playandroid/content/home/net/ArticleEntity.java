@@ -1,5 +1,7 @@
 package example.com.playandroid.content.home.net;
 
+import java.util.List;
+
 import example.com.playandroid.base.BaseEntity;
 
 /**
@@ -54,12 +56,12 @@ public class ArticleEntity extends BaseEntity {
     private long publishTime;
     private int superChapterId;
     private String superChapterName;
+    private List<ArticleTagsEntity> tags;
     private String title;
     private int type;
     private int userId;
     private int visible;
     private int zan;
-    private ArticleTagsEntity tags;
 
     public String getApkLink() {
         return apkLink;
@@ -237,11 +239,12 @@ public class ArticleEntity extends BaseEntity {
         this.zan = zan;
     }
 
-    public ArticleTagsEntity getTags() {
+
+    public List<ArticleTagsEntity> getTags() {
         return tags;
     }
 
-    public void setTags(ArticleTagsEntity tags) {
+    public void setTags(List<ArticleTagsEntity> tags) {
         this.tags = tags;
     }
 }

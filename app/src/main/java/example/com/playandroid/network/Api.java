@@ -2,8 +2,8 @@ package example.com.playandroid.network;
 
 import java.util.List;
 
-import example.com.playandroid.content.home.net.ArticleEntity;
 import example.com.playandroid.content.home.net.BannerEntity;
+import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.network.entity.InfoEntity;
 import example.com.playandroid.network.entity.UserEntity;
 import io.reactivex.Observable;
@@ -35,11 +35,11 @@ public interface Api {
     Observable<InfoEntity<List<BannerEntity>>> getBannerEntity();
 
     /**
-     * 获取feed文章列表
+     * 获取首页文章列表
      *
      * @param num 页数
-     * @return feed文章列表数据
+     * @return 首页文章列表数据
      */
     @GET("article/list/{num}/json")
-    Observable<InfoEntity<List<ArticleEntity>>> getFeedArticleList(@Path("num") int num);
+    Observable<InfoEntity<PageEntity>> getFeedArticleList(@Path("num") int num);
 }

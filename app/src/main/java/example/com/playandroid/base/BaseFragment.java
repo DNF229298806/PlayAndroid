@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import example.com.playandroid.BR;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.disposables.ListCompositeDisposable;
 
 /**
  * @author Richard_Y_Wang

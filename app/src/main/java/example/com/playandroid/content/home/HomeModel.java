@@ -24,7 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  */
 public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
     private List<BannerEntity> mBannerEntities = new ArrayList<>();
-    private List<ArticleEntity> names;
+    private List<ArticleEntity> articles;
 
 
 
@@ -40,15 +40,35 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::doOnNext, a->{a.printStackTrace();ToastUtils.showLong("获取数据失败");}));
 
-        names = new ArrayList<>();
-        for (int i = 0; i < 200; i++) {
+        articles = new ArrayList<>();
+        addDisposable(App.api.getFeedArticleList(0)
+                .compose(new RestfulTransformer<>())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(page->{
+                    RecyclerView recyclerView = getFragment().getBinding().recyclerView;
+                    recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(new ArticleBindingAdapter(page.getArticleEntities(),recyclerView.getContext()));
+
+                   /* List<TestEntity> list = new ArrayList<>();
+                    for (int i = 0; i < 200; i++) {
+                        TestEntity testEntity = new TestEntity();
+                        testEntity.setContent("hahahaha "+i);
+                        list.add(testEntity);
+                    }
+                    RecyclerView recyclerView = getFragment().getBinding().recyclerView;
+                    recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(new TestBindingAdapter(list,recyclerView.getContext()));*/
+                    //recyclerView.setOnBottomCallback(() -> ToastUtils.showLong("到底啦 老哥"));
+                },Throwable::printStackTrace)
+        );
+        /*for (int i = 0; i < 200; i++) {
             ArticleEntity testEntity = new ArticleEntity();
             //testEntity.setContent("hahahaha "+i);
-            names.add(testEntity);
-        }
-        RecyclerView recyclerView = getFragment().getBinding().recyclerView;
+            articles.add(testEntity);
+        }*/
+       /*RecyclerView recyclerView = getFragment().getBinding().recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new ArticleBindingAdapter(names, recyclerView.getContext()));
+        recyclerView.setAdapter(new ArticleBindingAdapter(articles, recyclerView.getContext()));*/
     }
 
     private void doOnNext(List<BannerEntity> list) {

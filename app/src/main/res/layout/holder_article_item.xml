@@ -6,14 +6,14 @@
     <data>
 
         <variable
-            name="vm"
+            name="entity"
             type="example.com.playandroid.content.home.net.ArticleEntity"/>
 
     </data>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp">
@@ -22,50 +22,56 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal">
+                android:layout_marginEnd="8dp">
 
                 <android.support.v7.widget.AppCompatTextView
+                    android:layout_gravity="start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="奥巴马"
+                    android:text="@{entity.author,default=tom}"
                     android:textColor="#444"/>
 
-                <android.support.v7.widget.AppCompatTextView
+               <!-- <android.support.v7.widget.AppCompatTextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="1天前"
-                    android:textColor="@color/light_gray"/>
+                    android:text="@{entity.niceDate,default=asdasd}"
+                    android:textColor="@color/light_gray"/>-->
 
                 <android.support.v7.widget.AppCompatTextView
+                    android:layout_gravity="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="公众号/金牌马老师"/>
-            </LinearLayout>
+                    android:text="@{entity.superChapterName+@string/backslash+entity.chapterName,default=asdasdasd}"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="8dp">
-
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{entity.niceDate,default=asdasd}"
+                        android:textColor="@color/light_gray"/>
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="一个清新简单的WanAndroid应用应用应用应用应用"
+                        android:text="@{entity.title,default=asdasdasdasd}"
                         android:textColor="#000"
                         android:textStyle="bold"/>
 
@@ -74,13 +80,17 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="4"
-                        android:text="android小桌面空间阿萨德阿萨德阿里的空间阿萨德阿斯利科技的爱上了的看加速度离开家阿斯利康加的拉斯克奖的拉斯克奖的拉丝机的拉斯克奖的上拉克爱上了肯德基拉考四级的啦"/>
+                        android:text="@{entity.desc}"/>
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="105dp"
-                    android:layout_height="105dp"
-                    android:src="@mipmap/icon_home"/>
+                    android:padding="5dp"
+                    android:adjustViewBounds="true"
+                    app:generalSrc="@{entity.envelopePic}"
+                    android:maxWidth="105dp"
+                    android:maxHeight="105dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
