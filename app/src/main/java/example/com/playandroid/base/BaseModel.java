@@ -60,9 +60,9 @@ public class BaseModel<T extends BaseActivity> implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onActivityDestroy() {
-        mActivity.getLifecycle().removeObserver(this);
         list.dispose();
         Timber.e("WishScoreRelativeLayout.ON_DESTROY()");
+        mActivity.getLifecycle().removeObserver(this);
     }
     /*private Fragment mFragment;*/
 

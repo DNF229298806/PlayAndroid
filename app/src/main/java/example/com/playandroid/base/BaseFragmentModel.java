@@ -70,9 +70,9 @@ public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment> i
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onFragmentDestroy() {
-        mFragment.getLifecycle().removeObserver(this);
         list.dispose();
         Timber.e("WishScoreRelativeLayout.ON_DESTROY()");
+        mFragment.getLifecycle().removeObserver(this);
     }
      /*  public BaseFragmentModel() {
           mFragment.getLifecycle().addObserver(this);
