@@ -1,7 +1,6 @@
 package example.com.playandroid.base;
 
 import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 
 import io.reactivex.disposables.Disposable;
@@ -12,7 +11,7 @@ import timber.log.Timber;
  * @author Richard_Y_Wang
  * @des 2018/9/30 17:12
  */
-public class BaseModel<T extends BaseActivity> implements LifecycleObserver {
+public class BaseModel<T extends BaseActivity> extends Model{
     private T mActivity;
 
     public ListCompositeDisposable list = new ListCompositeDisposable();
@@ -20,6 +19,7 @@ public class BaseModel<T extends BaseActivity> implements LifecycleObserver {
     public void addDisposable(Disposable disposable) {
         list.add(disposable);
     }
+
     public BaseModel(T activity) {
         mActivity = activity;
         mActivity.getLifecycle().addObserver(this);
@@ -63,6 +63,36 @@ public class BaseModel<T extends BaseActivity> implements LifecycleObserver {
         list.dispose();
         Timber.e("WishScoreRelativeLayout.ON_DESTROY()");
         mActivity.getLifecycle().removeObserver(this);
+    }
+
+    @Override
+    public void onCreate() {
+
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
     /*private Fragment mFragment;*/
 

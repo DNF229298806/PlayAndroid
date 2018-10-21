@@ -46,6 +46,33 @@ public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewData
         return data == null ? 0 : data.size();
     }
 
+    public void setData(List<K> data) {
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
+    public List<K> getData() {
+        return data;
+    }
+
+    public void appendItems(List<K> items) {
+        if (items != null && (items.size() != 0) && data != null) {
+            data.addAll(items);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void removeItem(K item) {
+        data.remove(item);
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        if (data != null) {
+            data.clear();
+            notifyDataSetChanged();
+        }
+    }
     /*private List<TestEntity> data;
 
     private Context context;
