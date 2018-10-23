@@ -1,8 +1,11 @@
 package example.com.playandroid.content.main;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+
+import com.blankj.utilcode.util.ToastUtils;
 
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
@@ -11,6 +14,7 @@ import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
+import example.com.playandroid.util.DogUtil;
 import example.com.playandroid.util.StatusBarUtil;
 import timber.log.Timber;
 
@@ -18,7 +22,7 @@ import static example.com.playandroid.util.Constant.FragmentType.HOME;
 import static example.com.playandroid.util.Constant.FragmentType.PROJECT;
 import static example.com.playandroid.util.Constant.FragmentType.SYSTEM;
 
-public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*extends BaseActivity<MainModel,ActivityMainBinding>*/{
+public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*extends BaseActivity<MainModel,ActivityMainBinding>*/ {
     private HomeFragment mHomeFragment;
     private ProjectFragment mProjectFragment;
     private SystemFragment mSystemFragment;
@@ -29,7 +33,7 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         long l = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         long l1 = System.currentTimeMillis();
-        Timber.i("super=%s", (l1-l));
+        Timber.i("super=%s", (l1 - l));
         //设置model 标题栏 还有底部的导航
         setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
@@ -37,7 +41,16 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         //BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
         initFragment(mHomeFragment, HOME);
         long l2 = System.currentTimeMillis();
-        Timber.i("Main=%s", (l2-l1));
+        Timber.i("Main=%s", (l2 - l1));
+        DogUtil.checkPermissionOneByOne(this, (permission -> {
+            if (permission.granted) {
+                ToastUtils.showShort("请求全部成功");
+            } else if (permission.shouldShowRequestPermissionRationale) {
+                ToastUtils.showShort("拒绝许可 不再询问 ");
+            }else{
+                ToastUtils.showShort("进入设置？？？？？？？？");
+            }
+        }), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     @Override
@@ -45,7 +58,7 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         return R.layout.activity_main;
     }
 
-    protected void initFragment(Fragment fragment,int type) {
+    protected void initFragment(Fragment fragment, int type) {
         //记录当前的fragment
         Fragment checkedFragment;
 
@@ -94,7 +107,7 @@ public class MainActivity extends BaseActivity<MainModel,ActivityMainBinding>/*e
         if (mSystemFragment != null) {
             transaction.hide(mSystemFragment);
         }
-        if (mNavigationFragment!=null) {
+        if (mNavigationFragment != null) {
             transaction.hide(mNavigationFragment);
         }
     }

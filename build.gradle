@@ -31,5 +31,9 @@ ext{
     support_version ="28.0.0"
     retrofit = "2.4.0"
     glide_version = "4.7.1"
+    rxpermissions_version = "0.10.2"
+    rxjava_version = "2.2.1"
+    rxandroid_version = "2.1.0"
+    gson_version = "2.8.5"
 }
 
