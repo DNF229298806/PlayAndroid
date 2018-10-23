@@ -46,4 +46,12 @@ public class SuperRecyclerView extends RecyclerView {
         }
     }
 
+
+   /* @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (isSlideToBottom()) {
+            mOnBottomCallback.onBottom();
+        }
+    }*/
 }

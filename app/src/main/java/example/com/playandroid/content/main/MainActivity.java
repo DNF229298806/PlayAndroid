@@ -1,11 +1,8 @@
 package example.com.playandroid.content.main;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-
-import com.blankj.utilcode.util.ToastUtils;
 
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
@@ -14,7 +11,6 @@ import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
-import example.com.playandroid.util.DogUtil;
 import example.com.playandroid.util.StatusBarUtil;
 import timber.log.Timber;
 
@@ -42,7 +38,7 @@ public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*
         initFragment(mHomeFragment, HOME);
         long l2 = System.currentTimeMillis();
         Timber.i("Main=%s", (l2 - l1));
-        DogUtil.checkPermissionOneByOne(this, (permission -> {
+      /*  DogUtil.checkPermissionOneByOne(this, (permission -> {
             if (permission.granted) {
                 ToastUtils.showShort("请求全部成功");
             } else if (permission.shouldShowRequestPermissionRationale) {
@@ -50,7 +46,7 @@ public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*
             }else{
                 ToastUtils.showShort("进入设置？？？？？？？？");
             }
-        }), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+        }), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)*/;
     }
 
     @Override

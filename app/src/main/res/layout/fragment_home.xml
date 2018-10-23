@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <!--todo Banner也要可以移动-->
         <com.youth.banner.Banner
             app:indicator_width="10dp"
             app:indicator_height="10dp"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"/>
 
-        <android.support.v7.widget.RecyclerView
+        <example.com.playandroid.base.SuperRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
