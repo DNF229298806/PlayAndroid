@@ -33,8 +33,8 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
     }
 
     @Override
-    public void onFragmentCreate() {
-        super.onFragmentCreate();
+    public void onCreate() {
+        super.onCreate();
         addDisposable(App.api.getBannerEntity()
                 .compose(new RestfulTransformer<>())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -70,6 +70,11 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(new ArticleBindingAdapter(articles, recyclerView.getContext()));*/
     }
+
+    /*@Override
+    public void onFragmentCreate() {
+        super.onFragmentCreate();
+    }*/
 
     private void doOnNext(List<BannerEntity> list) {
         List<String> titleList = new ArrayList<>();

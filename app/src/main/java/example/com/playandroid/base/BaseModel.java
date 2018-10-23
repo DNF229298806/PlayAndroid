@@ -1,8 +1,5 @@
 package example.com.playandroid.base;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.OnLifecycleEvent;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
 import timber.log.Timber;
@@ -33,7 +30,7 @@ public class BaseModel<T extends BaseActivity> extends Model{
         mActivity = activity;
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    /*@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onActivityCreate() {
         Timber.e("WishScoreRelativeLayout.ON_CREATE()");
     }
@@ -63,51 +60,37 @@ public class BaseModel<T extends BaseActivity> extends Model{
         list.dispose();
         Timber.e("WishScoreRelativeLayout.ON_DESTROY()");
         mActivity.getLifecycle().removeObserver(this);
-    }
+    }*/
 
     @Override
     public void onCreate() {
-
+        Timber.e("WishScoreRelativeLayout.ON_CREATE()");
     }
 
     @Override
     public void onStart() {
-
+        Timber.e("WishScoreRelativeLayout.ON_START()");
     }
 
     @Override
     public void onResume() {
-
+        Timber.e("WishScoreRelativeLayout.ON_RESUME()");
     }
 
     @Override
     public void onPause() {
-
+        Timber.e("WishScoreRelativeLayout.ON_PAUSE()");
     }
 
     @Override
     public void onStop() {
-
+        Timber.e("WishScoreRelativeLayout.ON_STOP()");
     }
 
     @Override
     public void onDestroy() {
-
+        list.dispose();
+        Timber.e("WishScoreRelativeLayout.ON_DESTROY()");
+        mActivity.getLifecycle().removeObserver(this);
     }
-    /*private Fragment mFragment;*/
-
-    /* public BaseModel() {
-         mActivity.getLifecycle().addObserver(this);
-     }*/
-
-    /*public BaseModel(Fragment fragment) {
-        mFragment = fragment;
-    }*/
-    /*  public Fragment getFragment() {
-          return mFragment;
-      }
-
-      public void setFragment(Fragment fragment) {
-          mFragment = fragment;
-      }*/
 }
