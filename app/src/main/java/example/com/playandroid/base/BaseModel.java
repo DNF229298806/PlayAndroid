@@ -21,8 +21,8 @@ public class BaseModel<T extends BaseActivity,V extends ViewDataBinding> extends
 
     public BaseModel(T activity) {
         mActivity = activity;
-        mActivity.getLifecycle().addObserver(this);
         mBinding = (V) activity.getBinding();
+        mActivity.getLifecycle().addObserver(this);
     }
 
     public T getActivity() {

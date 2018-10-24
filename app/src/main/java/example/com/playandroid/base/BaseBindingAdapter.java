@@ -55,9 +55,20 @@ public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewData
         return data;
     }
 
-    public void appendItems(List<K> items) {
+    public void addList(List<K> items) {
+        addList(getItemCount(),items);
+    }
+
+    public void addList(int position, List<K> items) {
         if (items != null && (items.size() != 0) && data != null) {
-            data.addAll(items);
+            data.addAll(position,items);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void addItem(K item,int position) {
+        if (item != null && data != null) {
+            data.add(position, item);
             notifyDataSetChanged();
         }
     }

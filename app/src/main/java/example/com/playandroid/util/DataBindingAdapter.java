@@ -7,6 +7,9 @@ import android.util.Patterns;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -18,16 +21,19 @@ import java.io.File;
  */
 public class DataBindingAdapter {
 
+    //BottomNavigationView
     @BindingAdapter("onNavigationItemSelected")
     public static void setOnNavigationItemSelected(BottomNavigationView view, OnNavigationItemSelectedListener listener) {
         view.setOnNavigationItemSelectedListener(listener);
     }
 
+    //Banner
     @BindingAdapter("onBannerClick")
     public static void setOnBannerClick(Banner view, OnBannerListener listener) {
         view.setOnBannerListener(listener);
     }
 
+    //ImageView
     @BindingAdapter("generalSrc")
     public static void setFilePath(ImageView view, String path) {
         if (Patterns.WEB_URL.matcher(path).matches()) {
@@ -35,6 +41,17 @@ public class DataBindingAdapter {
         } else {
             Glide.with(view.getContext()).load(new File(path)).into(view);
         }
+    }
+
+    //SmartRefreshLayout
+    @BindingAdapter("onLoadMoreListener")
+    public static void setOnLoadMoreListener(SmartRefreshLayout layout, OnLoadMoreListener listener) {
+        layout.setOnLoadMoreListener(listener);
+    }
+
+    @BindingAdapter("onRefreshListener")
+    public static void setOnRefreshListener(SmartRefreshLayout layout, OnRefreshListener listener) {
+        layout.setOnRefreshListener(listener);
     }
 
 }

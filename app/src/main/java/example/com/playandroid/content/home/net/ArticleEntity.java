@@ -1,6 +1,7 @@
 package example.com.playandroid.content.home.net;
 
 import java.util.List;
+import java.util.Objects;
 
 import example.com.playandroid.base.BaseEntity;
 
@@ -246,5 +247,21 @@ public class ArticleEntity extends BaseEntity {
 
     public void setTags(List<ArticleTagsEntity> tags) {
         this.tags = tags;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof ArticleEntity))
+            return false;
+        ArticleEntity that = (ArticleEntity) o;
+        return getId() == that.getId() &&
+                Objects.equals(getLink(), that.getLink());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getLink());
     }
 }

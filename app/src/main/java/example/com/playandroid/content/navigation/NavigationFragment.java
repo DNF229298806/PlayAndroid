@@ -29,7 +29,6 @@ public class NavigationFragment extends BaseFragment<MainActivity,NavigationMode
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setModel(new NavigationModel((MainActivity) getActivity(), this));
-
         RefreshLayout refreshLayout = getBinding().refreshLayout;
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

@@ -24,8 +24,8 @@ public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment,K 
     public BaseFragmentModel(T activity, V fragment) {
         mActivity = activity;
         mFragment = fragment;
-        mFragment.getLifecycle().addObserver(this);
         mBinding = (K) fragment.getBinding();
+        mFragment.getLifecycle().addObserver(this);
     }
 
     public T getActivity() {
