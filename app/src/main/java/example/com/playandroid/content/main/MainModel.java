@@ -11,6 +11,7 @@ import example.com.playandroid.content.home.HomeFragment;
 import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
+import example.com.playandroid.databinding.ActivityMainBinding;
 
 import static example.com.playandroid.util.Constant.FragmentType.HOME;
 import static example.com.playandroid.util.Constant.FragmentType.NAVIGATION;
@@ -21,7 +22,7 @@ import static example.com.playandroid.util.Constant.FragmentType.SYSTEM;
  * @author Richard_Y_Wang
  * @des 2018/9/27 21:49
  */
-public class MainModel extends BaseModel<MainActivity> {
+public class MainModel extends BaseModel<MainActivity,ActivityMainBinding> {
 
     public MainModel(MainActivity activity) {
         super(activity);

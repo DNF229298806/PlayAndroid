@@ -1,6 +1,7 @@
 package example.com.playandroid.base;
 
 import android.arch.lifecycle.LifecycleObserver;
+import android.databinding.ViewDataBinding;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
@@ -10,10 +11,10 @@ import timber.log.Timber;
  * @author Richard_Y_Wang
  * @des 2018/10/14 14:42
  */
-public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment>extends Model implements LifecycleObserver {
+public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment,K extends ViewDataBinding>extends Model implements LifecycleObserver {
     private T mActivity;
     private V mFragment;
-
+    private K mBinding;
     public ListCompositeDisposable list = new ListCompositeDisposable();
 
     public void addDisposable(Disposable disposable) {
@@ -24,6 +25,7 @@ public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment>ex
         mActivity = activity;
         mFragment = fragment;
         mFragment.getLifecycle().addObserver(this);
+        mBinding = (K) fragment.getBinding();
     }
 
     public T getActivity() {
@@ -42,7 +44,11 @@ public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment>ex
         mFragment = fragment;
     }
 
-    /*@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    public K getBinding() {
+        return mBinding;
+    }
+
+/*@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onFragmentCreate() {
         Timber.e("WishScoreRelativeLayout.ON_CREATE()");
     }

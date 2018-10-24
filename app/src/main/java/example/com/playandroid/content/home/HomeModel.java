@@ -15,6 +15,7 @@ import example.com.playandroid.base.SuperRecyclerView;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.content.main.MainActivity;
+import example.com.playandroid.databinding.FragmentHomeBinding;
 import example.com.playandroid.network.transform.RestfulTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -22,7 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * @author Richard_Y_Wang
  * @des 2018/9/25 22:10
  */
-public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
+public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment,FragmentHomeBinding> {
     private List<BannerEntity> mBannerEntities = new ArrayList<>();
     private PageEntity mPageEntity = new PageEntity();
 
@@ -51,7 +52,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
 
     private void doOnFirstLoading(PageEntity page) {
         mPageEntity = page;
-        SuperRecyclerView recyclerView = getFragment().getBinding().recyclerView;
+        SuperRecyclerView recyclerView = getBinding().recyclerView;
         recyclerView.setOnBottomCallback(this::doOnBottom);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(new ArticleBindingAdapter(page.getArticleEntities(), recyclerView.getContext()));
@@ -68,7 +69,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment> {
 
     private void more(PageEntity pageEntity) {
         mPageEntity = pageEntity;
-        ((ArticleBindingAdapter) getFragment().getBinding().recyclerView.getAdapter()).appendItems(pageEntity.getArticleEntities());
+        ((ArticleBindingAdapter) getBinding().recyclerView.getAdapter()).appendItems(pageEntity.getArticleEntities());
         ToastUtils.showShort("加载成功");
     }
 

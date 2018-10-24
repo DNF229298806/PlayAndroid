@@ -78,4 +78,6 @@ dependencies {
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     //运行时权限
     implementation "com.github.tbruyelle:rxpermissions:$rxpermissions_version"
+    //智能刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
 }

@@ -1,5 +1,7 @@
 package example.com.playandroid.base;
 
+import android.databinding.ViewDataBinding;
+
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
 import timber.log.Timber;
@@ -8,9 +10,9 @@ import timber.log.Timber;
  * @author Richard_Y_Wang
  * @des 2018/9/30 17:12
  */
-public class BaseModel<T extends BaseActivity> extends Model{
+public class BaseModel<T extends BaseActivity,V extends ViewDataBinding> extends Model{
     private T mActivity;
-
+    private V mBinding;
     public ListCompositeDisposable list = new ListCompositeDisposable();
 
     public void addDisposable(Disposable disposable) {
@@ -20,6 +22,7 @@ public class BaseModel<T extends BaseActivity> extends Model{
     public BaseModel(T activity) {
         mActivity = activity;
         mActivity.getLifecycle().addObserver(this);
+        mBinding = (V) activity.getBinding();
     }
 
     public T getActivity() {
@@ -30,7 +33,12 @@ public class BaseModel<T extends BaseActivity> extends Model{
         mActivity = activity;
     }
 
-    /*@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    public V getBinding() {
+        return mBinding;
+    }
+
+
+   /*@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onActivityCreate() {
         Timber.e("WishScoreRelativeLayout.ON_CREATE()");
     }
