@@ -95,8 +95,6 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
                     .doOnNext(article -> {
                         int i = 0;
                         for (ArticleEntity articleEntity : page.getArticleEntities()) {
-                           /* if (articleEntity.equals(article)) page.getArticleEntities().remove(articleEntity);
-                            else newData.add(article);*/
                             if (!articleEntity.equals(article)) i++;
                         }
                         if (i == page.getArticleEntities().size()) newData.add(article);
