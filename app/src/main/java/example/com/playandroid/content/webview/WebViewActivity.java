@@ -24,7 +24,6 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
         super.onCreate(savedInstanceState);
         setModel(new WebViewModel(this));
         initWebSettings();
-
     }
 
     @Override
