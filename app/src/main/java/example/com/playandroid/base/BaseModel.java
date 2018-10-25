@@ -1,6 +1,7 @@
 package example.com.playandroid.base;
 
 import android.databinding.ViewDataBinding;
+import android.support.annotation.CallSuper;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
@@ -96,6 +97,7 @@ public class BaseModel<T extends BaseActivity,V extends ViewDataBinding> extends
     }
 
     @Override
+    @CallSuper
     public void onDestroy() {
         list.dispose();
         Timber.e("WishScoreRelativeLayout.ON_DESTROY()");

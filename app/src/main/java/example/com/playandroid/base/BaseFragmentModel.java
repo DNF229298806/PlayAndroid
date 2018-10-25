@@ -2,6 +2,7 @@ package example.com.playandroid.base;
 
 import android.arch.lifecycle.LifecycleObserver;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.CallSuper;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
@@ -106,6 +107,7 @@ public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment,K 
     }
 
     @Override
+    @CallSuper
     public void onDestroy() {
         list.dispose();
         Timber.e("WishScoreRelativeLayout.ON_DESTROY()");

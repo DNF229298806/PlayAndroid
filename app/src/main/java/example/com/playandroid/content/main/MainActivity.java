@@ -14,9 +14,9 @@ import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.util.StatusBarUtil;
 import timber.log.Timber;
 
-import static example.com.playandroid.util.Constant.FragmentType.HOME;
-import static example.com.playandroid.util.Constant.FragmentType.PROJECT;
-import static example.com.playandroid.util.Constant.FragmentType.SYSTEM;
+import static example.com.playandroid.constant.Constant.FragmentType.HOME;
+import static example.com.playandroid.constant.Constant.FragmentType.PROJECT;
+import static example.com.playandroid.constant.Constant.FragmentType.SYSTEM;
 
 public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*extends BaseActivity<MainModel,ActivityMainBinding>*/ {
     private HomeFragment mHomeFragment;

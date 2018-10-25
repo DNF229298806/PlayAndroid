@@ -1,6 +1,7 @@
 package example.com.playandroid.content.home;
 
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,12 +16,14 @@ import java.util.List;
 
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseFragmentModel;
+import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.home.net.ArticleEntity;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.content.main.MainActivity;
 import example.com.playandroid.databinding.FragmentHomeBinding;
 import example.com.playandroid.network.transform.RestfulTransformer;
+import example.com.playandroid.util.ArouterUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -92,16 +95,23 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         List newData = new ArrayList<ArticleEntity>();
         addDisposable(
             Observable.fromIterable(adapter.getData().subList(0, page.getSize()))
-                    .doOnNext(article -> {
+                    .filter(article->{
+                        int i = 0;
+                        for (ArticleEntity articleEntity : page.getArticleEntities()) {
+                            if (!articleEntity.equals(article)) i++;
+                        }
+                        return i == page.getArticleEntities().size();
+                    })
+                    /*.doOnNext(article -> {
                         int i = 0;
                         for (ArticleEntity articleEntity : page.getArticleEntities()) {
                             if (!articleEntity.equals(article)) i++;
                         }
                         if (i == page.getArticleEntities().size()) newData.add(article);
-                    })
+                    })*/
                     .toList().toObservable()
                     .subscribe(list -> {
-                        adapter.addList(newData);
+                        adapter.addList(list);
                         refreshLayout.finishRefresh(1000, true);
                     }, (throwable -> {
                         refreshLayout.finishRefresh(1000, false);
@@ -137,7 +147,9 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
 
 
     public void OnBannerClick(int position) {
-        ToastUtils.showLong(mBannerEntities.get(position).getUrl());
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.link,mBannerEntities.get(position).getUrl());
+        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity,bundle);
     }
 
 }

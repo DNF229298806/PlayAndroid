@@ -1,10 +1,13 @@
-package example.com.playandroid.util;
+package example.com.playandroid.constant;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/25 21:15
  */
 public interface Constant {
+    String link = "link";
+    String article_title = "article_title";
+
     interface NetWork {
         String DEVICE = "android";
         String APP_ID = "3";
@@ -19,5 +22,9 @@ public interface Constant {
         int PROJECT = 1;
         int SYSTEM = 2;
         int NAVIGATION = 3;
+    }
+    interface ActivityPath{
+        String HomeActivity = "/home/";
+        String WebViewActivity = HomeActivity + "webview";
     }
 }

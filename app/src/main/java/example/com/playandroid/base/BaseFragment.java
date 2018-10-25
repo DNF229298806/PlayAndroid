@@ -3,6 +3,7 @@ package example.com.playandroid.base;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmen
 
     @Nullable
     @Override
+    @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, setLayout(), container, false);
         //doOnCreateView();

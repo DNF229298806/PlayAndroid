@@ -1,9 +1,14 @@
 package example.com.playandroid.content.home.net;
 
+import android.os.Bundle;
+import android.view.View;
+
 import java.util.List;
 import java.util.Objects;
 
 import example.com.playandroid.base.BaseEntity;
+import example.com.playandroid.constant.Constant;
+import example.com.playandroid.util.ArouterUtil;
 
 /**
  * @author Richard_Y_Wang
@@ -247,6 +252,14 @@ public class ArticleEntity extends BaseEntity {
 
     public void setTags(List<ArticleTagsEntity> tags) {
         this.tags = tags;
+    }
+
+
+    public void onItemClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.link,link);
+        bundle.putString(Constant.article_title,title);
+        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity,bundle);
     }
 
     @Override

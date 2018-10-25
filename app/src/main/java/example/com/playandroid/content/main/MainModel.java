@@ -13,10 +13,10 @@ import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
 
-import static example.com.playandroid.util.Constant.FragmentType.HOME;
-import static example.com.playandroid.util.Constant.FragmentType.NAVIGATION;
-import static example.com.playandroid.util.Constant.FragmentType.PROJECT;
-import static example.com.playandroid.util.Constant.FragmentType.SYSTEM;
+import static example.com.playandroid.constant.Constant.FragmentType.HOME;
+import static example.com.playandroid.constant.Constant.FragmentType.NAVIGATION;
+import static example.com.playandroid.constant.Constant.FragmentType.PROJECT;
+import static example.com.playandroid.constant.Constant.FragmentType.SYSTEM;
 
 /**
  * @author Richard_Y_Wang

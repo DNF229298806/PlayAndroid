@@ -8,7 +8,7 @@ import java.util.ServiceConfigurationError;
 import example.com.playandroid.network.entity.InfoEntity;
 import example.com.playandroid.network.exception.ApiException;
 import example.com.playandroid.network.exception.TokenExpireException;
-import example.com.playandroid.util.Constant.NetWork;
+import example.com.playandroid.constant.Constant.NetWork;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableSource;
