@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
         <!--todo Banner也要可以移动-->
         <com.youth.banner.Banner
+            android:visibility="gone"
             app:indicator_width="10dp"
             app:indicator_height="10dp"
             app:indicator_margin="5dp"

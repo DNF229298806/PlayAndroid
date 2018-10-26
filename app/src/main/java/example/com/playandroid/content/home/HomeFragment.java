@@ -44,8 +44,6 @@ public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHo
         banner.setImageLoader(new GlideImageLoader());
         banner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）
-        banner.isAutoPlay(true);
-        banner.setDelayTime(3000);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
     }
 

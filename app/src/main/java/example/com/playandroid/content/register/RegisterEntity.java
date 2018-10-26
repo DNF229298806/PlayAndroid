@@ -1,5 +1,7 @@
 package example.com.playandroid.content.register;
 
+import android.databinding.ViewDataBinding;
+
 import example.com.playandroid.base.BaseEntity;
 
 /**
@@ -42,5 +44,20 @@ public class RegisterEntity extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", repassword='" + repassword + '\'' +
                 '}';
+    }
+
+    @Override
+    public int getViewType() {
+        return 0;
+    }
+
+    @Override
+    public ViewDataBinding getDataBinding() {
+        return null;
+    }
+
+    @Override
+    public void setDataBinding(ViewDataBinding viewDataBinding) {
+
     }
 }

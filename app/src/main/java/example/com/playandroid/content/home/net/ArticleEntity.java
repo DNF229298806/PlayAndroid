@@ -1,5 +1,6 @@
 package example.com.playandroid.content.home.net;
 
+import android.databinding.ViewDataBinding;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -12,13 +13,14 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseEntity;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.constant.Constant;
+import example.com.playandroid.databinding.HolderArticleItemBinding;
 import example.com.playandroid.util.ArouterUtil;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/10/16 22:30
  */
-public class ArticleEntity extends BaseEntity implements Mult {
+public class ArticleEntity extends BaseEntity<HolderArticleItemBinding> implements Mult<HolderArticleItemBinding> {
 
     /**
      * apkLink :  APK地址
@@ -285,7 +287,32 @@ public class ArticleEntity extends BaseEntity implements Mult {
     }
 
     @Override
-    public int getLayout() {
+    public int getViewType() {
         return R.layout.holder_article_item;
     }
+
+    @Override
+    public HolderArticleItemBinding getDataBinding() {
+        return binding;
+    }
+
+    @Override
+    public void setDataBinding(HolderArticleItemBinding holderArticleItemBinding) {
+        binding = holderArticleItemBinding;
+    }
+
+    /*@Override
+    public HolderArticleItemBinding getDataBinding() {
+        return null;
+    }*/
+
+
+
+
+   /* @Override
+    public void setDataBinding(HolderArticleItemBinding holderArticleItemBinding) {
+        binding = holderArticleItemBinding;
+    }*/
+
+
 }

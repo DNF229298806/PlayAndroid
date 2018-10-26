@@ -1,8 +1,10 @@
 package example.com.playandroid.content.home;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -16,6 +18,8 @@ import java.util.List;
 
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseFragmentModel;
+import example.com.playandroid.base.Mult;
+import example.com.playandroid.base.test.BindingAdapter;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.home.net.ArticleEntity;
 import example.com.playandroid.content.home.net.BannerEntity;
@@ -35,7 +39,7 @@ import io.reactivex.functions.Consumer;
 public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, FragmentHomeBinding> {
     private List<BannerEntity> mBannerEntities = new ArrayList<>();
     private PageEntity mPageEntity = new PageEntity();
-
+    private BindingAdapter mAdapter = new BindingAdapter();
 
     public HomeModel(MainActivity activity, HomeFragment fragment) {
         super(activity, fragment);
@@ -85,14 +89,19 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         mPageEntity = page;
         RecyclerView recyclerView = getBinding().recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new ArticleBindingAdapter(page.getArticleEntities(), recyclerView.getContext()));
+        //recyclerView.setAdapter(new ArticleBindingAdapter(page.getArticleEntities(), recyclerView.getContext()));
+        recyclerView.setAdapter(mAdapter);
+        List<Mult> list = new ArrayList<>();
+        list.add(new BannerLayoutEntity());
+        list.addAll(page.getArticleEntities());
+        mAdapter.setItems(list);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void refreshZero(PageEntity page) {
         mPageEntity = page;
         ArticleBindingAdapter adapter = (ArticleBindingAdapter) (getBinding().recyclerView.getAdapter());
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
-        List newData = new ArrayList<ArticleEntity>();
         addDisposable(
             Observable.fromIterable(adapter.getData().subList(0, page.getSize()))
                     .filter(article->{
@@ -102,13 +111,6 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
                         }
                         return i == page.getArticleEntities().size();
                     })
-                    /*.doOnNext(article -> {
-                        int i = 0;
-                        for (ArticleEntity articleEntity : page.getArticleEntities()) {
-                            if (!articleEntity.equals(article)) i++;
-                        }
-                        if (i == page.getArticleEntities().size()) newData.add(article);
-                    })*/
                     .toList().toObservable()
                     .subscribe(list -> {
                         adapter.addList(list);
