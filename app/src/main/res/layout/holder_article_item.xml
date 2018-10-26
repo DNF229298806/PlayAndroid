@@ -83,7 +83,6 @@
                         android:textStyle="bold"/>
 
                     <example.com.playandroid.ui.JustifyTextView
-                        android:lineSpacingExtra="6dp"
                         android:visibility="@{TextUtils.isEmpty(entity.desc)?View.GONE:View.VISIBLE}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

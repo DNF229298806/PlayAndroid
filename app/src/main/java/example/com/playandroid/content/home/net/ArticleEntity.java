@@ -1,6 +1,8 @@
 package example.com.playandroid.content.home.net;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
 import java.util.List;
@@ -262,6 +264,7 @@ public class ArticleEntity extends BaseEntity {
         ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity,bundle);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -273,6 +276,7 @@ public class ArticleEntity extends BaseEntity {
                 Objects.equals(getLink(), that.getLink());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getLink());

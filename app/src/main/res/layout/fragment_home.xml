@@ -10,36 +10,30 @@
 
     </data>
 
-    <!--<android.support.v4.widget.NestedScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">-->
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <!--todo Banner也要可以移动-->
+        <com.youth.banner.Banner
+            app:indicator_width="10dp"
+            app:indicator_height="10dp"
+            app:indicator_margin="5dp"
+            app:onBannerClick = "@{vm::OnBannerClick}"
+            android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <!--todo Banner也要可以移动-->
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                app:indicator_height="10dp"
-                app:indicator_margin="5dp"
-                app:indicator_width="10dp"
-                app:onBannerClick="@{vm::OnBannerClick}"/>
+            android:layout_height="180dp"/>
 
-            <com.scwang.smartrefresh.layout.SmartRefreshLayout
-                android:id="@+id/refresh_layout"
-                onLoadMoreListener="@{vm::onLoadMore}"
-                onRefreshListener="@{vm::onRefresh}"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            onLoadMoreListener="@{vm::onLoadMore}"
+            onRefreshListener="@{vm::onRefresh}"
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-        </LinearLayout>
-    <!--</android.support.v4.widget.NestedScrollView>-->
+                android:layout_height="match_parent"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
 </layout>

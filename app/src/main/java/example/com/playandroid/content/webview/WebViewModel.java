@@ -1,7 +1,5 @@
 package example.com.playandroid.content.webview;
 
-import android.view.View;
-
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityWebviewBinding;
@@ -31,9 +29,4 @@ public class WebViewModel extends BaseModel<WebViewActivity,ActivityWebviewBindi
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public void navigationClick(View view) {
-        getActivity().finish();
-    }
-
 }

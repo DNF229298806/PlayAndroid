@@ -21,13 +21,11 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                app:navigationOnClickListener="@{vm::navigationClick}"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#0081f9"
                 android:elevation="4dp"
-                app:navigationIcon="@mipmap/icon_back"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
