@@ -8,7 +8,9 @@ import android.view.View;
 import java.util.List;
 import java.util.Objects;
 
+import example.com.playandroid.R;
 import example.com.playandroid.base.BaseEntity;
+import example.com.playandroid.base.Mult;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.util.ArouterUtil;
 
@@ -16,7 +18,7 @@ import example.com.playandroid.util.ArouterUtil;
  * @author Richard_Y_Wang
  * @des 2018/10/16 22:30
  */
-public class ArticleEntity extends BaseEntity {
+public class ArticleEntity extends BaseEntity implements Mult {
 
     /**
      * apkLink :  APK地址
@@ -280,5 +282,10 @@ public class ArticleEntity extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getLink());
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.holder_article_item;
     }
 }
