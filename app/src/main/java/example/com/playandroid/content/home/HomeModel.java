@@ -2,7 +2,6 @@ package example.com.playandroid.content.home;
 
 
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +17,12 @@ import java.util.List;
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseFragmentModel;
 import example.com.playandroid.base.Mult;
-import example.com.playandroid.base.test.BindingAdapter;
-import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.home.net.ArticleEntity;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.content.main.MainActivity;
 import example.com.playandroid.databinding.FragmentHomeBinding;
 import example.com.playandroid.network.transform.RestfulTransformer;
-import example.com.playandroid.util.ArouterUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -39,7 +34,7 @@ import io.reactivex.functions.Consumer;
 public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, FragmentHomeBinding> {
     private List<BannerEntity> mBannerEntities = new ArrayList<>();
     private PageEntity mPageEntity = new PageEntity();
-    private BindingAdapter mAdapter = new BindingAdapter();
+    private HomeAdapter mAdapter = new HomeAdapter();
 
     public HomeModel(MainActivity activity, HomeFragment fragment) {
         super(activity, fragment);
@@ -89,21 +84,20 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         mPageEntity = page;
         RecyclerView recyclerView = getBinding().recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-        //recyclerView.setAdapter(new ArticleBindingAdapter(page.getArticleEntities(), recyclerView.getContext()));
         recyclerView.setAdapter(mAdapter);
         List<Mult> list = new ArrayList<>();
-        list.add(new BannerLayoutEntity());
+        //把banner的数据传递进去
+        list.add(new BannerLayoutEntity(mBannerEntities));
         list.addAll(page.getArticleEntities());
-        mAdapter.setItems(list);
+        mAdapter.addList(list);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void refreshZero(PageEntity page) {
         mPageEntity = page;
-        ArticleBindingAdapter adapter = (ArticleBindingAdapter) (getBinding().recyclerView.getAdapter());
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
         addDisposable(
-            Observable.fromIterable(adapter.getData().subList(0, page.getSize()))
+            Observable.fromIterable(mAdapter.getList().subList(0, page.getSize()))
                     .filter(article->{
                         int i = 0;
                         for (ArticleEntity articleEntity : page.getArticleEntities()) {
@@ -113,7 +107,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
                     })
                     .toList().toObservable()
                     .subscribe(list -> {
-                        adapter.addList(list);
+                        mAdapter.addList(list);
                         refreshLayout.finishRefresh(1000, true);
                     }, (throwable -> {
                         refreshLayout.finishRefresh(1000, false);
@@ -124,7 +118,9 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
 
     private void loadSuccess(PageEntity pageEntity) {
         mPageEntity = pageEntity;
-        ((ArticleBindingAdapter) getBinding().recyclerView.getAdapter()).addList(pageEntity.getArticleEntities());
+        List<ArticleEntity> articleEntities = pageEntity.getArticleEntities();
+        List<Mult> list = new ArrayList<>(articleEntities);
+        mAdapter.addList(list);
         getBinding().refreshLayout.finishLoadMore(1000, true, false);
     }
 
@@ -134,24 +130,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     }
 
     private void doOnNext(List<BannerEntity> list) {
-        List<String> titleList = new ArrayList<>();
-        List imagesList = new ArrayList<>();
-        Banner banner = getFragment().getBinding().banner;
         mBannerEntities = list;
-        for (BannerEntity bannerEntity : list) {
-            titleList.add(bannerEntity.getTitle());
-            imagesList.add(bannerEntity.getImagePath());
-        }
-        banner.setImages(imagesList);
-        banner.setBannerTitles(titleList);
-        banner.start();
-    }
-
-
-    public void OnBannerClick(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constant.link,mBannerEntities.get(position).getUrl());
-        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity,bundle);
     }
 
 }

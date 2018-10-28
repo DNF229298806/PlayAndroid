@@ -21,6 +21,8 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
+                app:navigationOnClickListener="@{vm::navigationClick}"
+                app:navigationIcon="@mipmap/icon_back"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"

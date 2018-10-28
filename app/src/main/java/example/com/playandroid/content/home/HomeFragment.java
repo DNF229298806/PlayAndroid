@@ -8,15 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseFragment;
 import example.com.playandroid.content.main.MainActivity;
 import example.com.playandroid.databinding.FragmentHomeBinding;
-import example.com.playandroid.util.GlideImageLoader;
 
 /**
  * @author Richard_Y_Wang
@@ -30,7 +25,6 @@ public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHo
         super.onCreateView(inflater, container, savedInstanceState);
         //初始化model 并与fragment进行绑定
         setModel(new HomeModel((MainActivity) getActivity(),this));
-        initBanner();
         return getBinding().getRoot();
     }
 

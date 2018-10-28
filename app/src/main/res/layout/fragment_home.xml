@@ -14,17 +14,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--todo Banner也要可以移动-->
-        <com.youth.banner.Banner
-            android:visibility="gone"
-            app:indicator_width="10dp"
-            app:indicator_height="10dp"
-            app:indicator_margin="5dp"
-            app:onBannerClick = "@{vm::OnBannerClick}"
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"/>
-
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             onLoadMoreListener="@{vm::onLoadMore}"
             onRefreshListener="@{vm::onRefresh}"

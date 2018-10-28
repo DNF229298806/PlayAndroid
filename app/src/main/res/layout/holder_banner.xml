@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
         <!--app:onBannerClick = "@{vm::OnBannerClick}"-->
         <com.youth.banner.Banner
-
+            onBannerClick="@{entity::OnBannerClick}"
             app:delay_time="3000"
             app:is_auto_play="true"
             app:indicator_width="10dp"

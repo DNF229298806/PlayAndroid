@@ -1,9 +1,12 @@
 package example.com.playandroid.util;
 
 import android.databinding.BindingAdapter;
+import android.os.Build;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
+import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -52,6 +55,14 @@ public class DataBindingAdapter {
     @BindingAdapter("onRefreshListener")
     public static void setOnRefreshListener(SmartRefreshLayout layout, OnRefreshListener listener) {
         layout.setOnRefreshListener(listener);
+    }
+
+    //ToolBar 但是要求5.0以上
+    @BindingAdapter("navigationOnClickListener")
+    public static void setNavigationOnClickListener(Toolbar toolbar, View.OnClickListener listener) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setNavigationOnClickListener(listener);
+        }
     }
 
 }

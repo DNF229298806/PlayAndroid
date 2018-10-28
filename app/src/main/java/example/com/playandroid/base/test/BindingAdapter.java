@@ -6,36 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import example.com.playandroid.App;
 import example.com.playandroid.BR;
 import example.com.playandroid.base.Mult;
-import example.com.playandroid.content.home.net.BannerEntity;
-import example.com.playandroid.databinding.HolderBannerBinding;
-import example.com.playandroid.network.transform.RestfulTransformer;
-import example.com.playandroid.util.GlideImageLoader;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * @author admin
  * @des 2018/10/26
  */
 public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingHolder>{
-    public List<Mult> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Mult> items) {
-        this.items = items;
-    }
-    private List<Mult> items = new ArrayList<>();
+    protected List<Mult> data = new ArrayList<>();
 
     /**
      * @return 返回的是adapter的view
@@ -43,52 +25,53 @@ public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingH
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false);
-        if (binding instanceof HolderBannerBinding) {
-            Banner banner = ((HolderBannerBinding) binding).banner;
-            App.api.getBannerEntity()
-                    .compose(new RestfulTransformer<>())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(bannerEntities -> {
-                        List<String> titleList = new ArrayList<>();
-                        List imagesList = new ArrayList<>();
-                        for (BannerEntity bannerEntity : bannerEntities) {
-                            titleList.add(bannerEntity.getTitle());
-                            imagesList.add(bannerEntity.getImagePath());
-                        }
-                        banner.setImageLoader(new GlideImageLoader());
-                        banner.setBannerAnimation(Transformer.Default);
-                        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-                        banner.setImages(imagesList);
-                        banner.setBannerTitles(titleList);
-                        banner.start();
-                    }, a -> {
-                        a.printStackTrace();
-                        ToastUtils.showLong("获取数据失败");
-                    });
-        }
         return new BindingHolder(binding);
     }
 
+    public List<Mult> getList() {
+        return data;
+    }
 
+    public void setList(List<Mult> items) {
+        data = items;
+    }
+
+    public void addList(List<Mult> addItems) {
+        addList(getItemCount(),addItems);
+    }
+
+    public void addList(int position, List<Mult> addItems) {
+        if (addItems != null && (addItems.size() != 0) && data != null) {
+            data.addAll(position,addItems);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void addItem(Mult addItems,int position) {
+        if (addItems != null && data != null) {
+            data.add(position, addItems);
+            notifyDataSetChanged();
+        }
+    }
 
     /*
      * 数据绑定
      * */
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        holder.bindData(items.get(position));
+        holder.bindData(data.get(position));
     }
     @Override
     public int getItemCount() {
-        return items.size();
+        return data.size();
     }
     @Override
     public int getItemViewType(int position) {
-        return items.get(position).getViewType();
+        return data.get(position).getViewType();
     }
 
 
-    static class BindingHolder extends RecyclerView.ViewHolder {
+   protected static class BindingHolder extends RecyclerView.ViewHolder {
 
         ViewDataBinding binding;
         /**
