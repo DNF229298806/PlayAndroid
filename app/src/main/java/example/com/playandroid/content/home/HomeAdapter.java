@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.com.playandroid.App;
+import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.base.test.BindingAdapter;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.databinding.HolderBannerBinding;
@@ -31,27 +32,28 @@ public class HomeAdapter extends BindingAdapter {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false);
         if (binding instanceof HolderBannerBinding) {
             Banner banner = ((HolderBannerBinding) binding).banner;
-            App.api.getBannerEntity()
-                    .compose(new RestfulTransformer<>())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(bannerEntities -> {
-                        List<String> titleList = new ArrayList<>();
-                        List imagesList = new ArrayList<>();
-                        for (BannerEntity bannerEntity : bannerEntities) {
-                            titleList.add(bannerEntity.getTitle());
-                            imagesList.add(bannerEntity.getImagePath());
-                        }
-                        banner.setImageLoader(new GlideImageLoader());
-                        banner.setBannerAnimation(Transformer.Default);
-                        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-                        banner.setImages(imagesList);
-                        banner.setBannerTitles(titleList);
-                        //banner.setOnBannerListener(); 实在不行的时候可以采用这种写法
-                        banner.start();
-                    }, a -> {
-                        a.printStackTrace();
-                        ToastUtils.showLong("获取数据失败");
-                    });
+            ((BaseActivity) (App.getCurrentActivity())).getModel().addDisposable(
+                App.api.getBannerEntity()
+                        .compose(new RestfulTransformer<>())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(bannerEntities -> {
+                            List<String> titleList = new ArrayList<>();
+                            List imagesList = new ArrayList<>();
+                            for (BannerEntity bannerEntity : bannerEntities) {
+                                titleList.add(bannerEntity.getTitle());
+                                imagesList.add(bannerEntity.getImagePath());
+                            }
+                            banner.setImageLoader(new GlideImageLoader());
+                            banner.setBannerAnimation(Transformer.Default);
+                            banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+                            banner.setImages(imagesList);
+                            banner.setBannerTitles(titleList);
+                            banner.start();
+                        }, a -> {
+                            a.printStackTrace();
+                            ToastUtils.showLong("获取数据失败");
+                        })
+            );
         }
         return new BindingHolder(binding);
     }

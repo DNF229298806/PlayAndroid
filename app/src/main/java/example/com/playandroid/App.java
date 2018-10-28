@@ -1,11 +1,21 @@
 package example.com.playandroid;
 
+import android.app.Activity;
 import android.app.Application;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+
+import java.util.Stack;
 
 import example.com.playandroid.network.Api;
 import example.com.playandroid.network.ApiUtils;
@@ -16,7 +26,7 @@ import timber.log.Timber;
  * @author Richard_Y_Wang
  * @des 2018/9/19
  */
-public class App extends Application {
+public class App extends Application implements Application.ActivityLifecycleCallbacks{
     public static Api api;
     /**
      * 标识是否为调试
@@ -32,7 +42,10 @@ public class App extends Application {
         isDebug = debug;
     }
 
-    //static 代码段可以防止内存泄露
+    private Stack<Activity> stack = new Stack<>();
+    private static final App app = new App();
+
+    //static 代码段可以防止内存泄露 这边的是SmartRefreshLayout
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
@@ -72,4 +85,61 @@ public class App extends Application {
         api = ApiUtils.INSTANCE.getApi(this);
     }
 
+    public Stack<Activity> getStack() {
+        return app.stack;
+    }
+
+
+    public static Activity getCurrentActivity() {
+        return app.stack.lastElement();
+    }
+
+    @Override
+    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        app.stack.add(activity);
+    }
+
+    @Override
+    public void onActivityStarted(Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityResumed(Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPaused(Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityStopped(Activity activity) {
+
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivityDestroyed(Activity activity) {
+        app.stack.remove(activity);
+    }
+
+    public static String getResString(@StringRes int resId) {
+        return App.getCurrentActivity().getString(resId);
+    }
+
+
+    public static Drawable getResDrawable(@DrawableRes int id) {
+        return ContextCompat.getDrawable(getCurrentActivity(), id);
+    }
+
+    @ColorInt
+    public static int getResColor(@ColorRes int id) {
+        return ContextCompat.getColor(getCurrentActivity(), id);
+    }
 }
