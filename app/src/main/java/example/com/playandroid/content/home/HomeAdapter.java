@@ -33,26 +33,26 @@ public class HomeAdapter extends BindingAdapter {
         if (binding instanceof HolderBannerBinding) {
             Banner banner = ((HolderBannerBinding) binding).banner;
             ((BaseActivity) (App.getCurrentActivity())).getModel().addDisposable(
-                App.api.getBannerEntity()
-                        .compose(new RestfulTransformer<>())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(bannerEntities -> {
-                            List<String> titleList = new ArrayList<>();
-                            List imagesList = new ArrayList<>();
-                            for (BannerEntity bannerEntity : bannerEntities) {
-                                titleList.add(bannerEntity.getTitle());
-                                imagesList.add(bannerEntity.getImagePath());
-                            }
-                            banner.setImageLoader(new GlideImageLoader());
-                            banner.setBannerAnimation(Transformer.Default);
-                            banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-                            banner.setImages(imagesList);
-                            banner.setBannerTitles(titleList);
-                            banner.start();
-                        }, a -> {
-                            a.printStackTrace();
-                            ToastUtils.showLong("获取数据失败");
-                        })
+                    App.api.getBannerEntity()
+                            .compose(new RestfulTransformer<>())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(bannerEntities -> {
+                                List<String> titleList = new ArrayList<>();
+                                List imagesList = new ArrayList<>();
+                                for (BannerEntity bannerEntity : bannerEntities) {
+                                    titleList.add(bannerEntity.getTitle());
+                                    imagesList.add(bannerEntity.getImagePath());
+                                }
+                                banner.setImageLoader(new GlideImageLoader());
+                                banner.setBannerAnimation(Transformer.Default);
+                                banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+                                banner.setImages(imagesList);
+                                banner.setBannerTitles(titleList);
+                                banner.start();
+                            }, a -> {
+                                a.printStackTrace();
+                                ToastUtils.showLong("获取数据失败");
+                            })
             );
         }
         return new BindingHolder(binding);

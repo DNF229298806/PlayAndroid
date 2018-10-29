@@ -13,3 +13,4 @@ public interface Mult<T extends ViewDataBinding> {
     T getDataBinding();
     void setDataBinding(T t);
 }
+
