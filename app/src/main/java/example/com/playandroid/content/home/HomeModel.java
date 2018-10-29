@@ -97,7 +97,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         mPageEntity = page;
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
         addDisposable(
-            Observable.fromIterable(mAdapter.getList().subList(0, page.getSize()))
+            Observable.fromIterable(mAdapter.getList().subList(1, page.getSize()))
                     .filter(article->{
                         int i = 0;
                         for (ArticleEntity articleEntity : page.getArticleEntities()) {
