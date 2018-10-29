@@ -42,8 +42,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
         isDebug = debug;
     }
 
-    private Stack<Activity> stack = new Stack<>();
-    private static final App app = new App();
+    private static Stack<Activity> stack = new Stack<>();
 
     //static 代码段可以防止内存泄露 这边的是SmartRefreshLayout
     static {
@@ -83,20 +82,21 @@ public class App extends Application implements Application.ActivityLifecycleCal
         Timber.v("---onCreate---");
 
         api = ApiUtils.INSTANCE.getApi(this);
+        registerActivityLifecycleCallbacks(this);
     }
 
     public Stack<Activity> getStack() {
-        return app.stack;
+        return stack;
     }
 
 
     public static Activity getCurrentActivity() {
-        return app.stack.lastElement();
+        return stack.lastElement();
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        app.stack.add(activity);
+        stack.add(activity);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        app.stack.remove(activity);
+        stack.remove(activity);
     }
 
     public static String getResString(@StringRes int resId) {

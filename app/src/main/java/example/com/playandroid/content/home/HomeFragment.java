@@ -1,6 +1,5 @@
 package example.com.playandroid.content.home;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,21 +32,4 @@ public class HomeFragment extends BaseFragment<MainActivity,HomeModel,FragmentHo
         return R.layout.fragment_home;
     }
 
-    public void initBanner() {
-        Banner banner = getBinding().banner;
-        banner.setImageLoader(new GlideImageLoader());
-        banner.setBannerAnimation(Transformer.Default);
-        //设置标题集合（当banner样式有显示title时）
-        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 }
