@@ -29,11 +29,8 @@ public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmen
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, setLayout(), container, false);
-        //doOnCreateView();
         return mBinding.getRoot();
     }
-
-    //protected abstract void doOnCreateView();
 
     public void setModel(T model) {
         mModel = model;
@@ -59,10 +56,6 @@ public abstract class BaseFragment<K extends BaseActivity, T extends BaseFragmen
 
     public BaseEntity getEntity() {
         return mEntity;
-    }
-
-    public K getMyActivity() {
-        return mActivity;
     }
 
     public void setActivity(K activity) {
