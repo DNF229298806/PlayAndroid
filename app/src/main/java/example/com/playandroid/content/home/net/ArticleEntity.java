@@ -13,14 +13,13 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseEntity;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.constant.Constant;
-import example.com.playandroid.databinding.HolderArticleItemBinding;
 import example.com.playandroid.util.ArouterUtil;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/10/16 22:30
  */
-public class ArticleEntity extends BaseEntity<HolderArticleItemBinding> implements Mult<HolderArticleItemBinding> {
+public class ArticleEntity extends BaseEntity implements Mult {
 
     /**
      * apkLink :  APK地址
@@ -30,7 +29,7 @@ public class ArticleEntity extends BaseEntity<HolderArticleItemBinding> implemen
      * collect : false  是否收藏
      * courseId : 13    课程Id
      * desc : EasyBle主要用于，降低BLE开发繁琐程度。本库支持扫描（含自定义过滤条件扫描）、连接（包括设备多连接）、设备服务查询、读写数据（含分批写入）、读取设备信号、设置最大传输单元等BLE操作
-        描述
+     描述
 
      * envelopePic : http://www.wanandroid.com/resources/image/pc/default_project_img.jpg 封面图
      * fresh : true 是不是新鲜的 一天前？
@@ -286,33 +285,19 @@ public class ArticleEntity extends BaseEntity<HolderArticleItemBinding> implemen
         return Objects.hash(getId(), getLink());
     }
 
+
     @Override
     public int getViewType() {
         return R.layout.holder_article_item;
     }
 
     @Override
-    public HolderArticleItemBinding getDataBinding() {
-        return binding;
+    public ViewDataBinding getDataBinding() {
+        return null;
     }
 
     @Override
-    public void setDataBinding(HolderArticleItemBinding holderArticleItemBinding) {
-        binding = holderArticleItemBinding;
+    public void setDataBinding(ViewDataBinding viewDataBinding) {
+
     }
-
-    /*@Override
-    public HolderArticleItemBinding getDataBinding() {
-        return null;
-    }*/
-
-
-
-
-   /* @Override
-    public void setDataBinding(HolderArticleItemBinding holderArticleItemBinding) {
-        binding = holderArticleItemBinding;
-    }*/
-
-
 }

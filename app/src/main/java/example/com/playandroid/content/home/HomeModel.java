@@ -97,22 +97,22 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         mPageEntity = page;
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
         addDisposable(
-            Observable.fromIterable(mAdapter.getList().subList(0, page.getSize()))
-                    .filter(article->{
-                        int i = 0;
-                        for (ArticleEntity articleEntity : page.getArticleEntities()) {
-                            if (!articleEntity.equals(article)) i++;
-                        }
-                        return i == page.getArticleEntities().size();
-                    })
-                    .toList().toObservable()
-                    .subscribe(list -> {
-                        mAdapter.addList(list);
-                        refreshLayout.finishRefresh(1000, true);
-                    }, (throwable -> {
-                        refreshLayout.finishRefresh(1000, false);
-                        throwable.printStackTrace();
-                    }))
+                Observable.fromIterable(mAdapter.getList().subList(0, page.getSize()))
+                        .filter(article->{
+                            int i = 0;
+                            for (ArticleEntity articleEntity : page.getArticleEntities()) {
+                                if (!articleEntity.equals(article)) i++;
+                            }
+                            return i == page.getArticleEntities().size();
+                        })
+                        .toList().toObservable()
+                        .subscribe(list -> {
+                            mAdapter.addList(list);
+                            refreshLayout.finishRefresh(1000, true);
+                        }, (throwable -> {
+                            refreshLayout.finishRefresh(1000, false);
+                            throwable.printStackTrace();
+                        }))
         );
     }
 
