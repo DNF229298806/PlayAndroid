@@ -21,8 +21,6 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                app:navigationOnClickListener="@{vm::navigationClick}"
-                app:navigationIcon="@mipmap/icon_back"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -30,14 +28,36 @@
                 android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_scrollFlags="scroll|enterAlways"
+                app:navigationIcon="@mipmap/icon_back"
+                app:navigationOnClickListener="@{vm::navigationClick}"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@{vm.title}"/>
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:progressDrawable="@drawable/progressbar_bg"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
         </android.support.design.widget.AppBarLayout>
-        <WebView
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+
+
+        <example.com.playandroid.ui.NestedScrollWebView
             android:id="@+id/web_view"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+            <!--<ProgressBar
+                android:background="@color/colorPrimary"
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>-->
+         <!--   <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>-->
     </android.support.design.widget.CoordinatorLayout>
 
 </layout>

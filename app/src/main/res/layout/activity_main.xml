@@ -33,22 +33,11 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="玩安卓"/>
         </android.support.design.widget.AppBarLayout>
-        <!-- android:layout_weight="1"-->
         <FrameLayout
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <!-- <com.youth.banner.Banner            android:layout_weight="1"
-
-             android:id="@+id/banner"
-             android:layout_width="match_parent"
-             android:layout_height="150dp"/>
-
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="哈哈的空间阿萨阿萨的卢卡斯打开了将"/>-->
 
         <android.support.design.widget.BottomNavigationView
             app:labelVisibilityMode="labeled"

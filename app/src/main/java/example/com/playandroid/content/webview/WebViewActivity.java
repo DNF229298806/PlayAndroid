@@ -1,9 +1,14 @@
 package example.com.playandroid.content.webview;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
@@ -11,6 +16,7 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityWebviewBinding;
+import example.com.playandroid.util.StatusBarUtil;
 
 /**
  * @author admin
@@ -23,6 +29,8 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setModel(new WebViewModel(this));
+        setSupportActionBar(getBinding().toolbar);
+        StatusBarUtil.setStatusBarColor(this, R.color.tool_bar_blue);
         initWebSettings();
 
     }
@@ -65,6 +73,30 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
         // 允许通过 file url 加载的 Javascript 可以访问其他的源，包括其他的文件和 http，https 等其他的源，
         // Android 4.1 之前默认是true，在 Android 4.1 及以后默认是false,也就是禁止
         // 如果此设置是允许，则 setAllowFileAccessFromFileURLs 不起做用
+        getBinding().webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                //view.loadUrl(request.getUrl().toString());
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                getBinding().progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                getBinding().progressBar.setVisibility(View.GONE);
+            }
+        });
+
+        getBinding().webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                getBinding().progressBar.setProgress(newProgress);
+            }
+        });
     }
 
 
