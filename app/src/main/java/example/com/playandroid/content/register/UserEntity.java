@@ -1,4 +1,4 @@
-package example.com.playandroid.network.entity;
+package example.com.playandroid.content.register;
 
 import java.util.List;
 

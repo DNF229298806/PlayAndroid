@@ -5,14 +5,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 import java.util.Objects;
 
+import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseEntity;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.constant.Constant;
+import example.com.playandroid.ui.ArticleDownPopupWindow;
 import example.com.playandroid.util.ArouterUtil;
 
 /**
@@ -262,9 +265,9 @@ public class ArticleEntity extends BaseEntity implements Mult {
 
     public void onItemClick(View view) {
         Bundle bundle = new Bundle();
-        bundle.putString(Constant.link,link);
-        bundle.putString(Constant.article_title,title);
-        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity,bundle);
+        bundle.putString(Constant.link, link);
+        bundle.putString(Constant.article_title, title);
+        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity, bundle);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -299,5 +302,31 @@ public class ArticleEntity extends BaseEntity implements Mult {
     @Override
     public void setDataBinding(ViewDataBinding viewDataBinding) {
 
+    }
+
+    public void onDownClick(View view) {
+        /*// 用于PopupWindow的View
+        View contentView = LayoutInflater.from(App.getCurrentActivity()).inflate(R.layout.pop_article_down, null, false);
+        // 创建PopupWindow对象，其中：
+        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
+        PopupWindow window = new PopupWindow(contentView, ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams.WRAP_CONTENT, true);
+        // 设置PopupWindow的背景
+        window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        // 设置PopupWindow是否能响应外部点击事件
+        window.setOutsideTouchable(true);
+        // 设置PopupWindow是否能响应点击事件
+        window.setTouchable(true);
+        // 显示PopupWindow，其中：
+        // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
+        window.showAsDropDown(view, 0, 100);
+        // 或者也可以调用此方法显示PopupWindow，其中：
+        // 第一个参数是PopupWindow的父View，第二个参数是PopupWindow相对父View的位置，
+        // 第三和第四个参数分别是PopupWindow相对父View的x、y偏移
+         //
+        // window.showAtLocation(view, Gravity.BOTTOM, 10, 10);*/
+        ArticleDownPopupWindow pop = new ArticleDownPopupWindow(App.getCurrentActivity(), ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams.WRAP_CONTENT);
+        pop.setEntity(this);
+        pop.showPopupWindow(view);
     }
 }

@@ -94,10 +94,12 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void refreshZero(PageEntity page) {
+        //查重代码还是有问题的
         mPageEntity = page;
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
+        int min = mAdapter.getItemCount() < page.getCurPage() ? mAdapter.getItemCount() : page.getCurPage();
         addDisposable(
-            Observable.fromIterable(mAdapter.getList().subList(1, page.getSize()))
+            Observable.fromIterable(new ArrayList<>(mAdapter.getList().subList(1, min)))
                     .filter(article->{
                         int i = 0;
                         for (ArticleEntity articleEntity : page.getArticleEntities()) {
@@ -107,7 +109,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
                     })
                     .toList().toObservable()
                     .subscribe(list -> {
-                        mAdapter.addList(list);
+                        mAdapter.addList(1,list);
                         refreshLayout.finishRefresh(1000, true);
                     }, (throwable -> {
                         refreshLayout.finishRefresh(1000, false);

@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ToastUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,14 @@ public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingH
     public void addItem(Mult addItems,int position) {
         if (addItems != null && data != null) {
             data.add(position, addItems);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void removeToAdapter(Mult item) {
+        if (item != null && data != null) {
+            boolean remove = data.remove(item);
+            if (!remove) ToastUtils.showShort("移除失败");
             notifyDataSetChanged();
         }
     }

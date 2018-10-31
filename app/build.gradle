@@ -80,4 +80,6 @@ dependencies {
     implementation "com.github.tbruyelle:rxpermissions:$rxpermissions_version"
     //智能刷新
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    //BasePop
+    implementation "com.github.razerdp:BasePopup_Candy:$basepopup_candy"
 }

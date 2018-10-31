@@ -9,4 +9,5 @@
     <string name="navigation">导航</string>
     <string name="backslash"> / </string>
     <string name="bottom_navigation_view_behavior">io.github.zeleven.playa.ui.widget.BottomNavigationViewBehavior</string>
+    <string name="uninterested">不感兴趣</string>
 </resources>

@@ -5,7 +5,7 @@ import java.util.List;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.network.entity.InfoEntity;
-import example.com.playandroid.network.entity.UserEntity;
+import example.com.playandroid.content.register.UserEntity;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
