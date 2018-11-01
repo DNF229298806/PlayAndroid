@@ -23,7 +23,6 @@ import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.content.main.MainActivity;
 import example.com.playandroid.databinding.FragmentHomeBinding;
 import example.com.playandroid.network.transform.RestfulTransformer;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
@@ -97,17 +96,26 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         //查重代码还是有问题的
         mPageEntity = page;
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
-        int min = mAdapter.getItemCount() < page.getCurPage() ? mAdapter.getItemCount() : page.getCurPage();
-        addDisposable(
-            Observable.fromIterable(new ArrayList<>(mAdapter.getList().subList(1, min)))
+       /* int min = mAdapter.getItemCount() < page.getPageCount() ? mAdapter.getItemCount() : page.getPageCount();
+        List<Mult> tempList = new ArrayList<>( mAdapter.getList().subList(1, min));*/
+        refreshLayout.finishRefresh(1000, true);
+        ToastUtils.showShort("暂无数据更新");
+        /*addDisposable(
+            Observable.fromIterable(tempList)
+                    .observeOn(Schedulers.newThread())
                     .filter(article->{
                         int i = 0;
                         for (ArticleEntity articleEntity : page.getArticleEntities()) {
-                            if (!articleEntity.equals(article)) i++;
+                             //if (!articleEntity.equals(article)) i++;
+                            if(articleEntity.getId()!=((ArticleEntity)article).getId()) i++;
+                            Timber.i("articleEntity.getId()%s", articleEntity.getId());
+                            Timber.i("((ArticleEntity)article).getId())%s", ((ArticleEntity)article).getId());
                         }
-                        return i == page.getArticleEntities().size();
+                        Timber.i("打印测试：i=%1s size=%2s", i,page.getArticleEntities().size());
+                        return i == min;
                     })
                     .toList().toObservable()
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(list -> {
                         mAdapter.addList(1,list);
                         refreshLayout.finishRefresh(1000, true);
@@ -115,7 +123,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
                         refreshLayout.finishRefresh(1000, false);
                         throwable.printStackTrace();
                     }))
-        );
+        );*/
     }
 
     private void loadSuccess(PageEntity pageEntity) {
