@@ -1,7 +1,11 @@
 package example.com.playandroid.content.main;
 
+import android.content.res.ColorStateList;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -57,5 +61,42 @@ public class MainModel extends BaseModel<MainActivity,ActivityMainBinding> {
         }
         return false;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void navigationClick(View view) {
+        ToastUtils.showShort("出现菜单栏");
+        getBinding().drawableLayout.openDrawer(getBinding().navigationView);
+        ColorStateList cs = getActivity().getBaseContext().getResources().getColorStateList(R.color.nav_menu_text_color, null);
+        getBinding().navigationView.setItemTextColor(cs);
+        getBinding().navigationView.setItemIconTintList(cs);
+
+    }
+
+    public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_item_collection:
+                ToastUtils.showShort("这是收藏");
+                break;
+            case R.id.menu_item_navigation:
+                ToastUtils.showShort("这是导航");
+                break;
+            case R.id.menu_item_open_apis:
+                ToastUtils.showShort("这是开源Api");
+                break;
+            case R.id.menu_item_friend_link:
+                ToastUtils.showShort("这是友情链接");
+                break;
+            case R.id.menu_item_setting:
+                ToastUtils.showShort("这是设置");
+                break;
+            case R.id.menu_item_about:
+                ToastUtils.showShort("这是关于");
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
+
 
 }

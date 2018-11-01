@@ -11,43 +11,64 @@
 
     </data>
 
-
-    <android.support.design.widget.CoordinatorLayout
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawable_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#0081f9"
-                android:elevation="4dp"
-                app:layout_scrollFlags="scroll|enterAlways"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="玩安卓"/>
-        </android.support.design.widget.AppBarLayout>
-        <FrameLayout
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:id="@+id/frame_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+                android:layout_height="wrap_content">
 
-        <android.support.design.widget.BottomNavigationView
-            app:labelVisibilityMode="labeled"
-            android:id="@+id/bnv"
-            onNavigationItemSelected="@{vm::onNavigationItemSelected}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:layout_behavior="example.com.playandroid.ui.BottomNavigationViewBehavior"
-            app:menu="@menu/main_bnv_menu"/>
-    </android.support.design.widget.CoordinatorLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    navigationOnClickListener="@{vm::navigationClick}"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#0081f9"
+                    android:elevation="4dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:navigationIcon="@mipmap/icon_menu"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:title="玩安卓"/>
+            </android.support.design.widget.AppBarLayout>
+
+
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bnv"
+                onNavigationItemSelected="@{vm::onNavigationItemSelected}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="?android:attr/windowBackground"
+                app:labelVisibilityMode="labeled"
+                app:layout_behavior="example.com.playandroid.ui.BottomNavigationViewBehavior"
+                app:menu="@menu/main_bnv_menu"/>
+        </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.design.widget.NavigationView
+            app:itemTextColor="@null"
+            app:itemIconTint="@null"
+            android:fitsSystemWindows="true"
+            navigationItemSelectedListener="@{vm::onMenuItemSelected}"
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/header_layout"
+            app:menu="@menu/main_nav"/>
+    </android.support.v4.widget.DrawerLayout>
 </layout>

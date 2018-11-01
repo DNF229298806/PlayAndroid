@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item_collection"
+        android:icon="@mipmap/ic_launcher"
+        android:title="收藏"/>
+    <item
+        android:id="@+id/menu_item_navigation"
+        android:icon="@mipmap/ic_launcher"
+        android:title="导航"/>
+    <item
+        android:id="@+id/menu_item_open_apis"
+        android:icon="@mipmap/ic_launcher"
+        android:title="OPENAPIS"/>
+    <item
+        android:id="@+id/menu_item_friend_link"
+        android:icon="@mipmap/ic_launcher"
+        android:title="友情链接"/>
+    <item
+        android:id="@+id/menu_item_setting"
+        android:icon="@mipmap/icon_menu"
+        android:title="设置"/>
+    <item
+        android:id="@+id/menu_item_about"
+        android:icon="@drawable/selector_project"
+        android:title="关于"/>
+</menu>

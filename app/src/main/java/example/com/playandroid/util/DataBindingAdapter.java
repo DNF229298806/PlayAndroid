@@ -4,6 +4,7 @@ import android.databinding.BindingAdapter;
 import android.os.Build;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
 import android.view.View;
@@ -63,6 +64,12 @@ public class DataBindingAdapter {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setNavigationOnClickListener(listener);
         }
+    }
+
+    //NavigationView
+    @BindingAdapter("navigationItemSelectedListener")
+    public static void setNavigationItemSelectedListener(NavigationView nv, NavigationView.OnNavigationItemSelectedListener listener) {
+        nv.setNavigationItemSelectedListener(listener);
     }
 
 }
