@@ -59,9 +59,9 @@
                 app:menu="@menu/main_bnv_menu"/>
         </android.support.design.widget.CoordinatorLayout>
 
+        <!--    app:itemTextColor="@null"
+            app:itemIconTint="@null"-->
         <android.support.design.widget.NavigationView
-            app:itemTextColor="@null"
-            app:itemIconTint="@null"
             android:fitsSystemWindows="true"
             navigationItemSelectedListener="@{vm::onMenuItemSelected}"
             android:id="@+id/navigation_view"

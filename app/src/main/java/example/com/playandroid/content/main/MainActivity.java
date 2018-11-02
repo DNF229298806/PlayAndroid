@@ -1,5 +1,6 @@
 package example.com.playandroid.content.main;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -34,7 +35,12 @@ public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*
         setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
         StatusBarUtil.setStatusBarColor(this, R.color.tool_bar_blue);
-        //BottomNavigationViewHelper.disableShiftMode(getBinding().bnv);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            //解决NavigationView这边点击按钮以后无法变色的问题
+            ColorStateList cs = getBaseContext().getResources().getColorStateList(R.color.nav_menu_text_color, null);
+            getBinding().navigationView.setItemTextColor(cs);
+            getBinding().navigationView.setItemIconTintList(cs);
+        }
         initFragment(mHomeFragment, HOME);
         long l2 = System.currentTimeMillis();
         Timber.i("Main=%s", (l2 - l1));

@@ -1,9 +1,6 @@
 package example.com.playandroid.content.main;
 
-import android.content.res.ColorStateList;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -62,14 +59,9 @@ public class MainModel extends BaseModel<MainActivity,ActivityMainBinding> {
         return false;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void navigationClick(View view) {
         ToastUtils.showShort("出现菜单栏");
         getBinding().drawableLayout.openDrawer(getBinding().navigationView);
-        ColorStateList cs = getActivity().getBaseContext().getResources().getColorStateList(R.color.nav_menu_text_color, null);
-        getBinding().navigationView.setItemTextColor(cs);
-        getBinding().navigationView.setItemIconTintList(cs);
-
     }
 
     public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {

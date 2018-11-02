@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_item_collection"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_like"
         android:title="收藏"/>
     <item
         android:id="@+id/menu_item_navigation"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_navigation"
         android:title="导航"/>
     <item
         android:id="@+id/menu_item_open_apis"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_api"
         android:title="OPENAPIS"/>
     <item
         android:id="@+id/menu_item_friend_link"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_link_black_64dp"
         android:title="友情链接"/>
     <item
         android:id="@+id/menu_item_setting"
-        android:icon="@mipmap/icon_menu"
+        android:icon="@drawable/ic_settings_black_64dp"
         android:title="设置"/>
     <item
         android:id="@+id/menu_item_about"
-        android:icon="@drawable/selector_project"
+        android:icon="@mipmap/icon_about"
         android:title="关于"/>
 </menu>
