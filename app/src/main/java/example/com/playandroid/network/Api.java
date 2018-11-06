@@ -42,4 +42,8 @@ public interface Api {
      */
     @GET("article/list/{num}/json")
     Observable<InfoEntity<PageEntity>> getFeedArticleList(@Path("num") int num);
+
+    /*@POST("lg/collect/{id}/json")
+    Observable<InfoEntity>*/
+
 }
