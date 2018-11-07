@@ -10,4 +10,6 @@
     <string name="backslash"> / </string>
     <string name="bottom_navigation_view_behavior">io.github.zeleven.playa.ui.widget.BottomNavigationViewBehavior</string>
     <string name="uninterested">不感兴趣</string>
+    <string name="account">账号</string>
+    <string name="repassword">确认密码</string>
 </resources>
