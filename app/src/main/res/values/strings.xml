@@ -12,4 +12,8 @@
     <string name="uninterested">不感兴趣</string>
     <string name="account">账号</string>
     <string name="repassword">确认密码</string>
+    <string name="login_cn">登 录</string>
+    <string name="login_en">Login</string>
+    <string name="register_cn">注 册</string>
+    <string name="register_en">Register</string>
 </resources>
