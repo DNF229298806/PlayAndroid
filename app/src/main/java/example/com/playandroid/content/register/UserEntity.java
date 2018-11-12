@@ -1,12 +1,16 @@
 package example.com.playandroid.content.register;
 
+import android.databinding.ViewDataBinding;
+
 import java.util.List;
+
+import example.com.playandroid.base.BaseEntity;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/25 21:24
  */
-public class UserEntity {
+public class UserEntity extends BaseEntity {
     /**
      * collectIds : []
      * email :
@@ -26,6 +30,7 @@ public class UserEntity {
     private int type;
     private String username;
     private List<String> collectIds;
+    private int repassword;
 
     public String getEmail() {
         return email;
@@ -89,5 +94,28 @@ public class UserEntity {
 
     public void setCollectIds(List<String> collectIds) {
         this.collectIds = collectIds;
+    }
+
+    public int getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(int repassword) {
+        this.repassword = repassword;
+    }
+
+    @Override
+    public int getViewType() {
+        return 0;
+    }
+
+    @Override
+    public ViewDataBinding getDataBinding() {
+        return null;
+    }
+
+    @Override
+    public void setDataBinding(ViewDataBinding viewDataBinding) {
+
     }
 }

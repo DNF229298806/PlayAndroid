@@ -38,4 +38,8 @@ public class AnimUtil {
         v.setListener(listener).start();
     }
 
+    public static void moveAnd(View view,long time,float alpha,int y) {
+        view.animate().setDuration(time).y(y).start();
+    }
+
 }
