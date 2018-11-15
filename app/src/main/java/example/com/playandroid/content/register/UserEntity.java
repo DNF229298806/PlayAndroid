@@ -30,7 +30,7 @@ public class UserEntity extends BaseEntity {
     private int type;
     private String username;
     private List<String> collectIds;
-    private int repassword;
+    private String repassword;
 
     public String getEmail() {
         return email;
@@ -96,13 +96,7 @@ public class UserEntity extends BaseEntity {
         this.collectIds = collectIds;
     }
 
-    public int getRepassword() {
-        return repassword;
-    }
 
-    public void setRepassword(int repassword) {
-        this.repassword = repassword;
-    }
 
     @Override
     public int getViewType() {
@@ -117,5 +111,13 @@ public class UserEntity extends BaseEntity {
     @Override
     public void setDataBinding(ViewDataBinding viewDataBinding) {
 
+    }
+
+    public String getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
     }
 }

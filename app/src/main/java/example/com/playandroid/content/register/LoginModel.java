@@ -3,13 +3,17 @@ package example.com.playandroid.content.register;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.databinding.ObservableBoolean;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import example.com.playandroid.App;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.base.anima.BaseAnimatorListenerAdapter;
 import example.com.playandroid.databinding.ActivityLoginBinding;
+import example.com.playandroid.network.transform.RestfulTransformer;
 import example.com.playandroid.util.AnimUtil;
 
 /**
@@ -39,5 +43,51 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
                 ToastUtils.showLong("翻转结束了");
             }
         });
+    }
+
+    public void onRegisterOrLoginClick(View view) {
+        UserEntity user = getBinding().getEntity();
+        if (isLogin) {
+            ToastUtils.showLong("登录成功");
+        } else {
+            addDisposable(
+                    App.api.register(user.getUsername(), user.getPassword(), user.getRepassword()).compose(new RestfulTransformer<>())
+                            .subscribe(
+                                    entity -> ToastUtils.showLong("注册成功"),
+                                    a -> ToastUtils.showLong(a.getMessage())
+                            ));
+        }
+    }
+
+    public void userAfterTextChanged(Editable s) {
+        String text = s.toString();
+        if (TextUtils.isEmpty(text)) {
+            getBinding().tieUsername.setError("账号不能为空！");
+        }else{
+            getBinding().tieUsername.setError(null);
+        }
+    }
+    public void passwordAfterTextChanged(Editable s) {
+        String text = s.toString();
+        if (TextUtils.isEmpty(text)) {
+            getBinding().tiePassword.setError("密码不能为空！");
+        }else{
+            getBinding().tiePassword.setError(null);
+        }
+    }
+    public void repasswordAfterTextChanged(Editable s) {
+        String text = s.toString();
+        UserEntity entity = getBinding().getEntity();
+        if (TextUtils.isEmpty(text)) {
+            getBinding().tieConfirmPassword.setError("确认密码不能为空！");
+        }else if (!entity.getPassword().equals(entity.getRepassword())) {
+            getBinding().tieConfirmPassword.setError("两次输入的密码不一致！");
+        }else{
+            getBinding().tieConfirmPassword.setError(null);
+        }
+    }
+
+    public void isTextNull() {
+
     }
 }

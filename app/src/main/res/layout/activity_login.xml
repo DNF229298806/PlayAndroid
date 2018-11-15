@@ -10,6 +10,9 @@
         <variable
             name="vm"
             type="example.com.playandroid.content.register.LoginModel"/>
+        <variable
+            name="entity"
+            type="example.com.playandroid.content.register.UserEntity"/>
 
     </data>
 
@@ -90,10 +93,12 @@
             <android.support.design.widget.TextInputLayout
                 style="@style/style_login_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tie_username"
+                    android:afterTextChanged="@{vm::userAfterTextChanged}"
+                    android:text="@={entity.username}"
                     style="@style/style_login_input_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,6 +114,9 @@
                 app:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tie_password"
+                    android:afterTextChanged="@{vm::passwordAfterTextChanged}"
+                    android:text="@={entity.password}"
                     style="@style/style_login_input_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -117,7 +125,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_confirm_password"
                 style="@style/style_login_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,6 +134,9 @@
                 app:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tie_confirm_password"
+                    android:afterTextChanged="@{vm::repasswordAfterTextChanged}"
+                    android:text="@={entity.repassword}"
                     style="@style/style_login_input_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,6 +145,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:onClick="@{vm::onRegisterOrLoginClick}"
                 android:id="@+id/bt_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
