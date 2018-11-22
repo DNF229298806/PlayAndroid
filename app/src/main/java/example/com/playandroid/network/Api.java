@@ -20,10 +20,22 @@ import retrofit2.http.Path;
 public interface Api {
     String HOST = "http://www.wanandroid.com";
 
-    @POST("/user/register")
+    @POST("user/register")
     @FormUrlEncoded
         //Observable<InfoEntity> register(@Body RegisterParams params);
     Observable<InfoEntity<UserEntity>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+
+    /**
+     * 登陆
+     * http://www.wanandroid.com/user/login
+     *
+     * @param username user name
+     * @param password password
+     * @return 登陆数据
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    Observable<InfoEntity<UserEntity>> login(@Field("username") String username, @Field("password") String password);
 
     /**
      * 广告栏

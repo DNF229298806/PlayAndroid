@@ -6,7 +6,8 @@ package example.com.playandroid.constant;
  */
 public interface Constant {
     String link = "link";
-    String article_title = "article_title";
+    String article_title = "ARTICLE_TITLE";
+    String user_entity = "user";
 
     interface NetWork {
         String DEVICE = "android";

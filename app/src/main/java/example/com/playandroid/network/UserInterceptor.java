@@ -2,14 +2,17 @@ package example.com.playandroid.network;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 import example.com.playandroid.BuildConfig;
+import example.com.playandroid.constant.Constant;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -50,14 +53,16 @@ public class UserInterceptor implements Interceptor{
         }*/
 
         //看需求进行加请求头的操作 第一次进来的时候首先移除请求头
+        SPUtils sp = SPUtils.getInstance(Constant.user_entity);
         if (isConnection) {
+            String token_pass = TextUtils.isEmpty(sp.getString("token_pass")) ? "" : sp.getString("token_pass");
             request = request.newBuilder()
                     .removeHeader("Pragma")
-                    //                    .addHeader("User-Agent", "android")
+                    .addHeader("token_pass", token_pass)
                     //                    .addHeader("appid", Constant.NetWork.appId)
                     //                    .addHeader("nonceStr",nonceStr)
                     //                    .addHeader("sign",sign)
-                    //                    .addHeader("accessToken", User.getToken())
+                    //                    .addHeader("accessToken", User.getToken_pass())
                     //                    .addHeader("device",Constant.NetWork.device)
                     .addHeader("version", BuildConfig.VERSION_NAME)
                     .build();
@@ -78,6 +83,10 @@ public class UserInterceptor implements Interceptor{
         Response response = chain.proceed(request);
         if(response.code() == 401){
             return response.newBuilder().code(401).message("").build();
+        }
+        String token = response.headers().get("Set-Cookie");
+        if (!TextUtils.isEmpty(token)) {
+            sp.put("token_pass",token);
         }
         return response;
     }

@@ -17,7 +17,7 @@ public class UserEntity extends BaseEntity {
      * icon :
      * id : 9987
      * password : 123456
-     * token :
+     * token_pass :
      * type : 0
      * username : dnf123456
      */
@@ -26,7 +26,7 @@ public class UserEntity extends BaseEntity {
     private String icon;
     private int id;
     private String password;
-    private String token;
+    private String token_pass;
     private int type;
     private String username;
     private List<String> collectIds;
@@ -64,12 +64,12 @@ public class UserEntity extends BaseEntity {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
+    public String getToken_pass() {
+        return token_pass;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setToken_pass(String token_pass) {
+        this.token_pass = token_pass;
     }
 
     public int getType() {
@@ -97,6 +97,14 @@ public class UserEntity extends BaseEntity {
     }
 
 
+    public String getRepassword() {
+        return repassword;
+    }
+
+    public void setRepassword(String repassword) {
+        this.repassword = repassword;
+    }
+
 
     @Override
     public int getViewType() {
@@ -111,13 +119,5 @@ public class UserEntity extends BaseEntity {
     @Override
     public void setDataBinding(ViewDataBinding viewDataBinding) {
 
-    }
-
-    public String getRepassword() {
-        return repassword;
-    }
-
-    public void setRepassword(String repassword) {
-        this.repassword = repassword;
     }
 }

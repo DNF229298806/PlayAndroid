@@ -7,14 +7,19 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.base.anima.BaseAnimatorListenerAdapter;
+import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityLoginBinding;
+import example.com.playandroid.network.transform.ErrorTransform;
 import example.com.playandroid.network.transform.RestfulTransformer;
 import example.com.playandroid.util.AnimUtil;
+import example.com.playandroid.util.DogUtil;
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author Richard_Y_Wang
@@ -22,7 +27,9 @@ import example.com.playandroid.util.AnimUtil;
  * 明天回来对接接口 登录注册接口 注意要在一个按钮的点击事件里面分别处理登录和注册
  */
 public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
+    //拿来判断是想要进行登录还是注册
     private boolean isLogin = true;
+    //拿来判断是不是对登录/注册的按钮进行了点击或者转化
     public ObservableBoolean isChange = new ObservableBoolean(true);
 
     public LoginModel(LoginActivity activity) {
@@ -47,16 +54,34 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
 
     public void onRegisterOrLoginClick(View view) {
         UserEntity user = getBinding().getEntity();
+        Disposable disposable;
         if (isLogin) {
-            ToastUtils.showLong("登录成功");
+            disposable = App.api.login(user.getUsername(), user.getPassword())
+                    .compose(new ErrorTransform<>())
+                    .subscribe(info->{
+                        if (info.getErrorCode() == 0) {
+                            ToastUtils.showLong("登录成功");
+                            UserEntity returnUser = info.getData();
+                            initUser(user, returnUser);
+                            //界面跳转 以及把返回的User使用SP进行保存
+                            DogUtil.saveToSpByReflect(user,SPUtils.getInstance(Constant.user_entity));
+                        }
+                    },Throwable::printStackTrace);
         } else {
-            addDisposable(
-                    App.api.register(user.getUsername(), user.getPassword(), user.getRepassword()).compose(new RestfulTransformer<>())
-                            .subscribe(
-                                    entity -> ToastUtils.showLong("注册成功"),
-                                    a -> ToastUtils.showLong(a.getMessage())
-                            ));
+            disposable = App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
+                    .compose(new RestfulTransformer<>())
+                    .subscribe(entity -> ToastUtils.showLong("注册成功"),
+                            a -> ToastUtils.showLong(a.getMessage()));
         }
+        addDisposable(disposable);
+    }
+
+    private void initUser(UserEntity user, UserEntity returnUser) {
+        user.setCollectIds(returnUser.getCollectIds());
+        user.setEmail(returnUser.getEmail());
+        user.setIcon(returnUser.getIcon());
+        user.setId(returnUser.getId());
+        user.setType(returnUser.getType());
     }
 
     public void userAfterTextChanged(Editable s) {

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TestGson {
     public static void main(String[] args) {
-        Class gaoyi = new Class();
+        ClassA gaoyi = new ClassA();
         gaoyi.name = "高一三班";
         List<Student> students = new ArrayList<>();
         students.add(new Student("tom",1));
