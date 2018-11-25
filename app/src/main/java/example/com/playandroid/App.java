@@ -94,6 +94,20 @@ public class App extends Application implements Application.ActivityLifecycleCal
         return stack.lastElement();
     }
 
+    /**
+     * 增加一种类似于Model.dispash的方法 可以在A->B->C->D 可以在D中刷新A 差不多就是这样
+     * @param name 某个activity的类名
+     * @return
+     */
+    public static Activity getActivityByClassName(String name) {
+        for (Activity activity : stack) {
+            if (activity.getLocalClassName().equals(name)) {
+                return activity;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         stack.add(activity);
