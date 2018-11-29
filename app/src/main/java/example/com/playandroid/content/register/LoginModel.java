@@ -31,7 +31,7 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
     private boolean isLogin = true;
     //拿来判断是不是对登录/注册的按钮进行了点击或者转化
     public ObservableBoolean isChange = new ObservableBoolean(true);
-
+    public ObservableBoolean isProgressBarShow = new ObservableBoolean(false);
     public LoginModel(LoginActivity activity) {
         super(activity);
     }
@@ -53,20 +53,24 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
     }
 
     public void onRegisterOrLoginClick(View view) {
+        //开始网络请求的同时开始显示ProgressBar
+        isProgressBarShow.set(true);
         UserEntity user = getBinding().getEntity();
         Disposable disposable;
         if (isLogin) {
             disposable = App.api.login(user.getUsername(), user.getPassword())
                     .compose(new ErrorTransform<>())
-                    .subscribe(info->{
+                    .subscribe(info -> {
                         if (info.getErrorCode() == 0) {
                             ToastUtils.showLong("登录成功");
                             UserEntity returnUser = info.getData();
                             initUser(user, returnUser);
                             //界面跳转 以及把返回的User使用SP进行保存
-                            DogUtil.saveToSpByReflect(user,SPUtils.getInstance(Constant.user_entity));
+                            DogUtil.saveToSpByReflect(user, SPUtils.getInstance(Constant.user_entity));
                         }
-                    },Throwable::printStackTrace);
+                        //网络请求结束 ProgressBar进行隐藏
+                        isProgressBarShow.set(false);
+                    }, Throwable::printStackTrace);
         } else {
             disposable = App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
                     .compose(new RestfulTransformer<>())
