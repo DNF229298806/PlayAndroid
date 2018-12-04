@@ -55,6 +55,10 @@ public interface Api {
     @GET("article/list/{num}/json")
     Observable<InfoEntity<PageEntity>> getFeedArticleList(@Path("num") int num);
 
+    // 获取体系分类
+    @GET("tree/json")
+    Observable<InfoEntity<List<>>> getSystemClassification();
+
     /*@POST("lg/collect/{id}/json")
     Observable<InfoEntity>*/
 

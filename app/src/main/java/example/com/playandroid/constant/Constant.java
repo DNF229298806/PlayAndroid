@@ -27,5 +27,6 @@ public interface Constant {
     interface ActivityPath{
         String HomeActivity = "/home/";
         String WebViewActivity = HomeActivity + "webview";
+        String MainActivity = HomeActivity + "main";
     }
 }

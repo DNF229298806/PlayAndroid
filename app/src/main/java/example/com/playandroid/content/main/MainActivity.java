@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
+import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.home.HomeFragment;
 import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
@@ -19,6 +22,7 @@ import static example.com.playandroid.constant.Constant.FragmentType.HOME;
 import static example.com.playandroid.constant.Constant.FragmentType.PROJECT;
 import static example.com.playandroid.constant.Constant.FragmentType.SYSTEM;
 
+@Route(path = Constant.ActivityPath.MainActivity)
 public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*extends BaseActivity<MainModel,ActivityMainBinding>*/ {
     private HomeFragment mHomeFragment;
     private ProjectFragment mProjectFragment;

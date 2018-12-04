@@ -3,6 +3,7 @@ package example.com.playandroid.content.register;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.databinding.ObservableBoolean;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,9 +16,11 @@ import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.base.anima.BaseAnimatorListenerAdapter;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityLoginBinding;
+import example.com.playandroid.network.entity.InfoEntity;
 import example.com.playandroid.network.transform.ErrorTransform;
 import example.com.playandroid.network.transform.RestfulTransformer;
 import example.com.playandroid.util.AnimUtil;
+import example.com.playandroid.util.ArouterUtil;
 import example.com.playandroid.util.DogUtil;
 import io.reactivex.disposables.Disposable;
 
@@ -58,26 +61,53 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         UserEntity user = getBinding().getEntity();
         Disposable disposable;
         if (isLogin) {
-            disposable = App.api.login(user.getUsername(), user.getPassword())
-                    .compose(new ErrorTransform<>())
-                    .subscribe(info -> {
-                        if (info.getErrorCode() == 0) {
-                            ToastUtils.showLong("登录成功");
-                            UserEntity returnUser = info.getData();
-                            initUser(user, returnUser);
-                            //界面跳转 以及把返回的User使用SP进行保存
-                            DogUtil.saveToSpByReflect(user, SPUtils.getInstance(Constant.user_entity));
-                        }
-                        //网络请求结束 ProgressBar进行隐藏
-                        isProgressBarShow.set(false);
-                    }, Throwable::printStackTrace);
+            disposable = login(user);
         } else {
             disposable = App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
                     .compose(new RestfulTransformer<>())
-                    .subscribe(entity -> ToastUtils.showLong("注册成功"),
-                            a -> ToastUtils.showLong(a.getMessage()));
+                    .subscribe(entity -> {
+                                ToastUtils.showLong("注册成功");
+                                //注册成功并登陆
+                                addDisposable(login(entity));
+                            }, a -> ToastUtils.showLong(a.getMessage()));
         }
         addDisposable(disposable);
+    }
+
+    /**
+     * 调用登陆接口 包含登陆成功回调和失败回调
+     * @param user 用户实体
+     * @return
+     */
+    @NonNull
+    private Disposable login(UserEntity user) {
+        return App.api.login(user.getUsername(), user.getPassword())
+                .compose(new ErrorTransform<>())
+                .subscribe(info -> onLoginSuccess(user, info), this::onLoginFail);
+    }
+
+    private void onLoginFail(Throwable t) {
+        ToastUtils.showLong(t.getMessage());
+        t.printStackTrace();
+        isProgressBarShow.set(false);
+    }
+
+    /**
+     * 登陆成功以后 对用户信息进行保存 保存到SP中
+     * @param user
+     * @param info
+     */
+    private void onLoginSuccess(UserEntity user, InfoEntity<UserEntity> info) {
+        if (info.getErrorCode() == 0) {
+            ToastUtils.showLong("登录成功");
+            UserEntity returnUser = info.getData();
+            initUser(user, returnUser);
+            //界面跳转 以及把返回的User使用SP进行保存
+            DogUtil.saveToSpByReflect(user, SPUtils.getInstance(Constant.user_entity));
+        }
+        //网络请求结束 ProgressBar进行隐藏
+        isProgressBarShow.set(false);
+        ArouterUtil.navigation(Constant.ActivityPath.MainActivity);
     }
 
     private void initUser(UserEntity user, UserEntity returnUser) {
