@@ -82,4 +82,5 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     //BasePop
     implementation "com.github.razerdp:BasePopup_Candy:$basepopup_candy"
+    implementation 'com.google.android:flexbox:1.0.0'
 }

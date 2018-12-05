@@ -9,12 +9,12 @@
 
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <TextView
+            android:layout_margin="5dp"
+            android:background="@drawable/rectangle_frame"
+            android:padding="5dp"
             android:text="@{entity.content,default=12312321}"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </FrameLayout>
 </layout>

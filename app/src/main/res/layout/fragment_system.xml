@@ -9,7 +9,7 @@
 
     </data>
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,5 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="体系"/>
-    </LinearLayout>
+    </LinearLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </layout>

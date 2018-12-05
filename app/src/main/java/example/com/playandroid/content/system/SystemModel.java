@@ -1,6 +1,18 @@
 package example.com.playandroid.content.system;
 
+import android.support.v7.widget.RecyclerView;
+
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import example.com.playandroid.adapter.TestBindingAdapter;
 import example.com.playandroid.base.BaseFragmentModel;
+import example.com.playandroid.base.TestEntity;
 import example.com.playandroid.content.main.MainActivity;
 import example.com.playandroid.databinding.FragmentSystemBinding;
 
@@ -12,5 +24,28 @@ public class SystemModel extends BaseFragmentModel<MainActivity,SystemFragment,F
 
     public SystemModel(MainActivity activity, SystemFragment fragment) {
         super(activity, fragment);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        List<TestEntity> list = new ArrayList<>();
+        for (int i = 0; i < 200; i++) {
+            TestEntity test = new TestEntity();
+            test.setContent("I asasd "+i);
+            list.add(test);
+        }
+        RecyclerView recyclerView = getBinding().recyclerView;
+
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
+        //flexWrap 默认情况下 Flex 跟 LinearLayout 一样，都是不带换行排列的，但是flexWrap属性可以支持换行排列。
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        //flexDirection 属性决定主轴的方向（即项目的排列方向）。类似 LinearLayout 的 vertical 和 horizontal
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        //justifyContent 属性定义了项目在主轴上的对齐方式。
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new TestBindingAdapter(list, recyclerView.getContext()));
+
     }
 }

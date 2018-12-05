@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseModel;
+import example.com.playandroid.base.ModelObserver;
 import example.com.playandroid.base.anima.BaseAnimatorListenerAdapter;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityLoginBinding;
@@ -35,6 +36,7 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
     //拿来判断是不是对登录/注册的按钮进行了点击或者转化
     public ObservableBoolean isChange = new ObservableBoolean(true);
     public ObservableBoolean isProgressBarShow = new ObservableBoolean(false);
+
     public LoginModel(LoginActivity activity) {
         super(activity);
     }
@@ -59,23 +61,24 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         //开始网络请求的同时开始显示ProgressBar
         isProgressBarShow.set(true);
         UserEntity user = getBinding().getEntity();
-        Disposable disposable;
+        Disposable disposable = null;
         if (isLogin) {
             disposable = login(user);
         } else {
-            disposable = App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
+            App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
                     .compose(new RestfulTransformer<>())
-                    .subscribe(entity -> {
-                                ToastUtils.showLong("注册成功");
-                                //注册成功并登陆
-                                addDisposable(login(entity));
-                            }, a -> ToastUtils.showLong(a.getMessage()));
+                    .subscribe(new ModelObserver<>(this, entity -> {
+                        ToastUtils.showLong("注册成功");
+                        //注册成功并登陆
+                        addDisposable(login(entity));
+                    }));
         }
         addDisposable(disposable);
     }
 
     /**
      * 调用登陆接口 包含登陆成功回调和失败回调
+     *
      * @param user 用户实体
      * @return
      */
@@ -94,6 +97,7 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
 
     /**
      * 登陆成功以后 对用户信息进行保存 保存到SP中
+     *
      * @param user
      * @param info
      */
@@ -122,26 +126,28 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         String text = s.toString();
         if (TextUtils.isEmpty(text)) {
             getBinding().tieUsername.setError("账号不能为空！");
-        }else{
+        } else {
             getBinding().tieUsername.setError(null);
         }
     }
+
     public void passwordAfterTextChanged(Editable s) {
         String text = s.toString();
         if (TextUtils.isEmpty(text)) {
             getBinding().tiePassword.setError("密码不能为空！");
-        }else{
+        } else {
             getBinding().tiePassword.setError(null);
         }
     }
+
     public void repasswordAfterTextChanged(Editable s) {
         String text = s.toString();
         UserEntity entity = getBinding().getEntity();
         if (TextUtils.isEmpty(text)) {
             getBinding().tieConfirmPassword.setError("确认密码不能为空！");
-        }else if (!entity.getPassword().equals(entity.getRepassword())) {
+        } else if (!entity.getPassword().equals(entity.getRepassword())) {
             getBinding().tieConfirmPassword.setError("两次输入的密码不一致！");
-        }else{
+        } else {
             getBinding().tieConfirmPassword.setError(null);
         }
     }
