@@ -1,12 +1,17 @@
 package example.com.playandroid.content.system;
 
+import android.databinding.ViewDataBinding;
+
 import java.util.List;
+
+import example.com.playandroid.R;
+import example.com.playandroid.base.BaseEntity;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/11/3 10:59
  */
-public class SystemEntity {
+public class SystemEntity extends BaseEntity {
 
     /**
      * children : [{"children":[],"courseId":13,"id":60,"name":"Android Studio相关","order":1000,"parentChapterId":150,"userControlSetTop":false,"visible":1},{"children":[],"courseId":13,"id":169,"name":"gradle","order":1001,"parentChapterId":150,"userControlSetTop":false,"visible":1},{"children":[],"courseId":13,"id":269,"name":"官方发布","order":1002,"parentChapterId":150,"userControlSetTop":false,"visible":1}]
@@ -26,7 +31,7 @@ public class SystemEntity {
     private int parentChapterId;
     private boolean userControlSetTop;
     private int visible;
-    private List<ChildrenBean> children;
+    private List<SystemEntity> children;
 
     public int getCourseId() {
         return courseId;
@@ -84,97 +89,27 @@ public class SystemEntity {
         this.visible = visible;
     }
 
-    public List<ChildrenBean> getChildren() {
+
+    public List<SystemEntity> getChildren() {
         return children;
     }
 
-    public void setChildren(List<ChildrenBean> children) {
+    public void setChildren(List<SystemEntity> children) {
         this.children = children;
     }
 
-    public static class ChildrenBean {
-        /**
-         * children : []
-         * courseId : 13
-         * id : 60
-         * name : Android Studio相关
-         * order : 1000
-         * parentChapterId : 150
-         * userControlSetTop : false
-         * visible : 1
-         */
+    @Override
+    public int getViewType() {
+        return R.layout.holder_system;
+    }
 
-        private int courseId;
-        private int id;
-        private String name;
-        private int order;
-        private int parentChapterId;
-        private boolean userControlSetTop;
-        private int visible;
-        private List<?> children;
+    @Override
+    public ViewDataBinding getDataBinding() {
+        return null;
+    }
 
-        public int getCourseId() {
-            return courseId;
-        }
+    @Override
+    public void setDataBinding(ViewDataBinding viewDataBinding) {
 
-        public void setCourseId(int courseId) {
-            this.courseId = courseId;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getOrder() {
-            return order;
-        }
-
-        public void setOrder(int order) {
-            this.order = order;
-        }
-
-        public int getParentChapterId() {
-            return parentChapterId;
-        }
-
-        public void setParentChapterId(int parentChapterId) {
-            this.parentChapterId = parentChapterId;
-        }
-
-        public boolean isUserControlSetTop() {
-            return userControlSetTop;
-        }
-
-        public void setUserControlSetTop(boolean userControlSetTop) {
-            this.userControlSetTop = userControlSetTop;
-        }
-
-        public int getVisible() {
-            return visible;
-        }
-
-        public void setVisible(int visible) {
-            this.visible = visible;
-        }
-
-        public List<?> getChildren() {
-            return children;
-        }
-
-        public void setChildren(List<?> children) {
-            this.children = children;
-        }
     }
 }

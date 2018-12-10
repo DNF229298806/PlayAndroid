@@ -4,8 +4,9 @@ import java.util.List;
 
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
-import example.com.playandroid.network.entity.InfoEntity;
 import example.com.playandroid.content.register.UserEntity;
+import example.com.playandroid.content.system.SystemEntity;
+import example.com.playandroid.network.entity.InfoEntity;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -55,9 +56,11 @@ public interface Api {
     @GET("article/list/{num}/json")
     Observable<InfoEntity<PageEntity>> getFeedArticleList(@Path("num") int num);
 
-
-
-    /*@POST("lg/collect/{id}/json")
-    Observable<InfoEntity>*/
+    /**
+     * 获取体系列表
+     * @return 体系列表json
+     */
+    @GET("tree/json")
+    Observable<InfoEntity<List<SystemEntity>>> getSystemList();
 
 }

@@ -20,7 +20,7 @@ import example.com.playandroid.BR;
 public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewDataBinding> extends RecyclerView.Adapter<BindingViewHolder<T>> {
     /*public class BaseBindingAdapter extends RecyclerView.Adapter<BindingViewHolder<TestItemBinding>> {*/
     private List<K> data;
-    private Context context;
+    protected Context context;
 
     public BaseBindingAdapter(List<K> data, Context context) {
         this.data = data;

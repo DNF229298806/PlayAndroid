@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="entity"
+            type="example.com.playandroid.content.system.SystemEntity"/>
+
+    </data>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/rectangle_frame"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@{entity.name,default=12312321}"
+        />
+</layout>

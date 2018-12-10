@@ -71,17 +71,19 @@ public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingH
     public void onBindViewHolder(BindingHolder holder, int position) {
         holder.bindData(data.get(position));
     }
+
     @Override
     public int getItemCount() {
         return data.size();
     }
+
     @Override
     public int getItemViewType(int position) {
         return data.get(position).getViewType();
     }
 
 
-   protected static class BindingHolder extends RecyclerView.ViewHolder {
+    protected static class BindingHolder extends RecyclerView.ViewHolder {
 
         ViewDataBinding binding;
         /**
