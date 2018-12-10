@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class SystemModel extends BaseFragmentModel<MainActivity, SystemFragment,
         //flexDirection 属性决定主轴的方向（即项目的排列方向）。类似 LinearLayout 的 vertical 和 horizontal
         layoutManager.setFlexDirection(FlexDirection.ROW);
         //justifyContent 属性定义了项目在主轴上的对齐方式。
-        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        //layoutManager.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new SystemBindingAdapter(list, recyclerView.getContext()));
     }

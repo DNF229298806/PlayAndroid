@@ -13,9 +13,10 @@ import timber.log.Timber;
  */
 public class Demo {
     public static void main(String[] args) {
-        /**
-         * Groupby操作符 不用莱姆大表达式
-         */
+
+                /**
+                 * Groupby操作符 不用莱姆大表达式
+                 */
         Disposable subscribe = Observable.just(2, 3, 4, 5, 6).groupBy(new Function<Integer, String>() {
             @Override
             public String apply(Integer integer) throws Exception {
