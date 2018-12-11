@@ -8,13 +8,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
+import com.ethanhua.skeleton.Skeleton;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import example.com.playandroid.App;
+import example.com.playandroid.R;
 import example.com.playandroid.base.BaseFragmentModel;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.content.home.net.ArticleEntity;
@@ -25,15 +29,17 @@ import example.com.playandroid.databinding.FragmentHomeBinding;
 import example.com.playandroid.network.transform.RestfulTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import timber.log.Timber;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/25 22:10
  */
 public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, FragmentHomeBinding> {
-    private List<BannerEntity> mBannerEntities = new ArrayList<>();
-    private PageEntity mPageEntity = new PageEntity();
-    private HomeAdapter mAdapter = new HomeAdapter();
+    private List<BannerEntity> mBannerEntities;
+    private PageEntity mPageEntity;
+    private HomeAdapter mAdapter;
+    RecyclerViewSkeletonScreen loadingScreen;
 
     public HomeModel(MainActivity activity, HomeFragment fragment) {
         super(activity, fragment);
@@ -42,8 +48,20 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     @Override
     public void onCreate() {
         super.onCreate();
+        mBannerEntities = new ArrayList<>();
+        mPageEntity = new PageEntity();
+        RecyclerView recyclerView = getBinding().recyclerView;
+        mAdapter= new HomeAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(mAdapter);
+        Timber.i("setAdapter=" + recyclerView.hashCode());
+        loadingScreen = Skeleton.bind(recyclerView)
+                .adapter(mAdapter)
+                .load(R.layout.holder_article_item)
+                .show();
         addDisposable(App.api.getBannerEntity()
                 .compose(new RestfulTransformer<>())
+                .delay(3, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::doOnNext, a -> {
                     a.printStackTrace();
@@ -81,14 +99,16 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
 
     private void doOnFirstLoading(PageEntity page) {
         mPageEntity = page;
-        RecyclerView recyclerView = getBinding().recyclerView;
+       /* RecyclerView recyclerView = getBinding().recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);*/
         List<Mult> list = new ArrayList<>();
         //把banner的数据传递进去
         list.add(new BannerLayoutEntity(mBannerEntities));
         list.addAll(page.getArticleEntities());
-        mAdapter.addList(list);
+        Timber.i("refreshList=" + getBinding().recyclerView.hashCode());
+        mAdapter.refreshList(list);
+        //mAdapter.addList(list);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -100,30 +120,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         List<Mult> tempList = new ArrayList<>( mAdapter.getList().subList(1, min));*/
         refreshLayout.finishRefresh(1000, true);
         ToastUtils.showShort("暂无数据更新");
-        /*addDisposable(
-            Observable.fromIterable(tempList)
-                    .observeOn(Schedulers.newThread())
-                    .filter(article->{
-                        int i = 0;
-                        for (ArticleEntity articleEntity : page.getArticleEntities()) {
-                             //if (!articleEntity.equals(article)) i++;
-                            if(articleEntity.getId()!=((ArticleEntity)article).getId()) i++;
-                            Timber.i("articleEntity.getId()%s", articleEntity.getId());
-                            Timber.i("((ArticleEntity)article).getId())%s", ((ArticleEntity)article).getId());
-                        }
-                        Timber.i("打印测试：i=%1s size=%2s", i,page.getArticleEntities().size());
-                        return i == min;
-                    })
-                    .toList().toObservable()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(list -> {
-                        mAdapter.addList(1,list);
-                        refreshLayout.finishRefresh(1000, true);
-                    }, (throwable -> {
-                        refreshLayout.finishRefresh(1000, false);
-                        throwable.printStackTrace();
-                    }))
-        );*/
+
     }
 
     private void loadSuccess(PageEntity pageEntity) {
@@ -140,6 +137,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     }
 
     private void doOnNext(List<BannerEntity> list) {
+        loadingScreen.hide();
         mBannerEntities = list;
     }
 

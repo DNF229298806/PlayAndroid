@@ -42,24 +42,10 @@ public class SystemBindingAdapter extends BaseBindingAdapter<SystemEntity, Holde
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder<HolderSystemBinding> holder, int position) {
         super.onBindViewHolder(holder, position);
-        getData().get(position);
-        /*HolderSystemBinding binding = holder.getBinding();
-        if (binding.getEntity() != null && binding.getEntity().getChildren() != null && binding.getEntity().getChildren().size() != 0) {
-            FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(10, 10, 10, 10);
-            for (SystemEntity systemEntity : binding.getEntity().getChildren()) {
-                TextView textView = new TextView(context);
-                textView.setPadding(20, 20, 20, 20);
-                textView.setLayoutParams(params);
-                textView.setGravity(Gravity.CENTER);
-                textView.setText(systemEntity.getName());
-                textView.setBackground(App.getResDrawable(R.drawable.rectangle_frame));
-                binding.flex.addView(textView);
-            }
-        }*/
         if (getData().get(position).getChildren() != null) {
             FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(10, 10, 10, 10);
+            //记得先要remove所有的view 然后重新加入
             holder.getBinding().flex.removeAllViews();
             for (SystemEntity systemEntity : getData().get(position).getChildren()) {
                 TextView textView = new TextView(context);
@@ -69,19 +55,9 @@ public class SystemBindingAdapter extends BaseBindingAdapter<SystemEntity, Holde
                 textView.setText(systemEntity.getName());
                 textView.setBackground(App.getResDrawable(R.drawable.rectangle_frame));
                 holder.getBinding().flex.addView(textView);
-                //binding.flex.addView(textView);
             }
         }
-
         Timber.i("now position=%s", position);
-       /* ViewGroup.LayoutParams lp =  holder.getBinding().getRoot().getLayoutParams();
-        if (lp instanceof FlexboxLayoutManager.LayoutParams) {
-            FlexboxLayoutManager.LayoutParams flexboxLp =
-                    (FlexboxLayoutManager.LayoutParams)  holder.getBinding().getRoot().getLayoutParams();
-            flexboxLp.setFlexGrow(1.0f);
-        }*/
-
-
     }
 
 

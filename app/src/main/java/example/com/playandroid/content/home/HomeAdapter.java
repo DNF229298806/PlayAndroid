@@ -27,6 +27,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * @des 2018/10/28 21:17
  */
 public class HomeAdapter extends BindingAdapter {
+
     @Override
     public BindingAdapter.BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false);

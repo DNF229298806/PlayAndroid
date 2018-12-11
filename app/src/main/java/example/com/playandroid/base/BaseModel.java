@@ -38,39 +38,6 @@ public class BaseModel<T extends BaseActivity,V extends ViewDataBinding> extends
         return mBinding;
     }
 
-
-   /*@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    public void onActivityCreate() {
-        Timber.e("WishScoreRelativeLayout.ON_CREATE()");
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onActivityStart() {
-        Timber.e("WishScoreRelativeLayout.ON_START()");
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onActivityResume() {
-        Timber.e("WishScoreRelativeLayout.ON_RESUME()");
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onActivityPause() {
-        Timber.e("WishScoreRelativeLayout.ON_PAUSE()");
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onActivityStop() {
-        Timber.e("WishScoreRelativeLayout.ON_STOP()");
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onActivityDestroy() {
-        list.dispose();
-        Timber.e("WishScoreRelativeLayout.ON_DESTROY()");
-        mActivity.getLifecycle().removeObserver(this);
-    }*/
-
     @Override
     public void onCreate() {
         Timber.e("WishScoreRelativeLayout.ON_CREATE()");

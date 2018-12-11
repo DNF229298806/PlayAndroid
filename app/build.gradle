@@ -59,16 +59,16 @@ dependencies {
     //okhttp拦截器配合retrofit使用
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     //日志打印工具
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "com.jakewharton.timber:timber:$timber_version"
     //Gson
     implementation "com.google.code.gson:gson:$gson_version"
     //ARouter
     implementation 'com.alibaba:arouter-api:1.3.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     //UtilCode
-    implementation 'com.blankj:utilcode:1.20.3'
+    implementation "com.blankj:utilcode:$utilcode_version"
     //轮播图
-    implementation 'com.youth.banner:banner:1.4.10'
+    implementation "com.youth.banner:banner:$banner_version"
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
@@ -82,5 +82,9 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     //BasePop
     implementation "com.github.razerdp:BasePopup_Candy:$basepopup_candy"
+    //谷歌推荐的流布局
     implementation 'com.google.android:flexbox:1.0.0'
+    //recycle加载布局 显示载入中的在这种
+    implementation 'com.ethanhua:skeleton:1.1.1'
+    implementation 'io.supercharge:shimmerlayout:2.1.0'
 }

@@ -13,9 +13,9 @@ import timber.log.Timber;
  * @des 2018/10/14 14:42
  */
 public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment,K extends ViewDataBinding>extends Model implements LifecycleObserver {
-    private T mActivity;
-    private V mFragment;
-    private K mBinding;
+    private final T mActivity;
+    private final V mFragment;
+    private final K mBinding;
     public ListCompositeDisposable list = new ListCompositeDisposable();
 
     public void addDisposable(Disposable disposable) {
@@ -33,16 +33,8 @@ public class BaseFragmentModel<T extends BaseActivity, V extends BaseFragment,K 
         return mActivity;
     }
 
-    public void setActivity(T activity) {
-        mActivity = activity;
-    }
-
     public V getFragment() {
         return mFragment;
-    }
-
-    public void setFragment(V fragment) {
-        mFragment = fragment;
     }
 
     public K getBinding() {

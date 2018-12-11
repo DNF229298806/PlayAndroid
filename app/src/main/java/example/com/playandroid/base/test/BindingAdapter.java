@@ -20,7 +20,6 @@ import example.com.playandroid.base.Mult;
  */
 public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingHolder>{
     protected List<Mult> data = new ArrayList<>();
-
     /**
      * @return 返回的是adapter的view
      */
@@ -45,6 +44,14 @@ public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingH
     public void addList(int position, List<Mult> addItems) {
         if (addItems != null && (addItems.size() != 0) && data != null) {
             data.addAll(position,addItems);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void refreshList(List<Mult> addItems) {
+        data.clear();
+        if (addItems != null && addItems.size() != 0 && data != null) {
+            data.addAll(addItems);
             notifyDataSetChanged();
         }
     }
