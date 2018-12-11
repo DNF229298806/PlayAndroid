@@ -22,19 +22,7 @@ allprojects {
     }
 }
 
-/*sourceSets {
-    main {
-        res.srcDirs =
-                [
-                        'src/main/res/layouts/loading',
-                        'src/main/res/layouts/activities',
-                        'src/main/res/layouts/fragments',
-                        'src/main/res/layouts/content',
-                        'src/main/res/layouts',
-                        'src/main/res'
-                ]
-    }
-}*/
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
