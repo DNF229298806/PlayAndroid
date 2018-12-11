@@ -9,5 +9,7 @@
     <color name="gray_author">#9e9e9e</color>
     <color name="light_gray">#a7a7a7</color>
     <color name="tool_bar_blue">#0081f9</color>
-    <color name="greeen">#38b059</color>
+    <color name="green">#38b059</color>
+    <color name="light_transparent">#16000000</color>
+    <color name="dark_transparent">#24000000</color>
 </resources>

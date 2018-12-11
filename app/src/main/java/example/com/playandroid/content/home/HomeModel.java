@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
+import com.ethanhua.skeleton.ViewReplacer;
+import com.ethanhua.skeleton.ViewSkeletonScreen;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -40,7 +42,8 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     private PageEntity mPageEntity;
     private HomeAdapter mAdapter;
     RecyclerViewSkeletonScreen loadingScreen;
-
+    ViewSkeletonScreen loadingViewScreen;
+    ViewReplacer mViewReplacer;
     public HomeModel(MainActivity activity, HomeFragment fragment) {
         super(activity, fragment);
     }
@@ -52,12 +55,19 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         mPageEntity = new PageEntity();
         RecyclerView recyclerView = getBinding().recyclerView;
         mAdapter= new HomeAdapter();
+        mViewReplacer = new ViewReplacer(getBinding().root);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
         Timber.i("setAdapter=" + recyclerView.hashCode());
-        loadingScreen = Skeleton.bind(recyclerView)
+        //绑定recyclerView
+       /* loadingScreen = Skeleton.bind(recyclerView)
                 .adapter(mAdapter)
                 .load(R.layout.holder_article_item)
+                .show();*/
+       //绑定View
+        loadingViewScreen = Skeleton.bind(getBinding().refreshLayout)
+                .load(R.layout.loading_home)
+                .shimmer(true) //要不要光 默认开启
                 .show();
         addDisposable(App.api.getBannerEntity()
                 .compose(new RestfulTransformer<>())
@@ -92,8 +102,12 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     private void refreshFirstPage(Consumer<PageEntity> onNext) {
         addDisposable(App.api.getFeedArticleList(0)
                 .compose(new RestfulTransformer<>())
+                .delay(3, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(onNext, Throwable::printStackTrace)
+                .subscribe(onNext, throwable -> {
+                    throwable.printStackTrace();
+                    //mViewReplacer.replace();
+                })
         );
     }
 
@@ -116,8 +130,6 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         //查重代码还是有问题的
         mPageEntity = page;
         SmartRefreshLayout refreshLayout = getBinding().refreshLayout;
-       /* int min = mAdapter.getItemCount() < page.getPageCount() ? mAdapter.getItemCount() : page.getPageCount();
-        List<Mult> tempList = new ArrayList<>( mAdapter.getList().subList(1, min));*/
         refreshLayout.finishRefresh(1000, true);
         ToastUtils.showShort("暂无数据更新");
 
@@ -137,7 +149,8 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     }
 
     private void doOnNext(List<BannerEntity> list) {
-        loadingScreen.hide();
+        //loadingScreen.hide();
+        loadingViewScreen.hide();
         mBannerEntities = list;
     }
 

@@ -1,14 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,12 +22,26 @@ allprojects {
     }
 }
 
+/*sourceSets {
+    main {
+        res.srcDirs =
+                [
+                        'src/main/res/layouts/loading',
+                        'src/main/res/layouts/activities',
+                        'src/main/res/layouts/fragments',
+                        'src/main/res/layouts/content',
+                        'src/main/res/layouts',
+                        'src/main/res'
+                ]
+    }
+}*/
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext{
-    support_version ="28.0.0"
+ext {
+    support_version = "28.0.0"
     retrofit = "2.4.0"
     glide_version = "4.7.1"
     rxpermissions_version = "0.10.2"
@@ -40,4 +53,3 @@ ext{
     utilcode_version = "1.20.3"
     banner_version = "1.4.10"
 }
-
