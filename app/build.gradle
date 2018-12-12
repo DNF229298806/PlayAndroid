@@ -84,6 +84,8 @@ dependencies {
     //谷歌推荐的流布局
     implementation 'com.google.android:flexbox:1.0.0'
     //recycle加载布局 显示载入中的在这种
-    implementation 'com.ethanhua:skeleton:1.1.1'
+    implementation 'com.ethanhua:skeleton:1.1.2'
     implementation 'io.supercharge:shimmerlayout:2.1.0'
+    //BaseRecyclerViewAdapterHelper
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
 }

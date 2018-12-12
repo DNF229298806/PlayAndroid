@@ -17,8 +17,8 @@ import example.com.playandroid.BR;
  * @author Richard_Y_Wang
  * @des 2018/10/14 20:43
  */
-public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewDataBinding> extends RecyclerView.Adapter<BindingViewHolder<T>> {
-    /*public class BaseBindingAdapter extends RecyclerView.Adapter<BindingViewHolder<TestItemBinding>> {*/
+public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewDataBinding> extends RecyclerView.Adapter<BaseBindingViewHolder<T>> {
+    /*public class BaseBindingAdapter extends RecyclerView.Adapter<BaseBindingViewHolder<TestItemBinding>> {*/
     private List<K> data;
     protected Context context;
     public BaseBindingAdapter(List<K> data, Context context) {
@@ -28,13 +28,13 @@ public abstract class BaseBindingAdapter<K extends BaseEntity,T extends ViewData
 
     @NonNull
     @Override
-    public BindingViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseBindingViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         T binding = DataBindingUtil.inflate(LayoutInflater.from(context), setLayout(), parent, false);
-        return new BindingViewHolder(binding);
+        return new BaseBindingViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BindingViewHolder<T> holder, int position) {
+    public void onBindViewHolder(@NonNull BaseBindingViewHolder<T> holder, int position) {
         holder.getBinding().setVariable(BR.entity,data.get(position));
         // 立刻刷新界面
         holder.getBinding().executePendingBindings();

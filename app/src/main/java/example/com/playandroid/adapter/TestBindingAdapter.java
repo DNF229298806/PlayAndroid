@@ -10,7 +10,7 @@ import java.util.List;
 
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseBindingAdapter;
-import example.com.playandroid.base.BindingViewHolder;
+import example.com.playandroid.base.BaseBindingViewHolder;
 import example.com.playandroid.base.TestEntity;
 import example.com.playandroid.databinding.TestItemBinding;
 
@@ -31,7 +31,7 @@ public class TestBindingAdapter extends BaseBindingAdapter<TestEntity,TestItemBi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BindingViewHolder<TestItemBinding> holder, int position) {
+    public void onBindViewHolder(@NonNull BaseBindingViewHolder<TestItemBinding> holder, int position) {
         super.onBindViewHolder(holder, position);
         ViewGroup.LayoutParams lp =  holder.getBinding().getRoot().getLayoutParams();
         if (lp instanceof FlexboxLayoutManager.LayoutParams) {

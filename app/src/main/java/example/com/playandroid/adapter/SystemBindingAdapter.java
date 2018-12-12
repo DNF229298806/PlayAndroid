@@ -13,7 +13,7 @@ import java.util.List;
 import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseBindingAdapter;
-import example.com.playandroid.base.BindingViewHolder;
+import example.com.playandroid.base.BaseBindingViewHolder;
 import example.com.playandroid.content.system.SystemEntity;
 import example.com.playandroid.databinding.HolderSystemBinding;
 import timber.log.Timber;
@@ -35,12 +35,12 @@ public class SystemBindingAdapter extends BaseBindingAdapter<SystemEntity, Holde
 
     @NonNull
     @Override
-    public BindingViewHolder<HolderSystemBinding> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseBindingViewHolder<HolderSystemBinding> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return super.onCreateViewHolder(parent, viewType);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BindingViewHolder<HolderSystemBinding> holder, int position) {
+    public void onBindViewHolder(@NonNull BaseBindingViewHolder<HolderSystemBinding> holder, int position) {
         super.onBindViewHolder(holder, position);
         if (getData().get(position).getChildren() != null) {
             FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
