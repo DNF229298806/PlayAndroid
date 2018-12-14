@@ -8,11 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseFragment;
 import example.com.playandroid.content.main.MainActivity;
@@ -29,21 +24,21 @@ public class NavigationFragment extends BaseFragment<MainActivity,NavigationMode
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setModel(new NavigationModel((MainActivity) getActivity(), this));
-        RefreshLayout refreshLayout = getBinding().refreshLayout;
+       /* RefreshLayout refreshLayout = getBinding().refreshLayout;
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                refreshlayout.finishRefresh(2000*//*,false*//*);//传入false表示刷新失败
                 ToastUtils.showShort("上啦~~~~~~~~~~~~~");
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+                refreshlayout.finishLoadMore(2000*//*,false*//*);//传入false表示加载失败
                 ToastUtils.showShort("下啦~~~~~~~~~~~~~");
             }
-        });
+        });*/
 
         return getBinding().getRoot();
     }
