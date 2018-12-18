@@ -20,7 +20,7 @@ import timber.log.Timber;
  * @des 2018/10/9 21:08
  */
 public class NavigationModel extends BaseFragmentModel<MainActivity, NavigationFragment, FragmentNavigationBinding> {
-    ExpandableItemAdapter adapter;
+    private ExpandableItemAdapter adapter;
 
     public NavigationModel(MainActivity activity, NavigationFragment fragment) {
         super(activity, fragment);
