@@ -3,6 +3,7 @@ package example.com.playandroid.content.webview;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -92,6 +93,8 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
             @Override
             public void onPageFinished(WebView view, String url) {
                 getBinding().progressBar.setVisibility(View.GONE);
+                String title = view.getTitle();
+                getBinding().toolbar.setTitle(title);
             }
         });
 
@@ -103,6 +106,20 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
         });
     }
 
+    /**
+     * 如果WebView还可以返回的话  就让它返回 直到根目录的时候 再进行退出
+     *
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && getBinding().webView.canGoBack()) {
+            getBinding().webView.goBack();
+            return true;
+        } else {
+            onBackPressed();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     /**
      * 清空网页访问留下的缓存数据。需要注意的时，由于缓存是全局的，

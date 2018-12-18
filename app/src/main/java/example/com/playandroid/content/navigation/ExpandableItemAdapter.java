@@ -61,6 +61,7 @@ public class ExpandableItemAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
                 final NavigationTitleEntity lv0 = (NavigationTitleEntity) item;
                 ItemNavigationHeadBinding binding = (ItemNavigationHeadBinding) holder.itemView.getTag(R.id.BaseQuickAdapter_databinding_support);
                 binding.setTitle(lv0);
+                holder.setImageResource(R.id.iv, lv0.isExpanded() ? R.mipmap.icon_navigation_down : R.mipmap.icon_navigation_right);
                 holder.itemView.setOnClickListener(v -> {
                     int pos = holder.getAdapterPosition();
                     Log.d(TAG, "Level 0 item pos: " + pos);
@@ -70,29 +71,11 @@ public class ExpandableItemAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
                         expand(pos);
                     }
                 });
-               /* final Level0Item lv0 = (Level0Item) item;
-                holder.setText(R.id.tv_head, lv0.title);
-                holder.itemView.setOnClickListener(v -> {
-                    int pos = holder.getAdapterPosition();
-                    Log.d(TAG, "Level 0 item pos: " + pos);
-                    if (lv0.isExpanded()) {
-                        collapse(pos);
-                    } else {
-                        expand(pos);
-                    }
-                });*/
                 break;
             case TYPE_PERSON:
                 final NavigationArticlesEntity article = (NavigationArticlesEntity) item;
                 ItemNavigationChildBinding binding1 = (ItemNavigationChildBinding) holder.itemView.getTag(R.id.BaseQuickAdapter_databinding_support);
                 binding1.setArticle(article);
-              /*  final Person person = (Person) item;
-                holder.setText(R.id.tv_child, person.name + " parent pos: " + getParentPosition(person));
-                holder.itemView.setOnClickListener(view -> {
-                    int pos = holder.getAdapterPosition();
-                    Log.d(TAG, "Person item pos: " + pos);
-                    remove(pos);
-                });*/
                 break;
             default:
                 break;

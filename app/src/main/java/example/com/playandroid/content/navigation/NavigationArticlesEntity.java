@@ -1,8 +1,14 @@
 package example.com.playandroid.content.navigation;
 
+import android.os.Bundle;
+import android.view.View;
+
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
+
+import example.com.playandroid.constant.Constant;
+import example.com.playandroid.util.ArouterUtil;
 
 /**
  * @author admin
@@ -58,6 +64,14 @@ public class NavigationArticlesEntity implements MultiItemEntity {
     private int visible;
     private int zan;
     private List<?> tags;
+
+
+    public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.link, link);
+        bundle.putString(Constant.article_title,title);
+        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity,bundle);
+    }
 
     public String getApkLink() {
         return apkLink;
