@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="head"
-            type="example.com.playandroid.content.navigation.Level0Item"/>
+            name="title"
+            type="example.com.playandroid.content.navigation.NavigationTitleEntity"/>
 
     </data>
 
@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tv_head"
-            android:text="@{head.title}"
+            android:text="@{title.name}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

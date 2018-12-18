@@ -4,6 +4,7 @@ import java.util.List;
 
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
+import example.com.playandroid.content.navigation.NavigationTitleEntity;
 import example.com.playandroid.content.register.UserEntity;
 import example.com.playandroid.content.system.SystemEntity;
 import example.com.playandroid.network.entity.InfoEntity;
@@ -23,7 +24,6 @@ public interface Api {
 
     @POST("user/register")
     @FormUrlEncoded
-        //Observable<InfoEntity> register(@Body RegisterParams params);
     Observable<InfoEntity<UserEntity>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
     /**
@@ -63,4 +63,9 @@ public interface Api {
     @GET("tree/json")
     Observable<InfoEntity<List<SystemEntity>>> getSystemList();
 
+    /**
+     * 获取导航数据
+     */
+    @GET("navi/json")
+    Observable<InfoEntity<List<NavigationTitleEntity>>> getNavigationList();
 }

@@ -58,9 +58,9 @@ public class ExpandableItemAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
     protected void convert(final BaseViewHolder holder, final MultiItemEntity item) {
         switch (holder.getItemViewType()) {
             case TYPE_LEVEL_0:
-                final Level0Item lv0 = (Level0Item) item;
+                final NavigationTitleEntity lv0 = (NavigationTitleEntity) item;
                 ItemNavigationHeadBinding binding = (ItemNavigationHeadBinding) holder.itemView.getTag(R.id.BaseQuickAdapter_databinding_support);
-                binding.setHead(lv0);
+                binding.setTitle(lv0);
                 holder.itemView.setOnClickListener(v -> {
                     int pos = holder.getAdapterPosition();
                     Log.d(TAG, "Level 0 item pos: " + pos);
@@ -83,9 +83,9 @@ public class ExpandableItemAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
                 });*/
                 break;
             case TYPE_PERSON:
-                final Person person = (Person) item;
+                final NavigationArticlesEntity article = (NavigationArticlesEntity) item;
                 ItemNavigationChildBinding binding1 = (ItemNavigationChildBinding) holder.itemView.getTag(R.id.BaseQuickAdapter_databinding_support);
-                binding1.setChild(person);
+                binding1.setArticle(article);
               /*  final Person person = (Person) item;
                 holder.setText(R.id.tv_child, person.name + " parent pos: " + getParentPosition(person));
                 holder.itemView.setOnClickListener(view -> {

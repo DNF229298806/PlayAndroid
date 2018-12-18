@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="child"
-            type="example.com.playandroid.content.navigation.Person"/>
+            name="article"
+            type="example.com.playandroid.content.navigation.NavigationArticlesEntity"/>
 
     </data>
 
@@ -15,8 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:onClick="@{child::onClick}"
-            android:text="@{child.name}"
+            android:text="@{article.title}"
             android:id="@+id/tv_child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
