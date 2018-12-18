@@ -1,5 +1,8 @@
 package example.com.playandroid.content.navigation;
 
+import android.view.View;
+
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 /**
@@ -18,5 +21,9 @@ public class Person implements MultiItemEntity {
     @Override
     public int getItemType() {
         return ExpandableItemAdapter.TYPE_PERSON;
+    }
+
+    public void onClick(View view) {
+        ToastUtils.showLong("北京申奥成功了");
     }
 }
