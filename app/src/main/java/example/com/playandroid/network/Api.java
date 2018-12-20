@@ -21,7 +21,10 @@ import retrofit2.http.Path;
  */
 public interface Api {
     String HOST = "http://www.wanandroid.com";
-
+    /**
+     * 公开的API
+     */
+    String OPEN_API = "/openapis";
     @POST("user/register")
     @FormUrlEncoded
     Observable<InfoEntity<UserEntity>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
@@ -68,4 +71,10 @@ public interface Api {
      */
     @GET("navi/json")
     Observable<InfoEntity<List<NavigationTitleEntity>>> getNavigationList();
+
+    /**
+     * 公开的API
+     */
+    @GET("openapis")
+    Observable<String> getOpenAPIS();
 }

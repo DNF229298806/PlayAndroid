@@ -88,4 +88,6 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.1.0'
     //BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
+    //Jsoup Html网页解析
+    implementation 'org.jsoup:jsoup:1.11.3'
 }
