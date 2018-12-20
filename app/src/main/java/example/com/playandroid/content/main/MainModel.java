@@ -8,6 +8,8 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import org.jsoup.Jsoup;
 
+import java.io.IOException;
+
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.content.home.HomeFragment;
@@ -83,6 +85,11 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                         },Throwable::printStackTrace
                 );*/
               //这样解析之后可以拿到头部的数据 之后再拿到里面的li标签的数据就可以了
+                try {
+                    Observable.just(Jsoup.connect(HOST + OPEN_API).get()).subscribeOn(Schedulers.newThread()).subscribe();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Observable.just(1)
                         .observeOn(Schedulers.newThread())
                         .map(i -> Jsoup.connect(HOST+OPEN_API).get())
