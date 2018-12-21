@@ -16,10 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity android:name=".content.register.RegisterActivity">
-
         </activity>
         <activity android:name=".content.main.MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -28,11 +26,16 @@
         </activity>
         <activity android:name=".content.webview.WebViewActivity"/>
         <activity android:name=".content.register.LoginActivity">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".content.openapi.OpenApiActivity">
         </activity>
     </application>
 

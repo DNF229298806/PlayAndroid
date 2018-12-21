@@ -9,6 +9,11 @@ public interface Constant {
     String article_title = "ARTICLE_TITLE";
     String user_entity = "user";
 
+    interface TitleType{
+        int TYPE_LEVEL_0 = 0;
+        int TYPE_PERSON = 1;
+    }
+
     interface NetWork {
         String DEVICE = "android";
         String APP_ID = "3";
@@ -24,9 +29,11 @@ public interface Constant {
         int SYSTEM = 2;
         int NAVIGATION = 3;
     }
-    interface ActivityPath{
+
+    interface ActivityPath {
         String HomeActivity = "/home/";
         String WebViewActivity = HomeActivity + "webview";
         String MainActivity = HomeActivity + "main";
+        String OpenApiActivity = HomeActivity + "openapi";
     }
 }

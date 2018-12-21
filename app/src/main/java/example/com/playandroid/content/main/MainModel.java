@@ -7,16 +7,17 @@ import android.view.View;
 import com.blankj.utilcode.util.ToastUtils;
 
 import org.jsoup.Jsoup;
-
-import java.io.IOException;
+import org.jsoup.nodes.Document;
 
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
+import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.home.HomeFragment;
 import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
+import example.com.playandroid.util.ArouterUtil;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -75,33 +76,34 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
     public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_item_collection:
-                //因为api使用了GSON作为解析器 所以无法用来解析HTML
-                //这里使用了RxJava直接进行请求
-              /*  App.api.getOpenAPIS().subscribe(
-                        html -> {
-                            Document doc = Jsoup.parse(html);
-                            Timber.i("成功了？：%s",
-                                    doc.select("div.area_r").select("h3").get(0).childNode(0).toString());
-                        },Throwable::printStackTrace
-                );*/
-              //这样解析之后可以拿到头部的数据 之后再拿到里面的li标签的数据就可以了
-                try {
-                    Observable.just(Jsoup.connect(HOST + OPEN_API).get()).subscribeOn(Schedulers.newThread()).subscribe();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Observable.just(1)
+                // subscribeOn 用于指定上游线程，observeOn 用于指定下游线程，
+                // 多次用 subscribeOn 指定上游线程只有第一次有效，多次用 observeOn 指定下次线程，每次都有效；
+                //  just 和 create操作符的区别
+                // 如果Observable.just(Jsoup.connect(HOST + OPEN_API).get()) 这种写法
+                // 他是先网络请求再把返回的结果放进去的 所以不行 会报networkOnMainThread的错误
+                // 所以这里的线程切换实际上是没有用的 相当于1+1 在RxJava外面执行的 然后把结果2通过just发射出去
+                // 如果Observable.create的话 是通过接口然后走的回调接口 所以这里的线程切换是有用的
+                // 这样解析之后可以拿到头部的数据 之后再拿到里面的li标签的数据就可以了
+                Observable.<Document>create(e -> e.onNext(Jsoup.connect(HOST + OPEN_API).get()))
+                        .subscribeOn(Schedulers.newThread()).subscribe(
+                        doc -> {
+                            doc.select("div.area_r").select("h3").get(0).childNode(0).toString();
+                        }, Throwable::printStackTrace
+                );
+
+              /*  Observable.just(1)
                         .observeOn(Schedulers.newThread())
                         .map(i -> Jsoup.connect(HOST+OPEN_API).get())
                         .subscribe(doc -> {
                             doc.select("div.area_r").select("h3").get(0).childNode(0).toString();
-                        }, Throwable::printStackTrace);
+                        }, Throwable::printStackTrace);*/
                 ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
                 ToastUtils.showShort("这是导航");
                 break;
             case R.id.menu_item_open_apis:
+                ArouterUtil.navigation(Constant.ActivityPath.OpenApiActivity);
                 ToastUtils.showShort("这是开源Api");
                 break;
             case R.id.menu_item_friend_link:

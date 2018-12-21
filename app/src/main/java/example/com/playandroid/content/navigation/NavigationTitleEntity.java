@@ -5,6 +5,8 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
 
+import static example.com.playandroid.constant.Constant.TitleType.TYPE_LEVEL_0;
+
 /**
  * @author admin
  * @des 2018/12/18
@@ -52,6 +54,6 @@ public class NavigationTitleEntity extends AbstractExpandableItem<NavigationArti
 
     @Override
     public int getItemType() {
-        return ExpandableItemAdapter.TYPE_LEVEL_0;
+        return TYPE_LEVEL_0;
     }
 }

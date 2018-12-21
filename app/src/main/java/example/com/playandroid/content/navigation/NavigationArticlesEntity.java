@@ -10,6 +10,8 @@ import java.util.List;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.util.ArouterUtil;
 
+import static example.com.playandroid.constant.Constant.TitleType.TYPE_PERSON;
+
 /**
  * @author admin
  * @des 2018/12/18
@@ -259,6 +261,6 @@ public class NavigationArticlesEntity implements MultiItemEntity {
 
     @Override
     public int getItemType() {
-        return ExpandableItemAdapter.TYPE_PERSON;
+        return TYPE_PERSON;
     }
 }
