@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
@@ -17,6 +17,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.databinding.ActivityOpenApiBinding;
 import io.reactivex.Observable;
@@ -35,6 +36,8 @@ public class OpenApiModel extends BaseModel<OpenApiActivity, ActivityOpenApiBind
         super(activity);
     }
 
+    ExpandableItemAdapter adapter;
+
     /**
      * subscribeOn 用于指定上游线程，observeOn 用于指定下游线程，
      * 多次用 subscribeOn 指定上游线程只有第一次有效，多次用 observeOn 指定下次线程，每次都有效；
@@ -49,24 +52,25 @@ public class OpenApiModel extends BaseModel<OpenApiActivity, ActivityOpenApiBind
     public void onCreate() {
         super.onCreate();
         RecyclerView recyclerView = getBinding().recyclerView;
+        adapter = new ExpandableItemAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        adapter.setEmptyView(R.layout.loading_view, (ViewGroup) recyclerView.getParent());
         addDisposable(Observable.<Document>create(e -> e.onNext(Jsoup.connect(HOST + OPEN_API).get()))
                 .subscribeOn(Schedulers.newThread())//控制上游线程在子线程跑
                 .observeOn(AndroidSchedulers.mainThread())//控制下游线程在主线程跑
-                .subscribe(
-                        doc -> {
-                            List<OpenApiEntity> entities = getOpenApiData(doc);
-                            ArrayList<MultiItemEntity> res = new ArrayList<>();
-                            for (OpenApiEntity entity : entities) {
-                                for (ContentEntity contentEntity : entity.getList()) {
-                                    entity.addSubItem(contentEntity);
-                                }
-                                res.add(entity);
-                            }
-                            ExpandableItemAdapter adapter = new ExpandableItemAdapter(res);
-                            recyclerView.setAdapter(adapter);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayout.VERTICAL, false));
-                            adapter.expandAll();
-                        }, Throwable::printStackTrace));
+                .subscribe(doc -> {
+                    List<OpenApiEntity> entities = getOpenApiData(doc);
+                    ArrayList<MultiItemEntity> res = new ArrayList<>();
+                    for (OpenApiEntity entity : entities) {
+                        for (ContentEntity contentEntity : entity.getList()) {
+                            entity.addSubItem(contentEntity);
+                        }
+                        res.add(entity);
+                    }
+                    adapter.setNewData(res);
+                    adapter.expandAll();
+                }, throwable -> {adapter.setEmptyView(R.layout.error_view, (ViewGroup) recyclerView.getParent());throwable.printStackTrace();}));
     }
 
     /**
