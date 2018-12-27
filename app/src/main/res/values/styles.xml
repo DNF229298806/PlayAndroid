@@ -41,4 +41,9 @@
         <item name="android:layout_marginBottom">10dp</item>
     </style>
 
+    <style name="recycler_scrollbar">
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarSize">3dp</item>
+        <item name="android:scrollbarThumbVertical">@color/tool_bar_blue</item>
+    </style>
 </resources>

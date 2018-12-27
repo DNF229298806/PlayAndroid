@@ -10,6 +10,8 @@ import android.view.ViewPropertyAnimator;
  */
 public class AnimUtil {
     /**
+     *  这种写法是旋转到某个角度 比如写的是rotation 90 是旋转到90度
+     *  如果使用rotationBy 比如写的是rotationBy 90 是顺时针旋转90度
      *  使view 旋转某个角度 中心旋转
      * @param view  被旋转的控件
      * @param time  动画时间
@@ -18,9 +20,10 @@ public class AnimUtil {
     public static void rotate(View view,long time,float angle,AnimatorListenerAdapter listener) {
         view.animate()
                 .setDuration(time)   //设置动画时间
-                .rotation(angle)      //设置旋转角度
+                .rotation(angle)      //设置旋转角度 是旋转到某个角度
+                //.rotationBy(angle)  设置旋转角度 是旋转过这么多角度
                 .setListener(listener)
-                .start();           //开启动画
+                .start();           //开启动画、
     }
 
     /**

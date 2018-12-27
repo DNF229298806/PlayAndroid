@@ -32,32 +32,44 @@
                 app:navigationOnClickListener="@{vm::navigationClick}"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@{vm.title}"/>
+
             <ProgressBar
-                android:visibility="gone"
                 android:id="@+id/progress_bar"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:progressDrawable="@drawable/progressbar_bg"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
+                android:visibility="gone"/>
         </android.support.design.widget.AppBarLayout>
 
 
+        <!--android:clickable="true"
+        android:focusable="true"-->
+        <android.support.design.widget.FloatingActionButton
+            android:layout_gravity="bottom||end"
+            android:id="@+id/fab"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_width="wrap_content"
+            app:rippleColor="@color/tool_bar_blue"
+            android:layout_height="wrap_content">
+
+        </android.support.design.widget.FloatingActionButton>
 
         <example.com.playandroid.ui.NestedScrollWebView
             android:id="@+id/web_view"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-            <!--<ProgressBar
-                android:background="@color/colorPrimary"
-                android:id="@+id/progress_bar"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>-->
-         <!--   <WebView
-                android:id="@+id/web_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>-->
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        <!--<ProgressBar
+            android:background="@color/colorPrimary"
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>-->
+        <!--   <WebView
+               android:id="@+id/web_view"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"/>-->
     </android.support.design.widget.CoordinatorLayout>
 
 </layout>

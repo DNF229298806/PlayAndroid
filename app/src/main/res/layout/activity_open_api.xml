@@ -42,9 +42,7 @@
         </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
-            android:scrollbarSize="3dp"
-            android:scrollbarThumbVertical="@color/tool_bar_blue"
-            android:scrollbars="vertical"
+            style="@style/recycler_scrollbar"
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
