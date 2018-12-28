@@ -104,6 +104,8 @@ public class AnimUtil {
 
     public static void showIn(final View v) {
         Timber.i("showIn start!!!!!top:%1s,right:%2s,bottom:%3s,left:%4s", v.getTop(), v.getRight(), v.getBottom(), v.getLeft());
+        Timber.i("showIn start!!!!!height:%1s,width:%2s", v.getHeight(), v.getWidth());
+        Timber.i("showIn start!!!!!TranslationY:%1s",v.getTranslationY());
         v.setVisibility(View.VISIBLE);
         v.setAlpha(0f);
         v.setTranslationY(v.getHeight());
@@ -115,14 +117,18 @@ public class AnimUtil {
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         Timber.i("showIn end!!!!!top:%1s,right:%2s,bottom:%3s,left:%4s", v.getTop(), v.getRight(), v.getBottom(), v.getLeft());
+                        Timber.i("showIn end!!!!!height:%1s,width:%2s", v.getHeight(), v.getWidth());
+                        Timber.i("showIn end!!!!!TranslationY:%1s",v.getTranslationY());
                     }
                 })
-                .alpha(1f)
+                /*.alpha(1f)*/
                 .start();
     }
 
     public static void showOut(final View v) {
         Timber.i("showOut start!!!!!top:%1s,right:%2s,bottom:%3s,left:%4s", v.getTop(), v.getRight(), v.getBottom(), v.getLeft());
+        Timber.i("showOut start!!!!!height:%1s,width:%2s", v.getHeight(), v.getWidth());
+        Timber.i("showOut start!!!!!TranslationY:%1s",v.getTranslationY());
         v.setVisibility(View.VISIBLE);
         v.setAlpha(1f);
         v.setTranslationY(0);
@@ -133,6 +139,8 @@ public class AnimUtil {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         Timber.i("showOut end!!!!!top:%1s,right:%2s,bottom:%3s,left:%4s", v.getTop(), v.getRight(), v.getBottom(), v.getLeft());
+                        Timber.i("showOut end!!!!!height:%1s,width:%2s", v.getHeight(), v.getWidth());
+                        Timber.i("showOut end!!!!!TranslationY:%1s",v.getTranslationY());
                         v.setVisibility(View.GONE);
                         super.onAnimationEnd(animation);
                     }
