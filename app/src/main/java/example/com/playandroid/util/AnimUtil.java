@@ -121,7 +121,7 @@ public class AnimUtil {
                         Timber.i("showIn end!!!!!TranslationY:%1s",v.getTranslationY());
                     }
                 })
-                /*.alpha(1f)*/
+                .alpha(1f)
                 .start();
     }
 
