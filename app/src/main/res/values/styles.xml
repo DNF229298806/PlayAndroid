@@ -46,4 +46,24 @@
         <item name="android:scrollbarSize">3dp</item>
         <item name="android:scrollbarThumbVertical">@color/tool_bar_blue</item>
     </style>
+
+    <!--<item name="app:cardBackgroundColor">@android:color/white</item>-->
+    <style name="card_view_with_fab_in_webview">
+        <item name="android:layout_gravity">center_vertical|end</item>
+        <item name="android:layout_margin">@dimen/spacing_middle</item>
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardElevation">2dp</item>
+    </style>
+    <style name="sub_fab_in_webview">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_smlarge</item>
+        <item name="android:layout_marginTop">@dimen/spacing_middle</item>
+        <item name="android:layout_marginRight">@dimen/spacing_smlarge</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_middle</item>
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+        <item name="fabSize">mini</item>
+        <item name="rippleColor">@color/colorPrimaryDark</item>
+    </style>
 </resources>

@@ -42,25 +42,121 @@
                 android:visibility="gone"/>
         </android.support.design.widget.AppBarLayout>
 
-
-        <!--android:clickable="true"
-        android:focusable="true"-->
-        <android.support.design.widget.FloatingActionButton
-            app:srcCompat="@drawable/ic_add"
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/dp_16"
-            app:rippleColor="@color/tool_bar_blue">
-
-        </android.support.design.widget.FloatingActionButton>
-
         <example.com.playandroid.ui.NestedScrollWebView
             android:id="@+id/web_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:orientation="horizontal"
+            app:layout_anchor="@id/fab_open_browser"
+            app:layout_anchorGravity="top|end">
+
+            <android.support.v7.widget.CardView
+                style="@style/card_view_with_fab_in_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@android:color/white"
+                app:contentPadding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/collection"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            </android.support.v7.widget.CardView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_like"
+                style="@style/sub_fab_in_webview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_like"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:orientation="horizontal"
+            app:layout_anchor="@id/fab_copy_link"
+            app:layout_anchorGravity="top|end">
+
+            <android.support.v7.widget.CardView
+                style="@style/card_view_with_fab_in_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentPadding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/use_system_browser_open"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            </android.support.v7.widget.CardView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_open_browser"
+                style="@style/sub_fab_in_webview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_browser"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:orientation="horizontal"
+            app:layout_anchor="@id/fab"
+            app:layout_anchorGravity="top|end">
+            <!--app:contentPadding="5dp" 这个属性放到style里面去好像会没有用
+            不过没有进行试验所以不知道  等等去试验一下-->
+            <android.support.v7.widget.CardView
+                style="@style/card_view_with_fab_in_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentPadding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/copy_link"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+            </android.support.v7.widget.CardView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_copy_link"
+                style="@style/sub_fab_in_webview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_link"/>
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/dp_16"
+            android:clickable="true"
+            android:focusable="true"
+            app:fabSize="normal"
+            app:layout_behavior="example.com.playandroid.ui.FABScrollBehavior"
+            app:rippleColor="@color/colorPrimaryDark"
+            app:srcCompat="@drawable/ic_add"/>
+
+
         <!--<ProgressBar
             android:background="@color/colorPrimary"
             android:id="@+id/progress_bar"
