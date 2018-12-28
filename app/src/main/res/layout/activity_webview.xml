@@ -48,7 +48,18 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <View
+            android:id="@+id/backDrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/overlay_dark_30"
+            android:clickable="true"
+            android:fitsSystemWindows="true"
+            android:focusable="true"
+            android:visibility="gone"/>
+
         <LinearLayout
+            android:id="@+id/ll_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
@@ -81,6 +92,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_browser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
@@ -112,6 +124,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
@@ -155,7 +168,6 @@
             app:layout_behavior="example.com.playandroid.ui.FABScrollBehavior"
             app:rippleColor="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_add"/>
-
 
         <!--<ProgressBar
             android:background="@color/colorPrimary"
