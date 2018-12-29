@@ -73,7 +73,7 @@ public class AnimUtil {
 
     }
 
-    private static void toggleFabMode(View v, View[] popLayouts, View backDrop) {
+    public static void toggleFabMode(View v, View[] popLayouts, View backDrop) {
 
         rotate = rotateFab(v, !rotate);
         v.setTag(rotate);
