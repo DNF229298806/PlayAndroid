@@ -69,7 +69,7 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
                     .compose(new RestfulTransformer<>())
                     .subscribe(new ModelObserver<>(this, entity -> {
                         ToastUtils.showLong("注册成功");
-                        //注册成功并登陆
+                        //注册成功并登陆  并登陆这个逻辑没有写
                         addDisposable(login(entity));
                     }));
         }
@@ -111,6 +111,7 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         }
         //网络请求结束 ProgressBar进行隐藏
         isProgressBarShow.set(false);
+        getActivity().finish();
         ArouterUtil.navigation(Constant.ActivityPath.MainActivity);
     }
 
