@@ -89,5 +89,7 @@ dependencies {
     //BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
     //Jsoup Html网页解析
-    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation "org.jsoup:jsoup:$jsoup_version"
+    //关于库 关于使用的第三方库
+    implementation "com.mikepenz:aboutlibraries:$aboutlibraries_version"
 }

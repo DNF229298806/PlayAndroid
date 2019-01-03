@@ -40,4 +40,6 @@ ext {
     timber_version = "4.7.1"
     utilcode_version = "1.22.10"
     banner_version = "1.4.10"
+    jsoup_version = "1.11.3"
+    aboutlibraries_version = "6.1.1"
 }
