@@ -5,6 +5,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -114,6 +116,16 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 break;
             case R.id.menu_item_about:
                 ToastUtils.showShort("这是关于");
+                LibsBuilder lb = new LibsBuilder();
+                lb.aboutAppName = "玩Android";
+                lb.activityTitle = "感谢";
+                lb.withAboutIconShown(true)
+                        .withVersionShown(true)
+                        .withAboutVersionShown(true)
+                        .withSortEnabled(true)
+                        .withAboutDescription("This is a small sample which can be set in the about my app description file.<br /><b>You can style this with html markup :D</b>")
+                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                        .start(getActivity());
                 break;
             default:
                 break;

@@ -8,6 +8,7 @@
     <color name="red">#b45250</color>
     <color name="black">#010101</color>
     <color name="gray_author">#9e9e9e</color>
+    <color name="gray_background">#dedede</color>
     <color name="light_gray">#a7a7a7</color>
     <color name="tool_bar_blue">#0081f9</color>
     <color name="green">#38b059</color>
