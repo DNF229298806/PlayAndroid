@@ -10,6 +10,7 @@ import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityWebviewBinding;
 import example.com.playandroid.util.AnimUtil;
+import example.com.playandroid.util.ClipboardUtils;
 
 /**
  * @author admin
@@ -53,6 +54,13 @@ public class WebViewModel extends BaseModel<WebViewActivity, ActivityWebviewBind
         Uri uri = Uri.parse(link);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         getActivity().startActivity(intent);
+        hideFAB();
+    }
+
+    public void copyClick(View view) {
+        //注意这里的拷贝链接 是只拷贝了跳转第一下的链接 如果是后面的第二下第三下 这里的link是没有做记录的 所以没法拷贝的到
+        ClipboardUtils.copyText(link);
+        ToastUtils.showLong("复制链接成功");
         hideFAB();
     }
 

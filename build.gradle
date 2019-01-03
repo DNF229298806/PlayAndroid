@@ -38,6 +38,6 @@ ext {
     gson_version = "2.8.5"
     basepopup_candy = "2.0.8-alpha3"
     timber_version = "4.7.1"
-    utilcode_version = "1.20.3"
+    utilcode_version = "1.22.10"
     banner_version = "1.4.10"
 }
