@@ -20,13 +20,17 @@ import java.util.Stack;
 import example.com.playandroid.network.Api;
 import example.com.playandroid.network.ApiUtils;
 import example.com.playandroid.util.TimberUtil;
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinCardViewInflater;
+import skin.support.constraint.app.SkinConstraintViewInflater;
+import skin.support.design.app.SkinMaterialViewInflater;
 import timber.log.Timber;
 
 /**
  * @author Richard_Y_Wang
  * @des 2018/9/19
  */
-public class App extends Application implements Application.ActivityLifecycleCallbacks{
+public class App extends Application implements Application.ActivityLifecycleCallbacks {
     public static Api api;
     /**
      * 标识是否为调试
@@ -83,6 +87,13 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
         api = ApiUtils.INSTANCE.getApi(this);
         registerActivityLifecycleCallbacks(this);
+        SkinCompatManager.withoutActivity(this)                         // 基础控件换肤初始化
+                .addInflater(new SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]
+                .addInflater(new SkinConstraintViewInflater())          // ConstraintLayout 控件换肤初始化[可选]
+                .addInflater(new SkinCardViewInflater())                // CardView v7 控件换肤初始化[可选]
+                //.setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
+                //.setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
+                .loadSkin();
     }
 
     public Stack<Activity> getStack() {
@@ -156,4 +167,5 @@ public class App extends Application implements Application.ActivityLifecycleCal
     public static int getResColor(@ColorRes int id) {
         return ContextCompat.getColor(getCurrentActivity(), id);
     }
+
 }

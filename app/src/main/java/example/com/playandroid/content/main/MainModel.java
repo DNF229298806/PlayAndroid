@@ -22,6 +22,7 @@ import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.util.ArouterUtil;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import skin.support.SkinCompatManager;
 
 import static example.com.playandroid.constant.Constant.FragmentType.HOME;
 import static example.com.playandroid.constant.Constant.FragmentType.NAVIGATION;
@@ -92,13 +93,6 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                             doc.select("div.area_r").select("h3").get(0).childNode(0).toString();
                         }, Throwable::printStackTrace
                 );
-
-              /*  Observable.just(1)
-                        .observeOn(Schedulers.newThread())
-                        .map(i -> Jsoup.connect(HOST+OPEN_API).get())
-                        .subscribe(doc -> {
-                            doc.select("div.area_r").select("h3").get(0).childNode(0).toString();
-                        }, Throwable::printStackTrace);*/
                 ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
@@ -110,27 +104,33 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 break;
             case R.id.menu_item_friend_link:
                 ToastUtils.showShort("这是友情链接");
+                SkinCompatManager.getInstance().loadSkin("black.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_setting:
                 ToastUtils.showShort("这是设置");
+                SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_about:
                 ToastUtils.showShort("这是关于");
-                LibsBuilder lb = new LibsBuilder();
-                lb.aboutAppName = "玩Android";
-                lb.activityTitle = "感谢";
-                lb.withAboutIconShown(true)
-                        .withVersionShown(true)
-                        .withAboutVersionShown(true)
-                        .withSortEnabled(true)
-                        .withAboutDescription("This is a small sample which can be set in the about my app description file.<br /><b>You can style this with html markup :D</b>")
-                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                        .start(getActivity());
+                gotoAbout();
                 break;
             default:
                 break;
         }
         return false;
+    }
+
+    private void gotoAbout() {
+        LibsBuilder lb = new LibsBuilder();
+        lb.aboutAppName = "玩Android";
+        lb.activityTitle = "感谢";
+        lb.withAboutIconShown(true)
+                .withVersionShown(true)
+                .withAboutVersionShown(true)
+                .withSortEnabled(true)
+                .withAboutDescription("This is a small sample which can be set in the about my app description file.<br /><b>You can style this with html markup :D</b>")
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                .start(getActivity());
     }
 
 

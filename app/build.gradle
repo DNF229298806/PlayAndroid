@@ -56,7 +56,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     //okhttp拦截器配合retrofit使用
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     //日志打印工具
     implementation "com.jakewharton.timber:timber:$timber_version"
     //Gson
@@ -81,7 +81,7 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     //BasePop
     implementation "com.github.razerdp:BasePopup_Candy:$basepopup_candy"
-    //谷歌推荐的流布局
+    //谷歌推荐的流布局  不使用1.0.0以上的版本是因为 之后的版本也要AndroidX
     implementation 'com.google.android:flexbox:1.0.0'
     //recycle加载布局 显示载入中的在这种
     implementation 'com.ethanhua:skeleton:1.1.2'
@@ -90,6 +90,11 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
     //Jsoup Html网页解析
     implementation "org.jsoup:jsoup:$jsoup_version"
-    //关于库 关于使用的第三方库
+    //关于库 关于使用的第三方库 不使用6.1.1以上的版本是因为 之后的版本要适配AndroidX
     implementation "com.mikepenz:aboutlibraries:$aboutlibraries_version"
+    //换肤
+    implementation 'skin.support:skin-support:3.1.1'                   // skin-support 基础控件支持
+    implementation 'skin.support:skin-support-design:3.1.1'            // skin-support-design material design 控件支持[可选]
+    implementation 'skin.support:skin-support-cardview:3.1.1'          // skin-support-cardview CardView 控件支持[可选]
+    implementation 'skin.support:skin-support-constraint-layout:3.1.1' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }

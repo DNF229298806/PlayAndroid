@@ -31,7 +31,7 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
         super.onCreate(savedInstanceState);
         setModel(new WebViewModel(this));
         setSupportActionBar(getBinding().toolbar);
-        StatusBarUtil.setStatusBarColor(this, R.color.tool_bar_blue);
+        StatusBarUtil.setStatusBarColor(this, R.color.colorPrimary);
         initWebSettings();
 
     }

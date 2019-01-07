@@ -8,6 +8,7 @@ public interface Constant {
     String link = "link";
     String article_title = "ARTICLE_TITLE";
     String user_entity = "user";
+    String app_theme = "AppTheme";
 
     interface TitleType{
         int TYPE_LEVEL_0 = 0;
