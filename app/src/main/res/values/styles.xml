@@ -54,6 +54,7 @@
         <item name="cardCornerRadius">3dp</item>
         <item name="cardElevation">2dp</item>
     </style>
+    <!--<item name="android:tint">@color/colorPrimaryDark</item>-->
     <style name="sub_fab_in_webview">
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
@@ -62,7 +63,6 @@
         <item name="android:layout_marginRight">@dimen/spacing_smlarge</item>
         <item name="android:layout_marginBottom">@dimen/spacing_middle</item>
         <item name="backgroundTint">@android:color/white</item>
-        <item name="android:tint">@color/colorPrimaryDark</item>
         <item name="fabSize">mini</item>
         <item name="rippleColor">@color/colorPrimaryDark</item>
     </style>

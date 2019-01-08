@@ -9,7 +9,6 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityOpenApiBinding;
-import example.com.playandroid.util.StatusBarUtil;
 @Route(path = Constant.ActivityPath.OpenApiActivity)
 public class OpenApiActivity extends BaseActivity<OpenApiModel,ActivityOpenApiBinding> {
 
@@ -18,7 +17,6 @@ public class OpenApiActivity extends BaseActivity<OpenApiModel,ActivityOpenApiBi
         super.onCreate(savedInstanceState);
         setModel(new OpenApiModel(this));
         setSupportActionBar(getBinding().toolbar);
-        StatusBarUtil.setStatusBarColor(this, R.color.tool_bar_blue);
     }
 
     @Override

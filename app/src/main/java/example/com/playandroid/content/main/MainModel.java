@@ -96,6 +96,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
+                SkinCompatManager.getInstance().loadSkin("green", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
                 ToastUtils.showShort("这是导航");
                 break;
             case R.id.menu_item_open_apis:
@@ -104,11 +105,12 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 break;
             case R.id.menu_item_friend_link:
                 ToastUtils.showShort("这是友情链接");
-                SkinCompatManager.getInstance().loadSkin("black.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
+                SkinCompatManager.getInstance().loadSkin("red.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
+                //SkinCompatManager.getInstance().loadSkin("black.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_setting:
                 ToastUtils.showShort("这是设置");
-                SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
+                //SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_about:
                 ToastUtils.showShort("这是关于");

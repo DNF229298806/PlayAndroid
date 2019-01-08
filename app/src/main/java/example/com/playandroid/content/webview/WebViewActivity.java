@@ -17,7 +17,6 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityWebviewBinding;
-import example.com.playandroid.util.StatusBarUtil;
 
 /**
  * @author admin
@@ -31,9 +30,8 @@ public class WebViewActivity extends BaseActivity<WebViewModel, ActivityWebviewB
         super.onCreate(savedInstanceState);
         setModel(new WebViewModel(this));
         setSupportActionBar(getBinding().toolbar);
-        StatusBarUtil.setStatusBarColor(this, R.color.colorPrimary);
+        //StatusBarUtil.setStatusBarColor(this, R.color.colorPrimary);
         initWebSettings();
-
     }
 
     @Override

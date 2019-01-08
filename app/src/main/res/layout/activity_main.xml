@@ -46,8 +46,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+            <!--app:itemIconTint="@color/bottom_nav_icon_color"-->
             <android.support.design.widget.BottomNavigationView
+                app:itemTextColor="@color/bottom_nav_icon_color"
                 android:id="@+id/bnv"
                 onNavigationItemSelected="@{vm::onNavigationItemSelected}"
                 android:layout_width="match_parent"
@@ -55,13 +56,18 @@
                 android:layout_gravity="bottom"
                 android:background="?android:attr/windowBackground"
                 app:labelVisibilityMode="labeled"
+                app:itemIconTint="@color/bottom_nav_icon_color"
                 app:layout_behavior="example.com.playandroid.ui.BottomNavigationViewBehavior"
                 app:menu="@menu/main_bnv_menu"/>
         </android.support.design.widget.CoordinatorLayout>
 
         <!--    app:itemTextColor="@null"
             app:itemIconTint="@null"-->
+        <!--  app:itemIconTint="@color/bottom_nav_icon_color"
+            app:itemTextColor="@color/bottom_nav_icon_color"-->
         <android.support.design.widget.NavigationView
+            app:itemIconTint="@color/nav_menu_text_color"
+            app:itemTextColor="@color/nav_menu_text_color"
             android:fitsSystemWindows="true"
             navigationItemSelectedListener="@{vm::onMenuItemSelected}"
             android:id="@+id/navigation_view"

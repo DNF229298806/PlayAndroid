@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:icon="@drawable/selector_home"-->
+    <!--android:icon="@drawable/selector_project"-->
+    <!--  android:icon="@drawable/selector_system"-->
+    <!--android:icon="@drawable/selector_navigation"-->
     <item
         android:icon="@drawable/selector_home"
         android:id="@+id/it_home"
