@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*
         //设置model 标题栏 还有底部的导航
         setModel(new MainModel(this));
         setSupportActionBar(getBinding().toolbar);
-        StatusBarUtil.setStatusBarColor(this, R.color.colorPrimary);// R.color.tool_bar_blue
+        StatusBarUtil.setStatusBarColor(this, R.color.colorPrimary);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             //解决NavigationView这边点击按钮以后无法变色的问题
             ColorStateList cs = getBaseContext().getResources().getColorStateList(R.color.nav_menu_text_color, null);

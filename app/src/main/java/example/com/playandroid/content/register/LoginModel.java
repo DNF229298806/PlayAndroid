@@ -59,10 +59,12 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
 
     public void onRegisterOrLoginClick(View view) {
         //开始网络请求的同时开始显示ProgressBar
-        isProgressBarShow.set(true);
         UserEntity user = getBinding().getEntity();
         Disposable disposable = null;
+        if (isTextNull()) return;
+        isProgressBarShow.set(true);
         if (isLogin) {
+
             disposable = login(user);
         } else {
             App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
@@ -73,7 +75,7 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
                         addDisposable(login(entity));
                     }));
         }
-        addDisposable(disposable);
+        //addDisposable(disposable);
     }
 
     /**
@@ -153,7 +155,19 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         }
     }
 
-    public void isTextNull() {
-
+    public boolean isTextNull() {
+        UserEntity entity = getBinding().getEntity();
+        if (TextUtils.isEmpty(entity.getUsername())) {
+            ToastUtils.showLong("用户名不能为空");
+            return true;
+        } else if (TextUtils.isEmpty(entity.getPassword())) {
+            ToastUtils.showLong("密码不能为空");
+            return true;
+        } else if (!isLogin && TextUtils.isEmpty(entity.getRepassword())) {
+            ToastUtils.showLong("重复密码不能为空");
+            return true;
+        } else {
+            return false;
+        }
     }
 }

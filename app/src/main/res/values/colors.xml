@@ -17,5 +17,6 @@
     <color name="dark_transparent">#24000000</color>
     <color name="bg">#f0f0f0</color>
     <color name="txt_color">#48495F</color>
+    <color name= "home">#bfbfbf</color>
     <!--<color name="overlay_dark_30">#4D000000</color>-->
 </resources>
