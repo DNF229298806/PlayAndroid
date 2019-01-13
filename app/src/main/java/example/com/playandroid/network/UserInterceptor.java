@@ -65,6 +65,8 @@ public class UserInterceptor implements Interceptor{
                     //                    .addHeader("accessToken", User.getToken_pass())
                     //                    .addHeader("device",Constant.NetWork.device)
                     .addHeader("version", BuildConfig.VERSION_NAME)
+                    .addHeader("Cookie","loginUserName="+sp.getString("username"))
+                    .addHeader("Cookie", "loginUserPassword="+sp.getString("password"))
                     .build();
         } else {
             //设置缓存

@@ -110,6 +110,8 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 break;
             case R.id.menu_item_setting:
                 ToastUtils.showShort("这是设置");
+                //恢复应用默认皮肤
+                SkinCompatManager.getInstance().restoreDefaultTheme();
                 //SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_about:

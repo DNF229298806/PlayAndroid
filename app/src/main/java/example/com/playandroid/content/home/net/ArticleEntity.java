@@ -267,6 +267,7 @@ public class ArticleEntity extends BaseEntity implements Mult {
         Bundle bundle = new Bundle();
         bundle.putString(Constant.link, link);
         bundle.putString(Constant.article_title, title);
+        bundle.putInt(Constant.article_id,id);
         ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity, bundle);
     }
 

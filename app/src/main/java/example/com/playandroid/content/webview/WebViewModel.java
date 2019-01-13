@@ -6,9 +6,11 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 
+import example.com.playandroid.App;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityWebviewBinding;
+import example.com.playandroid.network.transform.ErrorTransform;
 import example.com.playandroid.util.AnimUtil;
 import example.com.playandroid.util.ClipboardUtils;
 
@@ -19,6 +21,7 @@ import example.com.playandroid.util.ClipboardUtils;
 public class WebViewModel extends BaseModel<WebViewActivity, ActivityWebviewBinding> {
     private String title = "玩安卓";
     private String link = "http://www.bilibili.com";
+    private int id = 0;
 
     public WebViewModel(WebViewActivity activity) {
         super(activity);
@@ -30,6 +33,7 @@ public class WebViewModel extends BaseModel<WebViewActivity, ActivityWebviewBind
         AnimUtil.initPopLayout(getBinding().fab, getBinding().backDrop, getBinding().llLink, getBinding().llBrowser, getBinding().llLike);
         link = getActivity().getIntent().getStringExtra(Constant.link);
         title = getActivity().getIntent().getStringExtra(Constant.article_title);
+        id = getActivity().getIntent().getIntExtra(Constant.article_id, 0);
         getBinding().webView.loadUrl(link);
     }
 
@@ -46,8 +50,17 @@ public class WebViewModel extends BaseModel<WebViewActivity, ActivityWebviewBind
     }
 
     public void collectionClick(View view) {
-        ToastUtils.showLong("收藏了");
         hideFAB();
+        if (id != 0) {
+            addDisposable(App.api.addCollectArticle(id)
+                    .compose(new ErrorTransform<>())
+                    .subscribe(info -> {
+                        ToastUtils.showLong("收藏成功");
+                    }, throwable -> {
+                        ToastUtils.showLong("收藏失败");
+                        throwable.printStackTrace();
+                    }));
+        }
     }
 
     public void browserClick(View view) {

@@ -77,4 +77,14 @@ public interface Api {
      */
     @GET("openapis")
     Observable<String> getOpenAPIS();
+
+    /**
+     * 收藏站内文章
+     * http://www.wanandroid.com/lg/collect/1165/json
+     *
+     * @param id article id
+     * @return 收藏站内文章数据
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<InfoEntity> addCollectArticle(@Path("id") int id);
 }

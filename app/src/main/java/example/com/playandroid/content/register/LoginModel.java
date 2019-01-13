@@ -64,7 +64,6 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         if (isTextNull()) return;
         isProgressBarShow.set(true);
         if (isLogin) {
-
             disposable = login(user);
         } else {
             App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
