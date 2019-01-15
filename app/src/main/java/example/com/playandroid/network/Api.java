@@ -4,6 +4,7 @@ import java.util.List;
 
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.content.home.net.PageEntity;
+import example.com.playandroid.content.main.CollectionPageEntity;
 import example.com.playandroid.content.navigation.NavigationTitleEntity;
 import example.com.playandroid.content.register.UserEntity;
 import example.com.playandroid.content.system.SystemEntity;
@@ -25,6 +26,7 @@ public interface Api {
      * 公开的API
      */
     String OPEN_API = "/openapis";
+
     @POST("user/register")
     @FormUrlEncoded
     Observable<InfoEntity<UserEntity>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
@@ -61,6 +63,7 @@ public interface Api {
 
     /**
      * 获取体系列表
+     *
      * @return 体系列表json
      */
     @GET("tree/json")
@@ -87,4 +90,14 @@ public interface Api {
      */
     @POST("lg/collect/{id}/json")
     Observable<InfoEntity> addCollectArticle(@Path("id") int id);
+
+    /**
+     * 获取收藏列表
+     * http://www.wanandroid.com/lg/collect/list/0/json
+     *
+     * @param page page number
+     * @return 收藏列表数据
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<InfoEntity<CollectionPageEntity>> getCollectList(@Path("page") int page);
 }

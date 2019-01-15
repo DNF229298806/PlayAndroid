@@ -11,6 +11,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.constant.Constant;
@@ -19,6 +20,7 @@ import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
+import example.com.playandroid.network.transform.RestfulTransformer;
 import example.com.playandroid.util.ArouterUtil;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -93,6 +95,11 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                             doc.select("div.area_r").select("h3").get(0).childNode(0).toString();
                         }, Throwable::printStackTrace
                 );
+                App.api.getCollectList(0)
+                        .compose(new RestfulTransformer<>())
+                        .subscribe(th->{
+                            ToastUtils.showLong("请求成功");
+                        },Throwable::printStackTrace);
                 ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
@@ -136,6 +143,4 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .start(getActivity());
     }
-
-
 }
