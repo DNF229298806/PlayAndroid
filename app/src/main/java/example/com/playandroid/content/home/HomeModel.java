@@ -71,7 +71,7 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
                 .show();
         addDisposable(App.api.getBannerEntity()
                 .compose(new RestfulTransformer<>())
-                .delay(3, TimeUnit.SECONDS)
+                .delay(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::doOnNext, a -> {
                     a.printStackTrace();

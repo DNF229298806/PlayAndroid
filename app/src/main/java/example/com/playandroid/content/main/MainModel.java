@@ -97,9 +97,9 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 );
                 App.api.getCollectList(0)
                         .compose(new RestfulTransformer<>())
-                        .subscribe(th->{
-                            ToastUtils.showLong("请求成功");
-                        },Throwable::printStackTrace);
+                        .subscribe(th-> ToastUtils.showLong("请求成功"),Throwable::printStackTrace);
+                //ArouterUtil.navigation(Constant.ActivityPath.TestActivity);
+                ArouterUtil.navigation(Constant.ActivityPath.CollectionActivity);
                 ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:

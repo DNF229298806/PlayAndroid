@@ -1,5 +1,9 @@
 package example.com.playandroid.content.main;
 
+import android.view.View;
+
+import com.blankj.utilcode.util.ToastUtils;
+
 /**
  * @author Richard_Y_Wang
  * @des 2019/1/15 14:12
@@ -167,5 +171,9 @@ public class CollectionArticleEntity {
 
     public void setZan(int zan) {
         this.zan = zan;
+    }
+
+    public void onItemClick(View view) {
+        ToastUtils.showLong("子类的点击事件");
     }
 }

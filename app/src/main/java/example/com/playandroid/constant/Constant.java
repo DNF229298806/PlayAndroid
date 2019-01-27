@@ -37,5 +37,8 @@ public interface Constant {
         String WebViewActivity = HomeActivity + "webview";
         String MainActivity = HomeActivity + "main";
         String OpenApiActivity = HomeActivity + "openapi";
+        String TestActivity = HomeActivity + "test";
+        String TestActivity2 = HomeActivity + "test2";
+        String CollectionActivity = HomeActivity + "collection";
     }
 }

@@ -13,7 +13,6 @@ import com.blankj.utilcode.util.ToastUtils;
 
 import example.com.playandroid.App;
 import example.com.playandroid.base.BaseModel;
-import example.com.playandroid.base.ModelObserver;
 import example.com.playandroid.base.anima.BaseAnimatorListenerAdapter;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivityLoginBinding;
@@ -66,12 +65,16 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
         if (isLogin) {
             disposable = login(user);
         } else {
-            App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
+            addDisposable(App.api.register(user.getUsername(), user.getPassword(), user.getRepassword())
                     .compose(new RestfulTransformer<>())
-                    .subscribe(new ModelObserver<>(this, entity -> {
+                    .subscribe(entity -> {
                         ToastUtils.showLong("注册成功");
                         //注册成功并登陆  并登陆这个逻辑没有写
                         addDisposable(login(entity));
+                    }, throwable -> {
+                        isProgressBarShow.set(false);
+                        ToastUtils.showLong(throwable.getMessage());
+                        throwable.printStackTrace();
                     }));
         }
         //addDisposable(disposable);

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="entity"
+            type="example.com.playandroid.content.main.CollectionArticleEntity"/>
+
+    </data>
+
+    <!--android:onClick="@{entity::onItemClick}"-->
+    <android.support.v7.widget.CardView
+        android:onClick="@{entity::onItemClick}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_gravity="start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{entity.author,default=tom}"
+                    android:textColor="#444"/>
+
+                <!--<android.support.v7.widget.AppCompatTextView
+                    android:layout_toLeftOf="@+id/iv_down"
+                    android:layout_marginEnd="30dp"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{entity.superChapterName+@string/backslash+entity.chapterName,default=asdasdasd}"
+                    android:layout_toStartOf="@+id/iv_down"
+                    android:layout_marginRight="30dp"/>-->
+
+                <!--<ImageView
+                    android:onClick="@{entity::onDownClick}"
+                    android:id="@+id/iv_down"
+                    android:src="@mipmap/icon_down"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"/>-->
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginTop="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{entity.niceDate,default=asdasd}"
+                        android:textColor="@color/light_gray"/>
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_marginTop="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{entity.title,default=asdasdasdasd}"
+                        android:textColor="#000"
+                        android:textStyle="bold"/>
+
+                    <example.com.playandroid.ui.JustifyTextView
+                        android:lineSpacingExtra="6dp"
+                        android:visibility="@{TextUtils.isEmpty(entity.desc)?View.GONE:View.VISIBLE}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:minHeight="0dp"
+                        android:ellipsize="end"
+                        android:maxLines="4"
+                        android:text="@{entity.desc}"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:adjustViewBounds="true"
+                    app:generalSrc="@{entity.envelopePic}"
+                    android:maxWidth="105dp"
+                    android:maxHeight="105dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

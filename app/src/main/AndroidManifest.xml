@@ -8,28 +8,31 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-<!--由于 Android P 限制了明文流量的网络请求，非加密的流量请求都会被系统禁止掉。 android:usesCleartextTraffic="true" 所以在这里声明可以进行明文请求-->
+
+    <!-- 由于 Android P 限制了明文流量的网络请求，非加密的流量请求都会被系统禁止掉。 android:usesCleartextTraffic="true" 所以在这里声明可以进行明文请求 -->
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".content.register.RegisterActivity">
         </activity>
         <activity android:name=".content.main.MainActivity">
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity android:name=".content.webview.WebViewActivity"/>
         <activity android:name=".content.register.LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -37,6 +40,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".content.openapi.OpenApiActivity">
+        </activity>
+        <activity android:name=".content.main.TestActivity">
+        </activity>
+        <activity android:name=".content.main.Test2Activity">
+        </activity>
+        <activity android:name=".content.collection.CollectionActivity">
         </activity>
     </application>
 

@@ -42,4 +42,5 @@ ext {
     banner_version = "1.4.10"
     jsoup_version = "1.11.3"
     aboutlibraries_version = "6.1.1"
+    photo_view_version = "2.1.4"
 }
