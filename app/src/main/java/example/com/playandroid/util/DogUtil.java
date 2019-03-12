@@ -213,27 +213,11 @@ public class DogUtil {
     public interface ZHIHUCallBack{
         void success();
     }
+
     public static void choosePictureCallBack(int requestCode, int resultCode, Intent data,ZHIHUCallBack zhihu,CropPictureCallBack callBack) {
         if (resultCode == RESULT_OK) {
             if (requestCode == UCrop.REQUEST_CROP) {
                 callBack.cropSuccess();
-
-
-               /* //裁剪以后的效果
-                Uri resultUri = UCrop.getOutput(data);
-                CircleImageView imHead = findViewById(R.id.im_head);
-                Glide.with(this)
-                        .load(resultUri)
-                        //Glide中的图片缓存key的生成是通过一个散列算法来实现的，所以很难手动去删除指定的图片缓存
-                        //Glide的图片缓存都有对应的唯一标识符，如果是相同的，就不加载调用缓存
-                        //不过改变标识符很困难，所以Glide提供signature()方法，来附加一个数据到缓存key中如果链接是文件，就用StringSignature，
-                        //比如.signature(nre StringSignature(yourVersionMetadata)).
-                        //如果链接是多媒体，就用MediaStoreSignature，
-                        //比如.signature(new MediaStoreSignature(mimeType, dateModified, orientation)).
-                        .signature(new StringSignature(UUID.randomUUID().toString()))
-                        .into(imHead);
-                //runOnUiThread(() -> imHead.setImageBitmap(BitmapFactory.decodeFile(resultUri.getPath())));
-                //Glide.with(this).load(resultUri).into(imHead);*/
                 Timber.d("走了裁剪的回调 而且裁剪成功");
                 return;
             }
@@ -244,27 +228,6 @@ public class DogUtil {
             }
             if (requestCode == REQUEST_CODE_CHOOSE) {
                 zhihu.success();
-
-               /* mSelected = Matisse.obtainResult(data);
-                Timber.d("mSelected:" + mSelected);
-                UCrop.Options options = new UCrop.Options();
-                options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
-                options.setCompressionQuality(100);
-                *//*“缩放”，“旋转”，“裁剪”*//*
-                //options.setAllowedGestures(UCropActivity.ALL,UCropActivity.NONE,UCropActivity.NONE);
-                //设置是否展示矩形裁剪框
-                options.setShowCropFrame(false);
-                //设置圆形切片
-                options.setCircleDimmedLayer(true);
-                //设置竖线的数量
-                options.setCropGridColumnCount(0);
-                //设置横线的数量
-                options.setCropGridRowCount(0);
-                //options.setShowCropFrame(true);
-                UCrop ucrop = UCrop.of(mSelected.get(0), Uri.fromFile(new File(getCacheDir(), "SampleCropImage.jpeg")));
-                ucrop.withOptions(options);
-                ucrop.start(this);*/
-
                 Timber.d("走了知乎的回调");
             }
         }

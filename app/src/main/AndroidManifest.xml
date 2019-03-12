@@ -50,6 +50,7 @@
         </activity>
         <activity android:name=".content.collection.CollectionActivity">
         </activity>
+        <activity android:name=".content.main.Test3Activity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="example.com.playandroid.fileprovider"

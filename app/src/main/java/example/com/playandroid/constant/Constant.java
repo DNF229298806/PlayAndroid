@@ -39,6 +39,7 @@ public interface Constant {
         String OpenApiActivity = HomeActivity + "openapi";
         String TestActivity = HomeActivity + "test";
         String TestActivity2 = HomeActivity + "test2";
+        String TestActivity3 = HomeActivity + "test3";
         String CollectionActivity = HomeActivity + "collection";
     }
 }
