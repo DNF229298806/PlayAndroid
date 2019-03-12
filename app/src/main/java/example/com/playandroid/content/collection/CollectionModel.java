@@ -3,6 +3,7 @@ package example.com.playandroid.content.collection;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -54,5 +55,9 @@ public class CollectionModel extends BaseModel<CollectionActivity,ActivityCollec
 
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
 
+    }
+
+    public void onBackClick(View view) {
+        getActivity().finish();
     }
 }

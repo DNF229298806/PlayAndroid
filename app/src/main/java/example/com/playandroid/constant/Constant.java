@@ -10,7 +10,7 @@ public interface Constant {
     String user_entity = "user";
     String app_theme = "AppTheme";
     String article_id = "ARTICLE_ID";
-
+    int REQUEST_CODE_CHOOSE = 23;//定义请求码常量
     interface TitleType{
         int TYPE_LEVEL_0 = 0;
         int TYPE_PERSON = 1;

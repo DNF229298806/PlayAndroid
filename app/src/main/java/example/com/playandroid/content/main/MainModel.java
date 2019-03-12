@@ -11,6 +11,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
@@ -38,9 +39,19 @@ import static example.com.playandroid.network.Api.OPEN_API;
  * @des 2018/9/27 21:49
  */
 public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
-
+    private CircleImageView iv_Head;
     public MainModel(MainActivity activity) {
         super(activity);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        View headerView = getBinding().navigationView.getHeaderView(0);
+        iv_Head = headerView.findViewById(R.id.iv_head);
+        iv_Head.setOnClickListener(v -> {
+            ToastUtils.showLong("图库搞起来");
+        });
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -139,7 +150,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 .withVersionShown(true)
                 .withAboutVersionShown(true)
                 .withSortEnabled(true)
-                .withAboutDescription("This is a small sample which can be set in the about my app description file.<br /><b>You can style this with html markup :D</b>")
+                .withAboutDescription("玩Android是由王一波独立开发的毕业设计作品，同时也是一款用于获取，阅读Android开发技术与资讯的App。本App的接口来自hongyang的个人网站,并在开发中使用了以下第三方库，特此感谢！")
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .start(getActivity());
     }

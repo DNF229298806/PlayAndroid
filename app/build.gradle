@@ -108,6 +108,11 @@ dependencies {
     // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
     //图片显示
     implementation "com.github.chrisbanes:PhotoView:$photo_view_version"
-
-
+    //圆形图片控件
+    implementation "de.hdodenhof:circleimageview:$circleimageview"
+    //知乎图片选择库       https://blog.csdn.net/qiaoshi96_bk/article/details/76164913
+    //https://www.jianshu.com/p/0fe204d00c63
+    implementation "com.zhihu.android:matisse:$matisse"
+    //图片裁剪库  https://blog.csdn.net/u011771755/article/details/50676888  https://blog.csdn.net/qq_37238649/article/details/78985518
+    implementation "com.github.yalantis:ucrop:$ucrop"
 }
