@@ -23,6 +23,7 @@ import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.network.transform.RestfulTransformer;
 import example.com.playandroid.util.ArouterUtil;
+import example.com.playandroid.util.DogUtil;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import skin.support.SkinCompatManager;
@@ -49,9 +50,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
         super.onCreate();
         View headerView = getBinding().navigationView.getHeaderView(0);
         iv_Head = headerView.findViewById(R.id.iv_head);
-        iv_Head.setOnClickListener(v -> {
-            ToastUtils.showLong("图库搞起来");
-        });
+        iv_Head.setOnClickListener(v -> DogUtil.choosePicture(getActivity(), true));
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -29,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--裁剪Activity的声明-->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".content.webview.WebViewActivity"/>
         <activity android:name=".content.register.LoginActivity">
            <!-- <intent-filter>
@@ -45,6 +50,15 @@
         </activity>
         <activity android:name=".content.collection.CollectionActivity">
         </activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="example.com.playandroid.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

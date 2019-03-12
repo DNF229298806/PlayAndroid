@@ -1,15 +1,30 @@
 package example.com.playandroid.util;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+
 import com.blankj.utilcode.util.SPUtils;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.yalantis.ucrop.UCrop;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.base.BaseFragment;
 import io.reactivex.functions.Consumer;
+import timber.log.Timber;
+
+import static android.app.Activity.RESULT_OK;
+import static example.com.playandroid.constant.Constant.REQUEST_CODE_CHOOSE;
 
 /**
  * @author Richard_Y_Wang
@@ -20,10 +35,11 @@ public class DogUtil {
 
     /**
      * 使用反射来遍历这个entity中所有的成员变量，并循环调用putvalue方法 对成员变量进行保存
-     * @param obj  需要保存到SP里的对象
-     * @param sp   SP对象
+     *
+     * @param obj 需要保存到SP里的对象
+     * @param sp  SP对象
      */
-    public static void saveToSpByReflect(Object obj,SPUtils sp) {
+    public static void saveToSpByReflect(Object obj, SPUtils sp) {
         try {
             //2.获得某个类的全部属性
             Field[] fields = obj.getClass().getDeclaredFields();
@@ -31,7 +47,7 @@ public class DogUtil {
             //循环写入
             for (Field fd : fields) {
                 fd.setAccessible(true);
-                putValue(fd.getName(),fd.get(obj),sp);
+                putValue(fd.getName(), fd.get(obj), sp);
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -44,12 +60,14 @@ public class DogUtil {
 
     /**
      * 判断传入的value值进行保存
-     * @param key       SP的KEY值
-     * @param value     SP的VALUE值
-     * @param sp        SP对象
+     *
+     * @param key   SP的KEY值
+     * @param value SP的VALUE值
+     * @param sp    SP对象
      */
-    public static void putValue(String key, Object value,SPUtils sp) {
-        if (value == null) return;
+    public static void putValue(String key, Object value, SPUtils sp) {
+        if (value == null)
+            return;
         if (value instanceof String) {
             sp.put(key, (String) value);
         } else if (value instanceof Boolean) {
@@ -115,7 +133,149 @@ public class DogUtil {
                         .subscribe(onNext, Throwable::printStackTrace));
     }
 
+    public static void choosePicture(BaseFragment fragment, boolean isNeedCamera) {
+        List<String> permissions = new ArrayList<>();
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (isNeedCamera) {
+            permissions.add(Manifest.permission.CAMERA);
+        }
+        String[] arr_permissions = new String[permissions.size()];
+        checkPermission(fragment, aBoolean -> {
+            if (aBoolean) {
+                startMatisse(fragment);
+            }
+        }, permissions.toArray(arr_permissions));
+    }
 
+    public static void choosePicture(BaseActivity activity, boolean isNeedCamera) {
+        List<String> permissions = new ArrayList<>();
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (isNeedCamera) {
+            permissions.add(Manifest.permission.CAMERA);
+        }
+        String[] arr_permissions = new String[permissions.size()];
+        checkPermission(activity, aBoolean -> {
+            if (aBoolean) {
+                startMatisse(activity);
+            }
+        }, permissions.toArray(arr_permissions));
+    }
+
+    private static void startMatisse(BaseFragment fragment) {
+        Matisse.from(fragment)
+                //照片视频全部显示
+                .choose(MimeType.ofImage())
+                //有序选择图片
+                .countable(true)
+                .maxSelectable(1)
+                .gridExpectedSize(300)
+                .capture(true)
+                .captureStrategy(new CaptureStrategy(true, "example.com.playandroid.fileprovider"))
+                //图像选择和预览活动所需的方向
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                //缩放比例
+                .thumbnailScale(0.85f)
+                //主题 暗色主题
+                .theme(R.style.Matisse_Zhihu)
+                //加载方式 原来的GlideEngine 在v4以后要改成Glide4Engine
+                .imageEngine(new Glide4Engine())
+                .forResult(REQUEST_CODE_CHOOSE);
+    }
+
+    private static void startMatisse(BaseActivity activity) {
+        Matisse.from(activity)
+                //照片视频全部显示
+                .choose(MimeType.ofImage())
+                //有序选择图片
+                .countable(true)
+                .maxSelectable(1)
+                .gridExpectedSize(300)
+                .capture(true)
+                .captureStrategy(new CaptureStrategy(true, "example.com.playandroid.fileprovider"))
+                //图像选择和预览活动所需的方向
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                //缩放比例
+                .thumbnailScale(0.85f)
+                //主题 暗色主题
+                .theme(R.style.Matisse_Zhihu)
+                //加载方式
+                .imageEngine(new Glide4Engine())
+                .forResult(REQUEST_CODE_CHOOSE);
+    }
+
+    public interface CropPictureCallBack {
+        void cropSuccess();
+        void cropFailed();
+    }
+
+    public interface ZHIHUCallBack{
+        void success();
+    }
+    public static void choosePictureCallBack(int requestCode, int resultCode, Intent data,ZHIHUCallBack zhihu,CropPictureCallBack callBack) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == UCrop.REQUEST_CROP) {
+                callBack.cropSuccess();
+
+
+               /* //裁剪以后的效果
+                Uri resultUri = UCrop.getOutput(data);
+                CircleImageView imHead = findViewById(R.id.im_head);
+                Glide.with(this)
+                        .load(resultUri)
+                        //Glide中的图片缓存key的生成是通过一个散列算法来实现的，所以很难手动去删除指定的图片缓存
+                        //Glide的图片缓存都有对应的唯一标识符，如果是相同的，就不加载调用缓存
+                        //不过改变标识符很困难，所以Glide提供signature()方法，来附加一个数据到缓存key中如果链接是文件，就用StringSignature，
+                        //比如.signature(nre StringSignature(yourVersionMetadata)).
+                        //如果链接是多媒体，就用MediaStoreSignature，
+                        //比如.signature(new MediaStoreSignature(mimeType, dateModified, orientation)).
+                        .signature(new StringSignature(UUID.randomUUID().toString()))
+                        .into(imHead);
+                //runOnUiThread(() -> imHead.setImageBitmap(BitmapFactory.decodeFile(resultUri.getPath())));
+                //Glide.with(this).load(resultUri).into(imHead);*/
+                Timber.d("走了裁剪的回调 而且裁剪成功");
+                return;
+            }
+            if (requestCode == UCrop.RESULT_ERROR) {
+                Timber.d("头像裁剪失败");
+                callBack.cropFailed();
+                return;
+            }
+            if (requestCode == REQUEST_CODE_CHOOSE) {
+                zhihu.success();
+
+               /* mSelected = Matisse.obtainResult(data);
+                Timber.d("mSelected:" + mSelected);
+                UCrop.Options options = new UCrop.Options();
+                options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+                options.setCompressionQuality(100);
+                *//*“缩放”，“旋转”，“裁剪”*//*
+                //options.setAllowedGestures(UCropActivity.ALL,UCropActivity.NONE,UCropActivity.NONE);
+                //设置是否展示矩形裁剪框
+                options.setShowCropFrame(false);
+                //设置圆形切片
+                options.setCircleDimmedLayer(true);
+                //设置竖线的数量
+                options.setCropGridColumnCount(0);
+                //设置横线的数量
+                options.setCropGridRowCount(0);
+                //options.setShowCropFrame(true);
+                UCrop ucrop = UCrop.of(mSelected.get(0), Uri.fromFile(new File(getCacheDir(), "SampleCropImage.jpeg")));
+                ucrop.withOptions(options);
+                ucrop.start(this);*/
+
+                Timber.d("走了知乎的回调");
+            }
+        }
+    }
+
+    public static void choosePictureCallBack(int requestCode, int resultCode, Intent data, ZHIHUCallBack zhihu) {
+        if (resultCode == RESULT_OK&&requestCode == REQUEST_CODE_CHOOSE) {
+            zhihu.success();
+            Timber.d("走了知乎的回调");
+        }
+    }
 
 
    /*

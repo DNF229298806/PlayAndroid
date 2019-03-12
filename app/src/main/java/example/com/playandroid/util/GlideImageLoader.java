@@ -3,8 +3,10 @@ package example.com.playandroid.util;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
+
+import example.com.playandroid.GlideApp;
+import example.com.playandroid.R;
 
 /**
  * @author Richard_Y_Wang
@@ -21,6 +23,6 @@ public class GlideImageLoader extends ImageLoader{
          切记不要胡乱强转！
          */
         //Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
+        GlideApp.with(context).load(path).error(R.mipmap.empty_icon).into(imageView);
     }
 }
