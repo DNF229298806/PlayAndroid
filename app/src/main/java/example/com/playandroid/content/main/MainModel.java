@@ -122,7 +122,8 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 break;
             case R.id.menu_item_navigation:
                 SkinCompatManager.getInstance().loadSkin("green", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
-                getActivity().initFragment(getActivity().getNavigationFragment(), NAVIGATION);
+                getBinding().bnv.setSelectedItemId(R.id.it_nav);
+                getBinding().drawableLayout.closeDrawers();
                 ToastUtils.showShort("这是导航");
                 break;
             case R.id.menu_item_open_apis:

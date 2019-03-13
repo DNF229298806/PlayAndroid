@@ -1,8 +1,10 @@
 package example.com.playandroid.content.main;
 
+import android.os.Bundle;
 import android.view.View;
 
-import com.blankj.utilcode.util.ToastUtils;
+import example.com.playandroid.constant.Constant;
+import example.com.playandroid.util.ArouterUtil;
 
 /**
  * @author Richard_Y_Wang
@@ -174,6 +176,10 @@ public class CollectionArticleEntity {
     }
 
     public void onItemClick(View view) {
-        ToastUtils.showLong("子类的点击事件");
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.link, link);
+        bundle.putString(Constant.article_title, title);
+        bundle.putInt(Constant.article_id, id);
+        ArouterUtil.navigation(Constant.ActivityPath.WebViewActivity, bundle);
     }
 }
