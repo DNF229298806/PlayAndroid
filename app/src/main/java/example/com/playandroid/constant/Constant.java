@@ -34,6 +34,7 @@ public interface Constant {
 
     interface ActivityPath {
         String HomeActivity = "/home/";
+        String LoginActivity = "/login/";
         String WebViewActivity = HomeActivity + "webview";
         String MainActivity = HomeActivity + "main";
         String OpenApiActivity = HomeActivity + "openapi";

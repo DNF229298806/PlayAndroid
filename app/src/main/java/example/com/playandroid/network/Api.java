@@ -21,7 +21,7 @@ import retrofit2.http.Path;
  * @des 2018/9/25 21:06
  */
 public interface Api {
-    String HOST = "http://www.wanandroid.com";
+    String HOST = "https://www.wanandroid.com";
     /**
      * 公开的API
      */

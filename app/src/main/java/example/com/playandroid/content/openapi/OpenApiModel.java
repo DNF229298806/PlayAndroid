@@ -70,7 +70,10 @@ public class OpenApiModel extends BaseModel<OpenApiActivity, ActivityOpenApiBind
                     }
                     adapter.setNewData(res);
                     adapter.expandAll();
-                }, throwable -> {adapter.setEmptyView(R.layout.error_view, (ViewGroup) recyclerView.getParent());throwable.printStackTrace();}));
+                }, throwable -> {
+                    adapter.setEmptyView(R.layout.error_view, (ViewGroup) recyclerView.getParent());
+                    throwable.printStackTrace();
+                }));
     }
 
     /**

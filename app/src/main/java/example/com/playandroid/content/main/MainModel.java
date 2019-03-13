@@ -1,9 +1,11 @@
 package example.com.playandroid.content.main;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
@@ -41,6 +43,7 @@ import static example.com.playandroid.network.Api.OPEN_API;
  */
 public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
     private CircleImageView iv_Head;
+
     public MainModel(MainActivity activity) {
         super(activity);
     }
@@ -48,6 +51,11 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
     @Override
     public void onCreate() {
         super.onCreate();
+        SPUtils sp = SPUtils.getInstance(Constant.user_entity);
+        if (TextUtils.isEmpty(sp.getString("username")) || TextUtils.isEmpty(sp.getString("password"))) {
+            ArouterUtil.navigation(Constant.ActivityPath.LoginActivity);
+            getActivity().finish();
+        }
         View headerView = getBinding().navigationView.getHeaderView(0);
         iv_Head = headerView.findViewById(R.id.iv_head);
         iv_Head.setOnClickListener(v -> DogUtil.choosePicture(getActivity(), true));
@@ -107,13 +115,14 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 );
                 App.api.getCollectList(0)
                         .compose(new RestfulTransformer<>())
-                        .subscribe(th-> ToastUtils.showLong("请求成功"),Throwable::printStackTrace);
+                        .subscribe(th -> ToastUtils.showLong("请求成功"), Throwable::printStackTrace);
                 //ArouterUtil.navigation(Constant.ActivityPath.TestActivity);
                 ArouterUtil.navigation(Constant.ActivityPath.CollectionActivity);
                 ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
                 SkinCompatManager.getInstance().loadSkin("green", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
+                getActivity().initFragment(getActivity().getNavigationFragment(), NAVIGATION);
                 ToastUtils.showShort("这是导航");
                 break;
             case R.id.menu_item_open_apis:
