@@ -110,4 +110,13 @@
         <item name="listPopupWindowStyle">@style/Popup.Zhihu</item>
         <item name="capture.textColor">@color/zhihu_capture</item>
     </style>
+
+    <style name="setting_ll">
+        <item name="android:background">@drawable/ripple</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!--<style name="">
+
+    </style>-->
 </resources>

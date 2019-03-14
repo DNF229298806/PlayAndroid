@@ -7,8 +7,6 @@ import android.view.View;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.mikepenz.aboutlibraries.Libs;
-import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -139,12 +137,12 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 ToastUtils.showShort("这是设置");
                 //恢复应用默认皮肤
                 SkinCompatManager.getInstance().restoreDefaultTheme();
-                ArouterUtil.navigation(Constant.ActivityPath.TestActivity3);
+                ArouterUtil.navigation(Constant.ActivityPath.SettingActivity);
                 //SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_about:
                 ToastUtils.showShort("这是关于");
-                gotoAbout();
+                //gotoAbout();
                 break;
             default:
                 break;
@@ -152,7 +150,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
         return false;
     }
 
-    private void gotoAbout() {
+   /* private void gotoAbout() {
         LibsBuilder lb = new LibsBuilder();
         lb.aboutAppName = "玩Android";
         lb.activityTitle = "感谢";
@@ -163,5 +161,5 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 .withAboutDescription("玩Android是由王一波独立开发的毕业设计作品，同时也是一款用于获取，阅读Android开发技术与资讯的App。本App的接口来自hongyang的个人网站,并在开发中使用了以下第三方库，特此感谢！")
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .start(getActivity());
-    }
+    }*/
 }
