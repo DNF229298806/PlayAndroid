@@ -18,7 +18,6 @@ import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.util.ArouterUtil;
 import example.com.playandroid.util.DogUtil;
-import skin.support.SkinCompatManager;
 
 import static example.com.playandroid.constant.Constant.FragmentType.HOME;
 import static example.com.playandroid.constant.Constant.FragmentType.NAVIGATION;
@@ -110,7 +109,6 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 //ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
-                SkinCompatManager.getInstance().loadSkin("green", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
                 getBinding().bnv.setSelectedItemId(R.id.it_nav);
                 getBinding().drawableLayout.closeDrawers();
                 //ToastUtils.showShort("这是导航");
@@ -121,15 +119,11 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 break;
             case R.id.menu_item_friend_link:
                 //ToastUtils.showShort("这是友情链接");
-                SkinCompatManager.getInstance().loadSkin("red.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
-                //SkinCompatManager.getInstance().loadSkin("black.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
+                ArouterUtil.navigation(Constant.ActivityPath.SkinChooseActivity);
                 break;
             case R.id.menu_item_setting:
                 //ToastUtils.showShort("这是设置");
-                //恢复应用默认皮肤
-                SkinCompatManager.getInstance().restoreDefaultTheme();
                 ArouterUtil.navigation(Constant.ActivityPath.SettingActivity);
-                //SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_about:
                 //ToastUtils.showShort("这是关于");

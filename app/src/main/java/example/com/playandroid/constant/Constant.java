@@ -43,5 +43,6 @@ public interface Constant {
         String TestActivity3 = HomeActivity + "test3";
         String CollectionActivity = HomeActivity + "collection";
         String SettingActivity = HomeActivity + "setting";
+        String SkinChooseActivity = HomeActivity + "SkinChooseActivity";
     }
 }

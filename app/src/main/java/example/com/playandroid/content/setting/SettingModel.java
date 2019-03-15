@@ -2,8 +2,11 @@ package example.com.playandroid.content.setting;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
+import com.blankj.utilcode.util.ReflectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.mikepenz.aboutlibraries.Libs;
@@ -11,7 +14,6 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.constant.Constant;
 import example.com.playandroid.databinding.ActivitySettingBinding;
@@ -46,12 +48,14 @@ public class SettingModel extends BaseModel<SettingActivity, ActivitySettingBind
     public void checkUpdate(View view) {
 
         ProgressDialog waitingDialog =
-                new ProgressDialog(getActivity(), R.style.dialog);
+                new ProgressDialog(getActivity());
         waitingDialog.setTitle("检查更新");
         waitingDialog.setMessage("检查更新中...");
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
         waitingDialog.show();
+        TextView mMessageView = (TextView) ReflectUtils.reflect(waitingDialog).field("mMessageView").get();
+        mMessageView.setTextColor(Color.BLACK);
         //((TextView) (mMessageView)).setTextColor(Color.BLACK);
         addDisposable(Observable.just(1).delay(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

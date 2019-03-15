@@ -54,7 +54,7 @@
         </activity>
         <activity android:name=".content.main.Test3Activity"/>
         <activity android:name=".content.setting.SettingActivity"/>
-
+        <activity android:name=".content.skin.SkinChooseActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="example.com.playandroid.fileprovider"
