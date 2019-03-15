@@ -15,12 +15,13 @@
     <item
         android:id="@+id/menu_item_friend_link"
         android:icon="@drawable/ic_link_black_64dp"
-        android:title="友情链接"/>
+        android:title="功能尝鲜（换肤）"/>
     <item
         android:id="@+id/menu_item_setting"
         android:icon="@drawable/ic_settings_black_64dp"
         android:title="设置"/>
     <item
+        android:visible="false"
         android:id="@+id/menu_item_about"
         android:icon="@mipmap/icon_about"
         android:title="关于"/>

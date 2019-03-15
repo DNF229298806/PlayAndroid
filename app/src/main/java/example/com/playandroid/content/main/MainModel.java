@@ -6,13 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.constant.Constant;
@@ -21,19 +16,14 @@ import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
-import example.com.playandroid.network.transform.RestfulTransformer;
 import example.com.playandroid.util.ArouterUtil;
 import example.com.playandroid.util.DogUtil;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 import skin.support.SkinCompatManager;
 
 import static example.com.playandroid.constant.Constant.FragmentType.HOME;
 import static example.com.playandroid.constant.Constant.FragmentType.NAVIGATION;
 import static example.com.playandroid.constant.Constant.FragmentType.PROJECT;
 import static example.com.playandroid.constant.Constant.FragmentType.SYSTEM;
-import static example.com.playandroid.network.Api.HOST;
-import static example.com.playandroid.network.Api.OPEN_API;
 
 /**
  * @author Richard_Y_Wang
@@ -49,6 +39,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
     @Override
     public void onCreate() {
         super.onCreate();
+        //一进来就是MainActivity 如果SP中没有东西 那么跳转到LoginActivity
         SPUtils sp = SPUtils.getInstance(Constant.user_entity);
         if (TextUtils.isEmpty(sp.getString("username")) || TextUtils.isEmpty(sp.getString("password"))) {
             ArouterUtil.navigation(Constant.ActivityPath.LoginActivity);
@@ -69,19 +60,19 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
         switch (item.getItemId()) {
             case R.id.it_home:
                 activity.initFragment(homeFragment, HOME);
-                ToastUtils.showLong("DataBindingAdapter home");
+                //ToastUtils.showLong("DataBindingAdapter home");
                 return true;
             case R.id.it_project:
                 activity.initFragment(projectFragment, PROJECT);
-                ToastUtils.showLong("DataBindingAdapter it_project");
+                //ToastUtils.showLong("DataBindingAdapter it_project");
                 return true;
             case R.id.it_system:
                 activity.initFragment(systemFragment, SYSTEM);
-                ToastUtils.showLong("DataBindingAdapter it_system");
+                //ToastUtils.showLong("DataBindingAdapter it_system");
                 return true;
             case R.id.it_nav:
                 activity.initFragment(navigationFragment, NAVIGATION);
-                ToastUtils.showLong("DataBindingAdapter it_nav");
+                //ToastUtils.showLong("DataBindingAdapter it_nav");
                 return true;
             default:
                 break;
@@ -90,7 +81,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
     }
 
     public void navigationClick(View view) {
-        ToastUtils.showShort("出现菜单栏");
+        //ToastUtils.showShort("出现菜单栏");
         getBinding().drawableLayout.openDrawer(getBinding().navigationView);
     }
 
@@ -105,7 +96,7 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 // 所以这里的线程切换实际上是没有用的 相当于1+1 在RxJava外面执行的 然后把结果2通过just发射出去
                 // 如果Observable.create的话 是通过接口然后走的回调接口 所以这里的线程切换是有用的
                 // 这样解析之后可以拿到头部的数据 之后再拿到里面的li标签的数据就可以了
-                Observable.<Document>create(e -> e.onNext(Jsoup.connect(HOST + OPEN_API).get()))
+                /*Observable.<Document>create(e -> e.onNext(Jsoup.connect(HOST + OPEN_API).get()))
                         .subscribeOn(Schedulers.newThread()).subscribe(
                         doc -> {
                             doc.select("div.area_r").select("h3").get(0).childNode(0).toString();
@@ -113,35 +104,35 @@ public class MainModel extends BaseModel<MainActivity, ActivityMainBinding> {
                 );
                 App.api.getCollectList(0)
                         .compose(new RestfulTransformer<>())
-                        .subscribe(th -> ToastUtils.showLong("请求成功"), Throwable::printStackTrace);
+                        .subscribe(th -> ToastUtils.showLong("请求成功"), Throwable::printStackTrace);*/
                 //ArouterUtil.navigation(Constant.ActivityPath.TestActivity);
                 ArouterUtil.navigation(Constant.ActivityPath.CollectionActivity);
-                ToastUtils.showShort("这是收藏");
+                //ToastUtils.showShort("这是收藏");
                 break;
             case R.id.menu_item_navigation:
                 SkinCompatManager.getInstance().loadSkin("green", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
                 getBinding().bnv.setSelectedItemId(R.id.it_nav);
                 getBinding().drawableLayout.closeDrawers();
-                ToastUtils.showShort("这是导航");
+                //ToastUtils.showShort("这是导航");
                 break;
             case R.id.menu_item_open_apis:
                 ArouterUtil.navigation(Constant.ActivityPath.OpenApiActivity);
-                ToastUtils.showShort("这是开源Api");
+                //ToastUtils.showShort("这是开源Api");
                 break;
             case R.id.menu_item_friend_link:
-                ToastUtils.showShort("这是友情链接");
+                //ToastUtils.showShort("这是友情链接");
                 SkinCompatManager.getInstance().loadSkin("red.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 //SkinCompatManager.getInstance().loadSkin("black.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_setting:
-                ToastUtils.showShort("这是设置");
+                //ToastUtils.showShort("这是设置");
                 //恢复应用默认皮肤
                 SkinCompatManager.getInstance().restoreDefaultTheme();
                 ArouterUtil.navigation(Constant.ActivityPath.SettingActivity);
                 //SkinCompatManager.getInstance().loadSkin("night.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
                 break;
             case R.id.menu_item_about:
-                ToastUtils.showShort("这是关于");
+                //ToastUtils.showShort("这是关于");
                 //gotoAbout();
                 break;
             default:
