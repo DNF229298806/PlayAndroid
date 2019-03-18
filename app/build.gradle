@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -115,4 +115,5 @@ dependencies {
     implementation "com.zhihu.android:matisse:$matisse"
     //图片裁剪库  https://blog.csdn.net/u011771755/article/details/50676888  https://blog.csdn.net/qq_37238649/article/details/78985518
     implementation "com.github.yalantis:ucrop:$ucrop"
+
 }

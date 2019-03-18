@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yalantis.ucrop.UCrop;
@@ -24,6 +26,7 @@ import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.home.HomeFragment;
 import example.com.playandroid.content.navigation.NavigationFragment;
 import example.com.playandroid.content.project.ProjectFragment;
+import example.com.playandroid.content.search.SearchActivity;
 import example.com.playandroid.content.system.SystemFragment;
 import example.com.playandroid.databinding.ActivityMainBinding;
 import example.com.playandroid.util.DogUtil;
@@ -199,5 +202,21 @@ public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                startActivity(new Intent(this, SearchActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

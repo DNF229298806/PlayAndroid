@@ -7,6 +7,7 @@ import example.com.playandroid.content.home.net.PageEntity;
 import example.com.playandroid.content.main.CollectionPageEntity;
 import example.com.playandroid.content.navigation.NavigationTitleEntity;
 import example.com.playandroid.content.register.UserEntity;
+import example.com.playandroid.content.search.suggest.HotKeyEntity;
 import example.com.playandroid.content.system.SystemEntity;
 import example.com.playandroid.network.entity.InfoEntity;
 import io.reactivex.Observable;
@@ -100,4 +101,15 @@ public interface Api {
      */
     @GET("lg/collect/list/{page}/json")
     Observable<InfoEntity<CollectionPageEntity>> getCollectList(@Path("page") int page);
+
+    // 搜索热词
+    @GET("hotkey/json")
+    Observable<InfoEntity<List<HotKeyEntity>>> getHotKeyEntity();
+
+    // 搜索
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    Observable<InfoEntity<InfoEntity<PageEntity>>> searchArticles(
+            @Path("page") int page, @Field("k") String keyword
+    );
 }

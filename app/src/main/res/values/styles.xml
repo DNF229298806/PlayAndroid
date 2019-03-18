@@ -164,6 +164,13 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="SearchViewToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColor">@color/md_white_1000</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:searchHintIcon">@null</item>
+        <item name="android:queryBackground">@null</item>
+    </style>
+
 
     <color name="transparent">#00000000</color>
 </resources>
