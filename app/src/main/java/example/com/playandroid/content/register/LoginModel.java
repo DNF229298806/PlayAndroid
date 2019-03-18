@@ -51,9 +51,14 @@ public class LoginModel extends BaseModel<LoginActivity, ActivityLoginBinding> {
                 super.onAnimationEnd(animation);
                 isChange.set(isLogin);
                 AnimUtil.rotateByAxis(getBinding().flTitle, true, 300, 0, null);
-                ToastUtils.showLong("翻转结束了");
+                //ToastUtils.showLong("翻转结束了");
             }
         });
+
+        //每次旋转以后 要进行清空
+        getBinding().tieUsername.setText("");
+        getBinding().tiePassword.setText("");
+        getBinding().tieConfirmPassword.setText("");
     }
 
     public void onRegisterOrLoginClick(View view) {

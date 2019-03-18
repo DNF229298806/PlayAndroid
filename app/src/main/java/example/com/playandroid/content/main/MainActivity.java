@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity<MainModel, ActivityMainBinding>/*
         initFragment(mHomeFragment, HOME);
         long l2 = System.currentTimeMillis();
         Timber.i("Main=%s", (l2 - l1));
-      /*  DogUtil.checkPermissionOneByOne(this, (permission -> {
+        /*DogUtil.checkPermissionOneByOne(this, (permission -> {
             if (permission.granted) {
                 ToastUtils.showShort("请求全部成功");
             } else if (permission.shouldShowRequestPermissionRationale) {
