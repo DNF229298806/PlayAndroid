@@ -1,5 +1,6 @@
 package example.com.playandroid.content.search.suggest;
 
+import android.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -67,8 +68,17 @@ public class SearchSuggestModel extends BaseFragmentModel<SearchActivity, Search
         searchHistoryAdapter.setNewData(db.querySearchHistory());
 
         getBinding().clearHistory.setOnClickListener(v -> {
-            db.deleteSearchHistoryAll();
-            searchHistoryAdapter.setNewData(new ArrayList<>());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("删除")
+                    .setMessage("您确定要删除所有的历史记录吗？")
+                    .setPositiveButton("确定", (dialog, which) -> {
+                        db.deleteSearchHistoryAll();
+                        searchHistoryAdapter.setNewData(new ArrayList<>());
+                        dialog.dismiss();
+                    }).setNegativeButton("取消", (dialog, which) -> {
+                        dialog.dismiss();
+            });
+            builder.create().show();
         });
     }
 

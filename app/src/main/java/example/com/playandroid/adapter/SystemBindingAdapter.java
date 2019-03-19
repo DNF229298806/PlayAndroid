@@ -60,6 +60,7 @@ public class SystemBindingAdapter extends BaseBindingAdapter<SystemEntity, Holde
                 textView.setOnClickListener(v -> {
                     Bundle bundle = new Bundle();
                     bundle.putInt(Constant.id, systemEntity.getId());
+                    bundle.putString(Constant.class_title, systemEntity.getName());
                     ArouterUtil.navigation(Constant.ActivityPath.SystemArticleActivity,bundle);
                 });
                 holder.getBinding().flex.addView(textView);

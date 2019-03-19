@@ -12,6 +12,7 @@ public interface Constant {
     String article_id = "ARTICLE_ID";
     int REQUEST_CODE_CHOOSE = 23;//定义请求码常量
     String id = "id";
+    String class_title = "class_title";
 
     interface TitleType{
         int TYPE_LEVEL_0 = 0;
