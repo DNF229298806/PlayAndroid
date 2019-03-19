@@ -115,5 +115,7 @@ dependencies {
     implementation "com.zhihu.android:matisse:$matisse"
     //图片裁剪库  https://blog.csdn.net/u011771755/article/details/50676888  https://blog.csdn.net/qq_37238649/article/details/78985518
     implementation "com.github.yalantis:ucrop:$ucrop"
-
+    //黄油刀
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

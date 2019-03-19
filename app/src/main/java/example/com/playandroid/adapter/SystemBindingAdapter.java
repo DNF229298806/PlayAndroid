@@ -1,6 +1,7 @@
 package example.com.playandroid.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.base.BaseBindingAdapter;
 import example.com.playandroid.base.BaseBindingViewHolder;
+import example.com.playandroid.constant.Constant;
 import example.com.playandroid.content.system.SystemEntity;
 import example.com.playandroid.databinding.HolderSystemBinding;
+import example.com.playandroid.util.ArouterUtil;
 import timber.log.Timber;
 
 /**
@@ -49,11 +52,16 @@ public class SystemBindingAdapter extends BaseBindingAdapter<SystemEntity, Holde
             holder.getBinding().flex.removeAllViews();
             for (SystemEntity systemEntity : getData().get(position).getChildren()) {
                 TextView textView = new TextView(context);
-                textView.setPadding(20, 20, 20, 20);
+                textView.setPadding(60, 20, 60, 20);
                 textView.setLayoutParams(params);
                 textView.setGravity(Gravity.CENTER);
                 textView.setText(systemEntity.getName());
                 textView.setBackground(App.getResDrawable(R.drawable.rectangle_frame));
+                textView.setOnClickListener(v -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(Constant.id, systemEntity.getId());
+                    ArouterUtil.navigation(Constant.ActivityPath.SystemArticleActivity,bundle);
+                });
                 holder.getBinding().flex.addView(textView);
             }
         }

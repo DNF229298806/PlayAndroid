@@ -31,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity> <!-- 裁剪Activity的声明 -->
+        <activity android:name=".content.system.SystemArticleActivity"/>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

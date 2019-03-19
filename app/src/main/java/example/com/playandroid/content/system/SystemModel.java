@@ -1,5 +1,8 @@
 package example.com.playandroid.content.system;
 
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 
 import com.google.android.flexbox.FlexDirection;
@@ -9,6 +12,7 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import java.util.List;
 
 import example.com.playandroid.App;
+import example.com.playandroid.R;
 import example.com.playandroid.adapter.SystemBindingAdapter;
 import example.com.playandroid.base.BaseFragmentModel;
 import example.com.playandroid.content.main.MainActivity;
@@ -37,6 +41,11 @@ public class SystemModel extends BaseFragmentModel<MainActivity, SystemFragment,
         //layoutManager.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new SystemBindingAdapter(list, recyclerView.getContext()));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.list_divider);
+        itemDecoration.setDrawable(drawable);
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     @Override

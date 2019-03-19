@@ -16,6 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * @author Richard_Y_Wang
@@ -70,6 +71,18 @@ public interface Api {
     @GET("tree/json")
     Observable<InfoEntity<List<SystemEntity>>> getSystemList();
 
+    // 获取项目分类下文章数据
+
+    /**
+     * 获取项目分类下文章数据
+     *
+     * @param page 页码
+     * @param cid  id
+     * @return 文章数据
+     */
+    @GET("article/list/{page}/json")
+    Observable<InfoEntity<PageEntity>> getProjectArticles(@Path("page") int page, @Query("cid") int cid);
+
     /**
      * 获取导航数据
      */
@@ -102,11 +115,19 @@ public interface Api {
     @GET("lg/collect/list/{page}/json")
     Observable<InfoEntity<CollectionPageEntity>> getCollectList(@Path("page") int page);
 
-    // 搜索热词
+    /**
+     * 搜索热词
+     *
+     * @return 热词列表
+     */
     @GET("hotkey/json")
     Observable<InfoEntity<List<HotKeyEntity>>> getHotKeyEntity();
 
-    // 搜索
+    /**
+     * @param page    页码
+     * @param keyword 搜索关键词
+     * @return 搜索结果
+     */
     @POST("article/query/{page}/json")
     @FormUrlEncoded
     Observable<InfoEntity<PageEntity>> searchArticles(

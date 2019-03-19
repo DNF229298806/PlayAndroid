@@ -15,6 +15,8 @@ buildscript {
         //文档    https://realm.io/docs/java/latest/ 英文 日文 韩文
         //github https://github.com/realm/realm-java  简书 https://www.jianshu.com/p/37af717761cc
         classpath "io.realm:realm-gradle-plugin:5.4.1"
+        //黄油刀
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
