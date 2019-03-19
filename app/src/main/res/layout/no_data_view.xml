@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/bg1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <ImageView
+        style="@style/empty_img"
+        android:src="@mipmap/empty_icon"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="暂无数据"
+            android:textColor="@color/txt_color"/>
+    </LinearLayout>
+</LinearLayout>

@@ -19,5 +19,7 @@
     <color name="txt_color">#48495F</color>
     <color name= "home">#bfbfbf</color>
     <color name="ripple_color">#d4d4d4</color>
+    <color name="title_black">#1a1a1a</color>
+    <color name="list_divider">#ebebeb</color>
     <!--<color name="overlay_dark_30">#4D000000</color>-->
 </resources>

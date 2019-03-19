@@ -29,9 +29,21 @@ public class DatabaseHelper {
         return realm.copyFromRealm(realmResults);
     }
 
-    public void deleteSearchHistory() {
+    public void deleteSearchHistoryAll() {
         realm.beginTransaction();
         realm.where(SearchHistoryEntity.class).findAll().deleteAllFromRealm();
+        realm.commitTransaction();
+    }
+
+    public void deleteSearchHistory(String keyword) {
+        realm.beginTransaction();
+        SearchHistoryEntity searchHistoryEntity = realm
+                .where(SearchHistoryEntity.class)
+                .equalTo("keyword", keyword)
+                .findFirst();
+        if (searchHistoryEntity != null) {
+            searchHistoryEntity.deleteFromRealm();
+        }
         realm.commitTransaction();
     }
 }

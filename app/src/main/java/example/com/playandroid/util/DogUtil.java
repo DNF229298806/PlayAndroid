@@ -241,6 +241,15 @@ public class DogUtil {
     }
 
 
+    public static String delHtmlTags(String htmlStr){
+        //定义HTML标签的正则表达式，去除标签，只提取文字内容
+        String htmlRegex="<[^>]+>";
+        // 过滤html标签
+        htmlStr = htmlStr.replaceAll(htmlRegex, "");
+        return htmlStr.trim(); // 返回文本字符串
+    }
+
+
    /*
    If multiple permissions at the same time, the result is combined :
 

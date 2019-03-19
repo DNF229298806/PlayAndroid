@@ -1,5 +1,7 @@
 package example.com.playandroid.content.search;
 
+import android.view.View;
+
 import example.com.playandroid.base.BaseModel;
 import example.com.playandroid.databinding.ActivitySearchBinding;
 
@@ -11,5 +13,9 @@ public class SearchModel extends BaseModel<SearchActivity, ActivitySearchBinding
 
     public SearchModel(SearchActivity activity) {
         super(activity);
+    }
+
+    public void navigationClick(View view) {
+        getActivity().finish();
     }
 }

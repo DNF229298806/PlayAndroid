@@ -13,11 +13,14 @@
     </data>
 
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
+            app:navigationOnClickListener="@{vm::navigationClick}"
             app:navigationIcon="@mipmap/icon_back"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"

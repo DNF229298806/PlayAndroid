@@ -20,6 +20,7 @@ import java.util.Stack;
 import example.com.playandroid.network.Api;
 import example.com.playandroid.network.ApiUtils;
 import example.com.playandroid.util.TimberUtil;
+import io.realm.Realm;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinCardViewInflater;
 import skin.support.constraint.app.SkinConstraintViewInflater;
@@ -96,6 +97,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
                 //.setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
                 //.setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
                 .loadSkin();
+        Realm.init(this);
     }
 
     public Stack<Activity> getStack() {

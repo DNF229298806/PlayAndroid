@@ -3,6 +3,7 @@ package example.com.playandroid.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import example.com.playandroid.R;
 import example.com.playandroid.content.search.suggest.SearchHistoryEntity;
 
 /**
@@ -16,6 +17,7 @@ public class SearchHistoryAdapter extends BaseQuickAdapter<SearchHistoryEntity, 
 
     @Override
     protected void convert(BaseViewHolder helper, SearchHistoryEntity item) {
-
+        helper.setText(R.id.history_keyword, item.getKeyword())
+                .addOnClickListener(R.id.delete);
     }
 }

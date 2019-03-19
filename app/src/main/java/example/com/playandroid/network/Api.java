@@ -109,7 +109,7 @@ public interface Api {
     // 搜索
     @POST("article/query/{page}/json")
     @FormUrlEncoded
-    Observable<InfoEntity<InfoEntity<PageEntity>>> searchArticles(
+    Observable<InfoEntity<PageEntity>> searchArticles(
             @Path("page") int page, @Field("k") String keyword
     );
 }

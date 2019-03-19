@@ -8,6 +8,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
+import java.util.ArrayList;
+
 import example.com.playandroid.App;
 import example.com.playandroid.R;
 import example.com.playandroid.adapter.HotKeyAdapter;
@@ -35,7 +37,6 @@ public class SearchSuggestModel extends BaseFragmentModel<SearchActivity, Search
     @Override
     public void onCreate() {
         super.onCreate();
-
         RecyclerView hotSearchList = getBinding().hotSearchList;
         RecyclerView searchHistoryList = getBinding().searchHistoryList;
 
@@ -47,6 +48,8 @@ public class SearchSuggestModel extends BaseFragmentModel<SearchActivity, Search
 
         searchHistoryList.setLayoutManager(new LinearLayoutManager(getActivity()));
         searchHistoryAdapter = new SearchHistoryAdapter(R.layout.item_search_history);
+        searchHistoryAdapter.setOnItemChildClickListener(SearchSuggestModel::onChildDeleteClick);
+
         searchHistoryList.setAdapter(searchHistoryAdapter);
 
         //网络请求热词 并显示
@@ -62,6 +65,11 @@ public class SearchSuggestModel extends BaseFragmentModel<SearchActivity, Search
         //去数据库拿数据显示搜索记录
         DatabaseHelper db = new DatabaseHelper();
         searchHistoryAdapter.setNewData(db.querySearchHistory());
+
+        getBinding().clearHistory.setOnClickListener(v -> {
+            db.deleteSearchHistoryAll();
+            searchHistoryAdapter.setNewData(new ArrayList<>());
+        });
     }
 
     private void hotKeyClick(BaseQuickAdapter adapter, View view, int position) {
@@ -72,5 +80,14 @@ public class SearchSuggestModel extends BaseFragmentModel<SearchActivity, Search
                 .replace(R.id.fragment_container,
                         SearchResultFragment.newInstance(((HotKeyEntity) adapter.getItem(position)).getName()))
                 .commit();
+    }
+
+    private static void onChildDeleteClick(BaseQuickAdapter adapter, View view, int position) {
+        if (view.getId() == R.id.delete) {
+            DatabaseHelper db = new DatabaseHelper();
+            SearchHistoryEntity entity = (SearchHistoryEntity) adapter.getItem(position);
+            db.deleteSearchHistory(entity.getKeyword());
+            adapter.remove(position);
+        }
     }
 }
