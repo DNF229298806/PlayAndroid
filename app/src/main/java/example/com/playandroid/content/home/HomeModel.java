@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 import example.com.playandroid.App;
 import example.com.playandroid.R;
+import example.com.playandroid.adapter.HomeAdapter;
 import example.com.playandroid.base.BaseFragmentModel;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.content.home.net.ArticleEntity;

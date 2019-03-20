@@ -88,7 +88,7 @@ public class SystemArticleActivity extends AppCompatActivity {
 
     @NotNull
     private Disposable loadArticles(int page, int id, boolean isFirst) {
-        return App.api.getProjectArticles(page, id)
+        return App.api.getHierarchyArticles(page, id)
                 .compose(new RestfulTransformer<>())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pageEntity -> {

@@ -71,16 +71,30 @@ public interface Api {
     @GET("tree/json")
     Observable<InfoEntity<List<SystemEntity>>> getSystemList();
 
-    // 获取项目分类下文章数据
-
     /**
-     * 获取项目分类下文章数据
+     * 获取体系分类下文章数据
      *
      * @param page 页码
      * @param cid  id
-     * @return 文章数据
+     * @return 体系分类下文章数据
      */
     @GET("article/list/{page}/json")
+    Observable<InfoEntity<PageEntity>> getHierarchyArticles(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 获取项目分类
+     * @return 项目分类
+     */
+    @GET("project/tree/json")
+    Observable<InfoEntity<List<SystemEntity>>> getProjectCategories();
+
+    /**
+     * 获取项目分类下文章数据
+     * @param page 页码
+     * @param cid id
+     * @return  项目下的文章数据
+     */
+    @GET("project/list/{page}/json")
     Observable<InfoEntity<PageEntity>> getProjectArticles(@Path("page") int page, @Query("cid") int cid);
 
     /**

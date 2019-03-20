@@ -9,7 +9,6 @@
         android:id="@+id/it_home"
         android:title="@string/home"/>
     <item
-        android:visible="false"
         android:icon="@drawable/selector_project"
         android:id="@+id/it_project"
         android:title="@string/project"/>
