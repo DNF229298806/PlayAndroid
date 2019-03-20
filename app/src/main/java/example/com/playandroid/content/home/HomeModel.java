@@ -17,6 +17,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import example.com.playandroid.App;
@@ -120,6 +121,9 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
         List<Mult> list = new ArrayList<>();
         //把banner的数据传递进去
         list.add(new BannerLayoutEntity(mBannerEntities));
+        for (ArticleEntity articleEntity : page.getArticleEntities()) {
+            articleEntity.setGoodCount(new Random().nextInt(1000));
+        }
         list.addAll(page.getArticleEntities());
         Timber.i("refreshList=" + getBinding().recyclerView.hashCode());
         mAdapter.refreshList(list);
@@ -139,6 +143,9 @@ public class HomeModel extends BaseFragmentModel<MainActivity, HomeFragment, Fra
     private void loadSuccess(PageEntity pageEntity) {
         mPageEntity = pageEntity;
         List<ArticleEntity> articleEntities = pageEntity.getArticleEntities();
+        for (ArticleEntity articleEntity : articleEntities) {
+            articleEntity.setGoodCount(new Random().nextInt(1000));
+        }
         List<Mult> list = new ArrayList<>(articleEntities);
         mAdapter.addList(list);
         getBinding().refreshLayout.finishLoadMore(1000, true, false);

@@ -76,6 +76,8 @@ public class ArticleEntity extends BaseEntity implements Mult {
     private int userId;
     private int visible;
     private int zan;
+    private int goodCount;
+    private boolean good;
 
     public String getApkLink() {
         return apkLink;
@@ -330,4 +332,29 @@ public class ArticleEntity extends BaseEntity implements Mult {
         pop.setEntity(this);
         pop.showPopupWindow(view);
     }
+
+    public void onGoodClick(View view) {
+        good = !good;
+        if (good) {
+
+        }
+    }
+
+    public int getGoodCount() {
+        return goodCount;
+    }
+
+    public void setGoodCount(int goodCount) {
+        this.goodCount = goodCount;
+    }
+
+    public boolean isGood() {
+        return good;
+    }
+
+    public void setGood(boolean good) {
+        this.good = good;
+    }
+
+
 }
