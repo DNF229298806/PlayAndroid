@@ -1,11 +1,9 @@
 package example.com.playandroid.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -39,8 +37,4 @@ public class TabViewPagerAdapter extends FragmentStatePagerAdapter {
         return itemList.get(position).getTitle();
     }
 
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        super.destroyItem(container, position, object);
-    }
 }
