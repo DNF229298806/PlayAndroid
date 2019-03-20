@@ -31,7 +31,6 @@ import example.com.playandroid.util.ArouterUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.ListCompositeDisposable;
-import timber.log.Timber;
 
 /**
  * @author Richard_Y_Wang
@@ -105,7 +104,6 @@ public class ProjectTabPageFragment extends Fragment {
                 .compose(new RestfulTransformer<>())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pageEntity -> {
-                    ToastUtils.showLong("获取搜索列表成功");
                     if (isFirst) {
                         adapter.setNewData(pageEntity.getArticleEntities());
                     } else {
@@ -134,7 +132,6 @@ public class ProjectTabPageFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Timber.d("当场去世！！！！！！！！！！！");
         unbinder.unbind();
     }
 }
