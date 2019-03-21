@@ -105,6 +105,10 @@ public class BindingAdapter extends RecyclerView.Adapter<BindingAdapter.BindingH
             item.setDataBinding(binding);
             binding.setVariable(BR.entity,item);
         }
+
+        public ViewDataBinding getBinding() {
+            return binding;
+        }
     }
 
 }

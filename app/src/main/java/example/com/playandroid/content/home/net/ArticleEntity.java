@@ -15,6 +15,7 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseEntity;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.constant.Constant;
+import example.com.playandroid.databinding.HolderArticleItemBinding;
 import example.com.playandroid.ui.ArticleDownPopupWindow;
 import example.com.playandroid.util.ArouterUtil;
 
@@ -298,7 +299,7 @@ public class ArticleEntity extends BaseEntity implements Mult {
     }
 
     @Override
-    public ViewDataBinding getDataBinding() {
+    public HolderArticleItemBinding getDataBinding() {
         return null;
     }
 
@@ -306,6 +307,7 @@ public class ArticleEntity extends BaseEntity implements Mult {
     public void setDataBinding(ViewDataBinding viewDataBinding) {
 
     }
+
 
     public void onDownClick(View view) {
         /*// 用于PopupWindow的View
@@ -334,9 +336,13 @@ public class ArticleEntity extends BaseEntity implements Mult {
     }
 
     public void onGoodClick(View view) {
+        boolean old_good = good;
+        //先取反
         good = !good;
         if (good) {
-
+            goodCount++;
+        }else{
+            goodCount--;
         }
     }
 
