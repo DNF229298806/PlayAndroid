@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import example.com.playandroid.R;
 import example.com.playandroid.base.BaseActivity;
 import example.com.playandroid.base.Mult;
 import example.com.playandroid.base.test.BindingAdapter;
+import example.com.playandroid.content.home.RewardDialog;
 import example.com.playandroid.content.home.net.ArticleEntity;
 import example.com.playandroid.content.home.net.BannerEntity;
 import example.com.playandroid.databinding.HolderArticleItemBinding;
@@ -67,7 +69,9 @@ public class HomeAdapter extends BindingAdapter {
             ImageView ivGood = ((HolderArticleItemBinding) binding).ivGood;
             TextView tvGoodCount = ((HolderArticleItemBinding) binding).tvGoodCount;
             ((HolderArticleItemBinding) binding).ivReward.setOnClickListener(v -> {
-
+                //todo 请输入打赏金额
+                RewardDialog dialog = new RewardDialog(ivGood.getContext());
+                dialog.show();
             });
             ivGood.setOnClickListener(v -> {
                 onGoodClick(binding, ivGood, tvGoodCount);
@@ -105,6 +109,7 @@ public class HomeAdapter extends BindingAdapter {
             Glide.with(binding.getRoot()).load(R.drawable.ic_good_off).into(ivGood);
             goodCount--;
         }
+        ivGood.startAnimation(AnimationUtils.loadAnimation(ivGood.getContext(),R.anim.good));
         entity.setGoodCount(goodCount);
         tvGoodCount.setText(String.valueOf(goodCount));
     }
